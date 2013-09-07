@@ -20,5 +20,6 @@ body {
 
 #preview  {
   overflow: auto;
- right: 0; 
+  right: 0; 
+  padding-left: 1%;
 }

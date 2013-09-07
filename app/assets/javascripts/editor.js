@@ -12,8 +12,8 @@ var Editor = function() {
     var documentWidth   = $(document).width();
     var documentHeight  = $(document).height();
 
-    $editor.width(documentWidth/2);
-    $preview.width(documentWidth/2);
+    $editor.width(documentWidth/2.05);
+    $preview.width(documentWidth/2.05);
   };
 
   this.updatePreviewPane = function() {
@@ -26,6 +26,7 @@ var Editor = function() {
     var context = this;
 
     editor.setTheme("ace/theme/twilight");
+    editor.getSession().setUseWrapMode(true);
     editor.getSession().setMode("ace/mode/markdown");
     editor.on('change', function(e){
       if(!shouldUpdatePreview)
@@ -49,6 +50,7 @@ var Editor = function() {
       context.placeElements();
     });
     context.placeElements();
+    context.updatePreviewPane();
   }).call(this);
 
 }
