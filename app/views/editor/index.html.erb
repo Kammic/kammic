@@ -1,0 +1,11 @@
+<div id="editor">
+#Main title
+##Section one
+</div>
+
+<%= javascript_include_tag 'lib/ace-builds/src-noconflict/ace' %>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/markdown");
+</script>
