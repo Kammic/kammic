@@ -2,11 +2,22 @@ body {
     overflow: hidden;
 }
 
+.container {
+
+}
+
+#editor,
+#preview {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
 #editor {
-    margin: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  left: 0;
+}
+
+#preview  {
+ right: 0; 
 }
