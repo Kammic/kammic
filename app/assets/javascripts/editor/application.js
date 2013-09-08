@@ -1,11 +1,13 @@
 var Application = angular.module('Application', []);
 
 Application.controller({
-  ApplicationController: function($scope, $rootScope, previewService) {
+  ApplicationController: function($scope, $rootScope) {
     $scope.$on('markdownUpdated', function(e, value) {
-      var mdConverter = new Showdown.converter();
-      markdown = mdConverter.makeHtml(value);
-      previewService.updatePreview(markdown);
+      $scope.$apply(function(){
+        var mdConverter = new Showdown.converter();
+        markdown = mdConverter.makeHtml(value);
+        $scope.value = markdown;
+      });
     });
 
     $(window).resize(function() {
@@ -14,10 +16,8 @@ Application.controller({
       $scope.$emit('windowResized', width, height);
     });
   },
-  PreviewController: function($scope, $rootScope, previewService) {
+  PreviewController: function($scope, $rootScope) {
     var $element = $('#preview');
-    previewService.setup($element);
-
     $rootScope.$on("windowResized", function(e, width, height){
       $element.width(width);
     });

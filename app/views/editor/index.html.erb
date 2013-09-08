@@ -312,7 +312,7 @@ eos
 %>
 
   </div>
-  <div id="preview" data-ng-controller='PreviewController'>{{value}}</div>
+  <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value"></div>
 </div>
 
 <%= javascript_include_tag 'lib/ace-builds/src-noconflict/ace' %>
