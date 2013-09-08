@@ -3,10 +3,20 @@
 
   <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value">
   </div>
+
+<!--   <div id="browser" data-ng-controller='BrowserController'>
+
+  </div> -->
+
+  <div id="menu-button">
+    <a href="#" ng-click="$emit('showMenu')">
+      <i class='icon-tasks icon-white'></i>
+    </a>
+  </div>
 </div>
 
 <script>
-  auth_token = <%= "#{@current_user[:auth_token]}" %>;
+  auth_token = '<%= "#{@current_user[:auth_token]}" %>';
 </script>
 <%= javascript_include_tag 'lib/ace-builds/src-noconflict/ace' %>
 <%= javascript_include_tag 'editor/editor' %>

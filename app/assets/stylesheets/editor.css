@@ -24,41 +24,20 @@ body {
   padding-left: 1.7em;
 }
 
-#drawer {
-  z-index: 5;
-  background-color: #fff;
+#menu-button {
   position: absolute;
-  left: 0;
-  top:-125px;
-  bottom: 0;
-  width:15em;
-  -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.8);
-  -moz-box-shadow: 0 0 20px rgba(0,0,0,0.8);
-  box-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
-#menu.open {
-  top:0px;
-}
-
-#menu {
-  position: absolute;
-  top:-125px;
-  left:0;
-  width:100%;
+  right: 1em;
+  bottom: 1em;
   background-color: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  border-radius: .2em;
+  padding: .5em;
+  opacity: 0.5;
+
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 
-#tab {
-  background-color: #000;
-  top:0;
-  right:3em;
-  border-bottom-left-radius: .3em;
-  border-bottom-right-radius: .3em;
-  position: absolute;
-  padding: .3em .5em;
+#menu-button:hover {
+  opacity: 1;
 }
