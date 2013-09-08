@@ -1,8 +1,13 @@
 ApplicationController = function($scope, $rootScope) {
-  function updatePreview(value) {
+  var context = this;
+
+  this.updatePreview = function(value) {
+    $scope.value = this.mdToHTML(value);
+  }
+
+  this.mdToHTML = function(md) {
     var mdConverter = new Showdown.converter();
-    markdown = mdConverter.makeHtml(value);
-    $scope.value = markdown;
+    return mdConverter.makeHtml(md);    
   }
 
   $scope.$on('previewLoaded', function(e) {
@@ -11,12 +16,12 @@ ApplicationController = function($scope, $rootScope) {
 
   $scope.$on('editorLoaded', function(e, value) {
     $(window).resize();
-    updatePreview(value);
+    context.updatePreview(value);
   });
 
-  $scope.$on('markdownUpdated', function(e, value) {
+  $scope.$on('markdownUpdated', function(e, value) {  
     $scope.$apply(function(){
-      updatePreview(value);  
+      context.updatePreview(value);  
     });
   });
 

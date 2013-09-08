@@ -12,7 +12,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'omniauth'
 gem 'omniauth-github'
 
-group :test do
+group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'jasmine'
+  gem 'jasmine-rails'
 end
