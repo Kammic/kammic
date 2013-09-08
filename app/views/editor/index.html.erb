@@ -1,8 +1,12 @@
 <div class="container" data-ng-controller='ApplicationController'>
+  <div id="editor" data-ng-controller='EditorController'><%= render 'code' %></div>
 
-  <div id="editor" data-ng-controller='EditorController'> <%= render 'code' %> </div>
-  <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value"></div>
+  <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value">
+  </div>
 </div>
 
+<script>
+  auth_token = <%= "#{@current_user[:auth_token]}" %>;
+</script>
 <%= javascript_include_tag 'lib/ace-builds/src-noconflict/ace' %>
 <%= javascript_include_tag 'editor/editor' %>

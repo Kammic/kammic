@@ -25,4 +25,4 @@ ApplicationController = function($scope, $rootScope) {
     var height = $(document).height();
     $scope.$emit('windowResized', width, height);
   });
-}
+};

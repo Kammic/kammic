@@ -2,7 +2,7 @@ EditorController = function($scope, $rootScope) {
   var editor  = ace.edit("editor");
   var $element = $('#editor');
 
-  editor.setTheme("ace/theme/twilight");
+  editor.setTheme("ace/theme/tomorrow_night");
   editor.getSession().setUseWrapMode(true);
   editor.getSession().setMode("ace/mode/markdown");
   editor.on('change', function(e) {
@@ -14,4 +14,4 @@ EditorController = function($scope, $rootScope) {
   });
 
   $scope.$emit('editorLoaded', editor.getSession().getValue());
-}
+};
