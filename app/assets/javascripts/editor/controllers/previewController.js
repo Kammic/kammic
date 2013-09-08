@@ -1,7 +1,7 @@
 PreviewController = function($scope, $rootScope) {
-  var $element = $('#preview');
+  $scope.$element = $('#preview');
   $rootScope.$on("windowResized", function(e, width, height){
-    $element.width(width);
+    $scope.$element.width(width);
   });
   $scope.$emit('previewLoaded');
 }
