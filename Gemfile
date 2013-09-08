@@ -11,3 +11,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'omniauth'
 gem 'omniauth-github'
+
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+end
