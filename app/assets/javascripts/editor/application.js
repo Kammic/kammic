@@ -23,9 +23,17 @@ Application.controller({
     });
     $(window).resize();
   },
-  EditorController: function($scope, $rootScope, editorService) {
+  EditorController: function($scope, $rootScope) {
+    var editor  = ace.edit("editor");
     var $element = $('#editor');
-    editorService.setup($element, $scope);
+
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setUseWrapMode(true);
+    editor.getSession().setMode("ace/mode/markdown");
+    editor.on('change', function(e) {
+      $scope.$emit('markdownUpdated', editor.getValue());
+    });
+
     $rootScope.$on("windowResized", function(e, width, height){
       $element.width(width);
     });
