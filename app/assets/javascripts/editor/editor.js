@@ -1,3 +1,3 @@
-//= require_tree ../lib/angular/angular.min
-//= require ../lib/showdown/src/showdown
+//= require ../lib/angular/angular.min
+//= require ../lib/showdown/compressed/showdown
 //= require_tree .
