@@ -16,6 +16,7 @@ src_files:
   - app/assets/javascripts/lib/angular/angular-mocks.js
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js
+  - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js
 
 # stylesheets
 #

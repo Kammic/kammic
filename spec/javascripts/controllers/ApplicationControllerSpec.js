@@ -1,5 +1,5 @@
 describe('controller: ApplicationController', function() {
-  beforeEach(function(){
+  beforeEach(function() {
     module('Application');
   });
 
@@ -43,7 +43,7 @@ describe('controller: ApplicationController', function() {
         expect(height).toBeGreaterThan(1);
         calledResized = true;
       });
-      
+
       $(window).resize();
       expect(calledResized).toEqual(true);
     });

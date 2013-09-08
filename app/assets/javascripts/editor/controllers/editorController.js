@@ -1,17 +1,17 @@
 EditorController = function($scope, $rootScope) {
-  var editor  = ace.edit("editor");
-  var $element = $('#editor');
+  $scope.editor  = ace.edit("editor");
+  $scope.$element = $('#editor');
 
-  editor.setTheme("ace/theme/tomorrow_night");
-  editor.getSession().setUseWrapMode(true);
-  editor.getSession().setMode("ace/mode/markdown");
-  editor.on('change', function(e) {
-    $scope.$emit('markdownUpdated', editor.getValue());
+  $scope.editor.setTheme("ace/theme/tomorrow_night");
+  $scope.editor.getSession().setUseWrapMode(true);
+  $scope.editor.getSession().setMode("ace/mode/markdown");
+  $scope.editor.on('change', function(e) {
+    $scope.$emit('markdownUpdated', $scope.editor.getValue());
   });
 
   $rootScope.$on("windowResized", function(e, width, height){
-    $element.width(width);
+    $scope.$element.width(width);
   });
 
-  $scope.$emit('editorLoaded', editor.getSession().getValue());
+  $scope.$emit('editorLoaded', $scope.editor.getSession().getValue());
 };
