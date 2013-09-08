@@ -4,10 +4,10 @@
   <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value">
   </div>
 
-  <!-- <div id="browser" data-ng-controller='BrowserController'></div> -->
+  <div id="browser" data-ng-controller='BrowserController'></div>
 
-  <div id="menu-button">
-    <a href="#" ng-click="$emit('showMenu')">
+  <div id="menu-button" ng-click="$emit('toggleBrowser')">
+    <a href="#" >
       <i class='icon-tasks icon-white'></i>
     </a>
   </div>

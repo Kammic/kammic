@@ -1,4 +1,4 @@
-describe('controller: EditorController', function() {
+describe('controller: PreviewController', function() {
   beforeEach(function() {
     module('Application');
     $("body").append("<div id='preview'></div>");
