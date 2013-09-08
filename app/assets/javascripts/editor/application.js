@@ -2,11 +2,24 @@ var Application = angular.module('Application', []);
 
 Application.controller({
   ApplicationController: function($scope, $rootScope) {
+    function updatePreview(value) {
+      var mdConverter = new Showdown.converter();
+      markdown = mdConverter.makeHtml(value);
+      $scope.value = markdown;
+    }
+
+    $scope.$on('previewLoaded', function(e) {
+      $(window).resize();
+    });
+
+    $scope.$on('editorLoaded', function(e, value) {
+      $(window).resize();
+      updatePreview(value);
+    });
+
     $scope.$on('markdownUpdated', function(e, value) {
       $scope.$apply(function(){
-        var mdConverter = new Showdown.converter();
-        markdown = mdConverter.makeHtml(value);
-        $scope.value = markdown;
+        updatePreview(value);  
       });
     });
 
@@ -21,7 +34,7 @@ Application.controller({
     $rootScope.$on("windowResized", function(e, width, height){
       $element.width(width);
     });
-    $(window).resize();
+    $scope.$emit('previewLoaded');
   },
   EditorController: function($scope, $rootScope) {
     var editor  = ace.edit("editor");
@@ -37,6 +50,7 @@ Application.controller({
     $rootScope.$on("windowResized", function(e, width, height){
       $element.width(width);
     });
-    $(window).resize();
+
+    $scope.$emit('editorLoaded', editor.getSession().getValue());
   }
 });
