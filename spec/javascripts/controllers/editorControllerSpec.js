@@ -35,5 +35,11 @@ describe('controller: EditorController', function() {
     expect(emitted).toEqual(true);
     
   });
+
+  it("#markdown gets the current markdown", function(){
+    this.scope.editor.setValue('#title');
+    var markdown = this.ctrl.markdown();
+    expect(markdown).toBe('#title');
+  });
 });
 

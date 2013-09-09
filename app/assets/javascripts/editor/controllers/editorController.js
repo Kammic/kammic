@@ -2,6 +2,10 @@ EditorController = function($scope, $rootScope) {
   $scope.editor  = ace.edit("editor");
   $scope.$element = $('#editor');
 
+  this.markdown = function() {
+    return $scope.editor.getSession().getValue();
+  }
+
   $scope.editor.setTheme("ace/theme/tomorrow_night");
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
@@ -16,6 +20,6 @@ EditorController = function($scope, $rootScope) {
   $rootScope.$on('loadFile', function(e, file) {
 
   });
-  
-  $scope.$emit('editorLoaded', $scope.editor.getSession().getValue());
+
+  $scope.$emit('editorLoaded', this.markdown());
 };
