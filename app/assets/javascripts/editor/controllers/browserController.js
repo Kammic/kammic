@@ -1,4 +1,4 @@
-BrowserController = function($scope, $rootScope) {
+BrowserController = function($scope, $rootScope, githubService) {
   $scope.$element = $('#browser');
   $scope.$element.hide();
   $scope.visible  = false;
@@ -14,27 +14,10 @@ BrowserController = function($scope, $rootScope) {
   });
 
   $rootScope.$on('fileSelected', function(e, file) {
-    
+
   });
 
-  $scope.files = [
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-    {name: 'file1.md', size: '1 MB', updated: 'Aug 1, 2013 12:00PM'},
-  ];
+  $scope.files = githubService.getFiles();
   
   $(window).resize(function() {
     var width  = $(document).width()/2.05;
