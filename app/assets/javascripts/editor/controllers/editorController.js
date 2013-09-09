@@ -9,9 +9,13 @@ EditorController = function($scope, $rootScope) {
     $scope.$emit('markdownUpdated', $scope.editor.getValue());
   });
 
-  $rootScope.$on("windowResized", function(e, width, height){
+  $rootScope.$on('windowResized', function(e, width, height){
     $scope.$element.width(width);
   });
 
+  $rootScope.$on('loadFile', function(e, file) {
+
+  });
+  
   $scope.$emit('editorLoaded', $scope.editor.getSession().getValue());
 };
