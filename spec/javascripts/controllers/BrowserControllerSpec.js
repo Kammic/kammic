@@ -1,11 +1,11 @@
-describe('controller: PreviewController', function() {
+describe('controller: BrowserController', function() {
   beforeEach(function() {
     module('Application');
     $("body").append("<div id='browser'></div>");
   });
 
   afterEach(function(){
-    $("#browser").remove();
+    // $("#browser").remove();
   });
 
   beforeEach(inject(function($rootScope, $controller) {
@@ -15,12 +15,12 @@ describe('controller: PreviewController', function() {
     });
   }));
 
-  it('is hidden by default', function(){
+  it('is hidden by default', function() {
     expect(this.scope.visible).toBe(false);
     expect(this.scope.$element.css('display')).toEqual('none');
   });
 
-  it('#toggleBrowser', function(){
+  it('#toggleBrowser', function() {
     expect(this.scope.visible).toBe(false);
     expect(this.scope.$element.css('display')).toEqual('none');
     this.scope.$emit('toggleBrowser');

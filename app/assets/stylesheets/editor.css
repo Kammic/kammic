@@ -46,8 +46,32 @@ body {
 #browser {
   display: none;
   z-index: 5;
-  background-color: #fff;
+  background-color: #AAA;
   position: absolute;
   border-radius: 5px;
-  border:5px solid #E0E0E0;
+  overflow: auto;
+  padding:2em;
+}
+
+#browser ul {
+  list-style: none;
+  max-width: none;
+  width: 100%;
+}
+
+#browser ul li {
+  width: 29%;
+  background-color: #FFF;
+  float: left;
+  margin: .5em .5em;
+  padding: .4em;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  cursor: pointer;
+  cursor: hand;
+}
+
+#browser ul li span {
+  display: block;
 }

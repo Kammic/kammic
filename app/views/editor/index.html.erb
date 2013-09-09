@@ -4,7 +4,15 @@
   <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value">
   </div>
 
-  <div id="browser" data-ng-controller='BrowserController'></div>
+  <div id="browser" data-ng-controller='BrowserController'>
+    <ul>
+      <li ng-repeat="file in files" ng-click="$emit('fileSelected', file)">
+        <span>{{file.name}}</span>
+        <span>{{file.size}}</span>
+        <span>{{file.updated}}</span>
+      </li>
+    </ul>
+  </div>
 
   <div id="menu-button" ng-click="$emit('toggleBrowser')">
     <a href="#" >
