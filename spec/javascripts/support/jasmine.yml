@@ -14,6 +14,10 @@ src_files:
   - app/assets/javascripts/lib/jquery/jquery-1.10.2.min.js
   - app/assets/javascripts/lib/angular/angular.min.js
   - app/assets/javascripts/lib/angular/angular-mocks.js
+  - app/assets/javascripts/lib/angular/jquery.mockjax.js
+  - app/assets/javascripts/lib/github/base64.js
+  - app/assets/javascripts/lib/github/underscore.js
+  - app/assets/javascripts/lib/github/octokit.js
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js
   - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js

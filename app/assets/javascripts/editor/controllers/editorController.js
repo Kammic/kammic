@@ -18,7 +18,7 @@ EditorController = function($scope, $rootScope) {
   });
 
   $rootScope.$on('loadFile', function(e, file) {
-
+    $scope.editor.getSession().setValue(file.content);
   });
 
   $scope.$emit('editorLoaded', this.markdown());

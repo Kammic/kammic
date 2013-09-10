@@ -1,3 +1,0 @@
-describe('service: githubService', function() {
-
-});

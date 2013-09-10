@@ -1,4 +1,4 @@
-BrowserController = function($scope, $rootScope, githubService) {
+BrowserController = function($scope, $rootScope, githubFactory) {
   $scope.$element = $('#browser');
   $scope.$element.hide();
   $scope.visible  = false;
@@ -13,11 +13,18 @@ BrowserController = function($scope, $rootScope, githubService) {
     }
   });
 
+  var repo   = githubFactory.github.getRepo('ortuna','simple-book');
+  var branch = repo.getDefaultBranch();
+  
   $rootScope.$on('fileSelected', function(e, file) {
-
+    branch.read(file.name).done(function(file){
+      $rootScope.$emit('loadFile', file);
+    });
   });
 
-  $scope.files = githubService.getFiles();
+  repo.contents('master','/').done(function(files){
+    $scope.files = files;
+  });
   
   $(window).resize(function() {
     var width  = $(document).width()/2.05;
