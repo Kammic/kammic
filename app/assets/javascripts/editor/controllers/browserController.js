@@ -13,20 +13,30 @@ BrowserController = function($scope, $rootScope, githubFactory) {
     }
   });
 
-  var repo   = githubFactory.github.getRepo('ortuna','progit');
+  var repo   = githubFactory.github.getRepo('ortuna','progit-bana');
   var branch = repo.getDefaultBranch();
-  
+  var fetchFiles = function(path) {
+    repo.contents('master', path).done(function(files) {
+      $scope.$apply(function(){
+        $scope.files = files;
+      });
+    });
+  };
+
+  fetchFiles('');
+
   $rootScope.$on('fileSelected', function(e, file) {
-    branch.read(file.name).done(function(file){
+    branch.read(file.path).done(function(file){
       $rootScope.$emit('toggleBrowser');
       $rootScope.$emit('loadFile', file);
     });
   });
 
-  repo.contents('master','/').done(function(files) {
-    console.debug(files);
-    $scope.files = files;
+  $rootScope.$on('dirSelected', function(e, file) {
+    fetchFiles(file.path);
   });
+
+  
   
   $(window).resize(function() {
     var width  = $(document).width()/2.05;

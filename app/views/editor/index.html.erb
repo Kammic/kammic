@@ -11,10 +11,10 @@
         <td>Size</td>
       </tr>
       <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
-        <td ng-if="{file.type == 'file'}" ng-click="$emit('fileSelected', file)">
+        <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
           <a href="#">{{file.name}}</a>
         </td>
-        <td ng-if="{file.type == ''}" ng-click="$emit('folderSelected', file)">
+        <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
           <a href="#">{{file.name}}</a>
         </td>
         <td>{{file.size}}</td>

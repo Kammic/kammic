@@ -819,9 +819,8 @@
               return _request('GET', this.repoPath, null);
             };
             this.contents = function(branch, path) {
-              return _request('GET', "" + this.repoPath + "/contents?ref=" + branch, {
-                path: path
-              });
+              qs = toQueryString({ref: branch, path: path});
+              return _request('GET', "" + this.repoPath + "/contents" + qs);
             };
             this.fork = function() {
               return _request('POST', "" + this.repoPath + "/forks", null);
