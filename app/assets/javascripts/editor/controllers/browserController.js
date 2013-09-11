@@ -13,16 +13,18 @@ BrowserController = function($scope, $rootScope, githubFactory) {
     }
   });
 
-  var repo   = githubFactory.github.getRepo('ortuna','simple-book');
+  var repo   = githubFactory.github.getRepo('ortuna','progit');
   var branch = repo.getDefaultBranch();
   
   $rootScope.$on('fileSelected', function(e, file) {
     branch.read(file.name).done(function(file){
+      $rootScope.$emit('toggleBrowser');
       $rootScope.$emit('loadFile', file);
     });
   });
 
-  repo.contents('master','/').done(function(files){
+  repo.contents('master','/').done(function(files) {
+    console.debug(files);
     $scope.files = files;
   });
   
@@ -33,7 +35,7 @@ BrowserController = function($scope, $rootScope, githubFactory) {
     $scope.$element.height(height);
 
     $scope.$element.css('top', height/2);
-    $scope.$element.css('left', width/2);
+    $scope.$element.css('left', (width/2));
   });
   $(window).resize();
   $scope.$emit('browserLoaded');
