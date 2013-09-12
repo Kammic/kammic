@@ -18,7 +18,15 @@ EditorController = function($scope, $rootScope) {
   });
 
   $rootScope.$on('loadFile', function(e, file) {
+    $scope.file = file;
     $scope.editor.getSession().setValue(file.content);
+  });
+
+  $rootScope.$on('saveFile', function(e) {
+    var contents = $scope.editor.getSession().getValue();
+    $rootScope.branch.write($scope.file.path, contents, "Updated " + $scope.file.path).done(function() {
+      console.debug("Done saving!");
+    });
   });
 
   $scope.$emit('editorLoaded', this.markdown());

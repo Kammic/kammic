@@ -25,6 +25,11 @@ ApplicationController = function($scope, $rootScope) {
     });
   });
 
+  KeyboardJS.on('ctrl + s', function() {
+    $scope.$emit('saveFile');
+  });
+
+
   $(window).resize(function() {
     var width  = $(document).width()/2.05;
     var height = $(document).height();

@@ -13,10 +13,11 @@ BrowserController = function($scope, $rootScope, githubFactory) {
     }
   });
 
-  var repo   = githubFactory.github.getRepo('ortuna','progit-bana');
-  var branch = repo.getDefaultBranch();
+  $rootScope.repo   = githubFactory.github.getRepo('ortuna','progit-bana');
+  $rootScope.branch = $rootScope.repo.getDefaultBranch();
+
   var fetchFiles = function(path) {
-    repo.contents('master', path).done(function(files) {
+    $rootScope.repo.contents('master', path).done(function(files) {
       $scope.$apply(function(){
         $scope.files = files;
       });
@@ -25,8 +26,9 @@ BrowserController = function($scope, $rootScope, githubFactory) {
 
   fetchFiles('');
 
-  $rootScope.$on('fileSelected', function(e, file) {
-    branch.read(file.path).done(function(file){
+  $rootScope.$on('fileSelected', function(e, selectedFile) {
+    $rootScope.branch.read(selectedFile.path).done(function(file) {
+      file.path = selectedFile.path;
       $rootScope.$emit('toggleBrowser');
       $rootScope.$emit('loadFile', file);
     });
