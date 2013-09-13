@@ -9,6 +9,7 @@
       <tr>
         <td></td>
         <td>Name</td>
+        <td>Sha</td>
         <td>Size</td>
       </tr>
       <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')">
@@ -16,6 +17,7 @@
         <td>
           <a href="#">..</a>
         </td>
+        <td></td>
         <td></td>
       </tr>
       <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
@@ -29,6 +31,12 @@
           <a href="#">{{file.name}}</a>
         </td>
         <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+          <a href="#">{{file.name}}</a>
+        </td>
+        <td>
+          <a href="#">{{file.sha}}</a>
+        </td>
+        <td>
           <a href="#">{{file.name}}</a>
         </td>
         <td>{{file.size}}</td>

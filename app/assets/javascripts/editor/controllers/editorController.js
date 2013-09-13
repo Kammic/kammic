@@ -13,7 +13,7 @@ EditorController = function($scope, $rootScope, github) {
     $scope.$emit('markdownUpdated', $scope.editor.getValue());
   });
 
-  $rootScope.$on('windowResized', function(e, width, height){
+  $rootScope.$on('windowResized', function(e, width, height) {
     $scope.$element.width(width/2.05);
   });
 

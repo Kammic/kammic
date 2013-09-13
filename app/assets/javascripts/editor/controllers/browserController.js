@@ -6,22 +6,26 @@ BrowserController = function($scope, $rootScope, github) {
   $scope.currentPath = [];
 
   $rootScope.$on('toggleBrowser', function(e) {
-    if($scope.visible) {
-      $scope.visible = false;
-      $scope.$element.fadeOut(250);
-    } else {
-      $scope.visible = true;
-      $scope.$element.fadeIn(250);
-    }
+    $scope.visible ? hideBrowser() : showBrowser();
   });
 
-  updateFilesList = function(files) {
+  var hideBrowser = function() {
+    $scope.visible = false;
+    $scope.$element.fadeOut(env.browserFadeOutTime);
+  }
+
+  var showBrowser = function() {
+    $scope.visible = true;
+    $scope.$element.fadeIn(env.browserFadeInTime);
+  }
+
+  var updateFilesList = function(files) {
     $scope.$apply(function() {
       $scope.files = files;
     });
   }
 
-  browseToDirectory = function(treeArray) {
+  var browseToDirectory = function(treeArray) {
     github.getTree(treeArray.join('/')).then(function(files) {
       $scope.currentPath = treeArray;
       updateFilesList(files);
@@ -31,6 +35,7 @@ BrowserController = function($scope, $rootScope, github) {
   github.init(env.auth_token).then(function(){
     github.setRepo('progit-bana');
     github.getTree().then(function(files){
+      console.debug(files);
       updateFilesList(files);
     });
   });
