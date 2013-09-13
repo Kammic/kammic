@@ -51,6 +51,9 @@ BrowserController = function($scope, $rootScope, github) {
     browseToDirectory(requestedPath);
   });
 
+  $rootScope.$on('fileSelected', function(e){
+    $scope.$emit('toggleBrowser');
+  });
   
   $rootScope.$on('windowResized', function(e, width, height){
     $scope.$element.width(width/2.05);

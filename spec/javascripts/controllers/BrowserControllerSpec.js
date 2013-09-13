@@ -42,7 +42,7 @@ describe('controller: BrowserController', function() {
     });
   });
 
-  describe('Event: toggleBrowser', function(){
+  describe('Event: toggleBrowser', function() {
     it('hides the browser', function() {
       this.scope.visible = false;
       this.scope.$emit('toggleBrowser');
@@ -55,6 +55,16 @@ describe('controller: BrowserController', function() {
 
       this.scope.$emit('toggleBrowser');
       waitsFor(function(){ return !(this.scope.visible); }, 'toggleBrowser', 100);
+      expect(this.scope.visible).toEqual(false);
+    });
+  });
+
+  describe('Event: fileSelected', function() {
+    it('hides the browser when a file is selected', function(){
+      this.scope.visible = true;
+      this.scope.$emit('fileSelected', {});
+
+      waitsFor(function(){ return !(this.scope.visible) }, 'fileSelected', 100);
       expect(this.scope.visible).toEqual(false);
     });
   });

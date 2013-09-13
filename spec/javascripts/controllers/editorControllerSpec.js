@@ -42,12 +42,6 @@ describe('controller: EditorController', function() {
   });
 
   describe('Event: fileSelected', function() {
-    it('emits toggleBrowser', function() {
-      spy_and_return(this.github, 'getFile', 'test content');
-      check_emit(this.scope, 'toggleBrowser');
-      this.scope.$emit('fileSelected', {path: 'some_remote_path'});
-    });
-
     it('emits loadFile with response', function() {
       spy_and_return(this.github, 'getFile', {content: 'test content'});
       check_emit(this.scope, 'loadFile');

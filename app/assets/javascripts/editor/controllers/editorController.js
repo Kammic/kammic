@@ -24,7 +24,6 @@ EditorController = function($scope, $rootScope, github) {
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {
     github.getFile(selectedFile.path).then(function(response) {
-      $rootScope.$emit('toggleBrowser');
       $rootScope.$emit('loadFile', response);
     });
   });
