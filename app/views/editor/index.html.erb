@@ -1,16 +1,30 @@
 <div class="container" data-ng-controller='ApplicationController'>
   <div id="editor" data-ng-controller='EditorController'><%= render 'code' %></div>
 
-  <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="value">
+  <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="preview">
   </div>
 
   <div id="browser" data-ng-controller='BrowserController'>
     <table>
       <tr>
+        <td></td>
         <td>Name</td>
         <td>Size</td>
       </tr>
+      <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')">
+        <td></td>
+        <td>
+          <a href="#">..</a>
+        </td>
+        <td></td>
+      </tr>
       <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
+        <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
+          <a href="#">f</a>
+        </td>
+        <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+          <a href="#">d</a>
+        </td>
         <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
           <a href="#">{{file.name}}</a>
         </td>

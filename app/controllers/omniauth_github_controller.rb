@@ -7,7 +7,7 @@ class OmniauthGithubController < ApplicationController
 
     if user
       session[:user_id] = user[:id]
-      redirect_to root_path
+      redirect_to editor_path
     else
       flash[:error] = 'A login error has occured'
       redirect_to user_login_path

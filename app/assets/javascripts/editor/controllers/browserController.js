@@ -1,7 +1,9 @@
-BrowserController = function($scope, $rootScope, githubFactory) {
+BrowserController = function($scope, $rootScope, github) {
   $scope.$element = $('#browser');
   $scope.$element.hide();
   $scope.visible  = false;
+
+  $scope.currentPath = [];
 
   $rootScope.$on('toggleBrowser', function(e) {
     if($scope.visible) {
@@ -13,42 +15,47 @@ BrowserController = function($scope, $rootScope, githubFactory) {
     }
   });
 
-  $rootScope.repo   = githubFactory.github.getRepo('ortuna','progit-bana');
-  $rootScope.branch = $rootScope.repo.getDefaultBranch();
-
-  var fetchFiles = function(path) {
-    $rootScope.repo.contents('master', path).done(function(files) {
-      $scope.$apply(function(){
-        $scope.files = files;
-      });
+  updateFilesList = function(files) {
+    $scope.$apply(function() {
+      $scope.files = files;
     });
-  };
+  }
 
-  fetchFiles('');
+  browseToDirectory = function(treeArray) {
+    github.getTree(treeArray.join('/')).then(function(files) {
+      $scope.currentPath = treeArray;
+      updateFilesList(files);
+    });
+  }
 
-  $rootScope.$on('fileSelected', function(e, selectedFile) {
-    $rootScope.branch.read(selectedFile.path).done(function(file) {
-      file.path = selectedFile.path;
-      $rootScope.$emit('toggleBrowser');
-      $rootScope.$emit('loadFile', file);
+  github.init(env.auth_token).then(function(){
+    github.setRepo('progit-bana');
+    github.getTree().then(function(files){
+      updateFilesList(files);
     });
   });
 
-  $rootScope.$on('dirSelected', function(e, file) {
-    fetchFiles(file.path);
+  $rootScope.$on('dirSelected', function(e, dir) {
+    var requestedPath = $scope.currentPath;
+    requestedPath.push(dir.path);
+    browseToDirectory(requestedPath);
+  });
+
+  $rootScope.$on('parentSelected', function(e){
+    var requestedPath = $scope.currentPath;
+    requestedPath.pop();
+    browseToDirectory(requestedPath);
   });
 
   
-  
-  $(window).resize(function() {
-    var width  = $(document).width()/2.05;
-    var height = $(document).height()/2.05;
-    $scope.$element.width(width);
-    $scope.$element.height(height);
+  $rootScope.$on('windowResized', function(e, width, height){
+    $scope.$element.width(width/2.05);
+    $scope.$element.height(height/2.05);
 
-    $scope.$element.css('top', height/2);
-    $scope.$element.css('left', (width/2));
+    $scope.$element.css('top', height/4.05);
+    $scope.$element.css('left', width/4.05);
   });
   $(window).resize();
+
   $scope.$emit('browserLoaded');
 }
