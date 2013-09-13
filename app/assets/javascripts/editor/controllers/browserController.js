@@ -32,7 +32,7 @@ BrowserController = function($scope, $rootScope, github) {
     });
   }
 
-  github.init(env.auth_token).then(function(){
+  github.init(env.auth_token).then(function() {
     github.setRepo('progit-bana');
     github.getTree().then(function(files){
       updateFilesList(files);
@@ -45,13 +45,13 @@ BrowserController = function($scope, $rootScope, github) {
     browseToDirectory(requestedPath);
   });
 
-  $rootScope.$on('parentSelected', function(e){
+  $rootScope.$on('parentSelected', function(e) {
     var requestedPath = $scope.currentPath;
     requestedPath.pop();
     browseToDirectory(requestedPath);
   });
 
-  $rootScope.$on('fileSelected', function(e){
+  $rootScope.$on('fileSelected', function(e) {
     $scope.$emit('toggleBrowser');
   });
   
