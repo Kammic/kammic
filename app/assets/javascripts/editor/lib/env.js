@@ -1,5 +1,6 @@
 env = {}
-env.auth_token = auth_token;
+if(typeof auth_token !== 'undefined')
+  env.auth_token = auth_token;
 env.windowResizedCoolDownTime = 100;
 
 env.browserFadeOutTime = 100;

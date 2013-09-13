@@ -5,7 +5,5 @@
 //= require ../lib/github/octokit
 //= require ../lib/keyboard/keyboard
 
-//= require ../lib/angular/jquery.mockjax
-//= require ../lib/mock-github/mock-github
 
 //= require_tree .

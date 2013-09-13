@@ -4,6 +4,10 @@ describe('service: github', function() {
     subject = github;
   }));
 
+  afterEach(function(){
+    $.mockjaxClear();
+  });
+
   var repoName   = 'progit-bana';
   // var auth_token = 'a17157d31accc9155e12f01825c8fc13fbf6137d';
   var auth_token  = 'some_auth_token';

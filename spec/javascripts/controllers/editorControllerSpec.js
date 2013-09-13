@@ -8,38 +8,73 @@ describe('controller: EditorController', function() {
     $("#editor").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller) {
-    this.scope = $rootScope.$new();
-    this.ctrl  = $controller('EditorController', {
+  beforeEach(inject(function($rootScope, $controller, github) {
+    this.github = github;
+    this.scope  = $rootScope.$new();
+    this.ctrl   = $controller('EditorController', {
       $scope: this.scope,
+      $rootScope: this.scope
     });
   }));
 
-  it('creates the ace editor', function(){
-    expect(this.scope.editor).toBeDefined();
-  });
-
-  it('updates the elements width on #windowResized', function(){
-    this.scope.$emit('windowResized', 50, 50);
-    expect(this.scope.$element.width()).toEqual(50);
-  });
-
-  it('emits #markdownUpdated on editor change', function(){
-    var emitted = false;
-    this.scope.$on('markdownUpdated', function(e, value) {
-      expect(value).toEqual('some markdown');
-      emitted = true;
+  describe('Event: windowResized', function() {
+    it('resizes the element on windowResized', function() {
+      var originalWidth = this.scope.$element.width();
+      this.scope.$emit('windowResized', 50, 1);
+      expect(this.scope.$element.width()).toNotEqual(originalWidth);
     });
-    
-    this.scope.editor.setValue('some markdown');
-    expect(emitted).toEqual(true);
-    
   });
 
-  it("#markdown gets the current markdown", function(){
-    this.scope.editor.setValue('#title');
-    var markdown = this.ctrl.markdown();
-    expect(markdown).toBe('#title');
+  describe('Event: loadFile', function() {
+    it('updates the $scope.file', function(){
+      this.scope.file = null;
+      this.scope.$emit('loadFile', 'object_as_string');
+      expect(this.scope.file).toEqual('object_as_string');
+    });
+
+    it('sets the ace editor value to object.content', function() {
+      var file = {content: '#title'};
+      this.scope.$emit('loadFile', file);
+
+      var editorValue = this.scope.editor.getSession().getValue();
+      expect(editorValue).toEqual('#title');
+    });
+  });
+
+  describe('Event: fileSelected', function() {
+    it('emits toggleBrowser', function() {
+      spy_and_return(this.github, 'getFile', 'test content');
+      check_emit(this.scope, 'toggleBrowser');
+      this.scope.$emit('fileSelected', {path: 'some_remote_path'});
+    });
+
+    it('emits loadFile with response', function() {
+      spy_and_return(this.github, 'getFile', {content: 'test content'});
+      check_emit(this.scope, 'loadFile');
+
+      var done = false;
+      this.scope.$on('loadFile', function(e, file) {
+        expect(file.content).toEqual('test content');
+        done = true;
+      });
+
+      waitsFor(function(){ return done; }, 'emit loadFile w/ content', 100);
+      this.scope.$emit('fileSelected', {path: 'some_remote_path'});
+    });
+  });
+
+  describe('Event: previewLoaded', function(){
+    it('emits markdownUpdated', function(){
+      var done = false;
+      this.scope.editor.setValue('test content');
+      this.scope.$on('markdownUpdated', function(e, content) {
+        expect(content).toEqual('test content');
+        done = true;
+      });
+
+      waitsFor(function(){ return done; }, 'emit markdownUpdated w/ previewLoaded', 100);
+      this.scope.$emit('previewLoaded');
+    });
   });
 });
 

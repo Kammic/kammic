@@ -31,7 +31,8 @@ EditorController = function($scope, $rootScope, github) {
 
   $rootScope.$on('saveFile', function(e) {
     var contents = $scope.editor.getSession().getValue();
-    $rootScope.branch.write($scope.file.path,contents, "Updated " + $scope.file.path)
+    $rootScope.branch.write(
+      $scope.file.path,contents, "Updated " + $scope.file.path)
       .done(function() {
         console.debug("Done saving!");
       });
