@@ -22,10 +22,10 @@
       </tr>
       <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
         <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
-          <a href="#">f</a>
+          <a href="#"><i class="icon-file"></i></a>
         </td>
         <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
-          <a href="#">d</a>
+          <a href="#"><i class="icon-folder-close"></i></a>
         </td>
         <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
           <a href="#">{{file.name}}</a>

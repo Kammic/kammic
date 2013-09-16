@@ -54,6 +54,12 @@ body {
   padding: 1em;
 }
 
+#browser a,
+#browser a:visited,
+#browser a:hover {
+  color:#0099ff;
+}
+
 #browser table {
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
