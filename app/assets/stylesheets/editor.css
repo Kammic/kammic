@@ -68,6 +68,12 @@ body {
 
 #browser tr {
   border-bottom: 1px solid #eee;
+  cursor: hand;
+  cursor: pointer;
+}
+
+#browser tr:hover {
+  background-color: #eee;
 }
 
 #browser td {  
