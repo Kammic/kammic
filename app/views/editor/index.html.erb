@@ -12,7 +12,7 @@
         <td>Sha</td>
         <td>Size</td>
       </tr>
-      <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')">
+      <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
         <td>
           <a href="#"><i class="icon-circle-arrow-up"></i></a>
         </td>
