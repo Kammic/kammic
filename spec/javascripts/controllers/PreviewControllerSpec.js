@@ -4,7 +4,7 @@ describe('controller: PreviewController', function() {
     $("body").append("<div id='preview'></div>");
   });
 
-  afterEach(function(){
+  afterEach(function() {
     $("#preview").remove();
   });
 
@@ -19,6 +19,16 @@ describe('controller: PreviewController', function() {
     var originalWidth = this.scope.$element.width();
     this.scope.$emit('windowResized', 50, 1);
     expect(this.scope.$element.width()).toNotEqual(originalWidth);
+  });
+
+  it('emits hideBrowser when clicked', function(){
+    var done = false;
+    this.scope.$on('hideBrowser', function(e) {
+      done = true;
+    });
+
+    waitsFor(function() { return done; }, 'emit hideBrowser on click', 100);
+    this.scope.$element.click();
   });
 
   describe('Event: markdownUpdated', function(){

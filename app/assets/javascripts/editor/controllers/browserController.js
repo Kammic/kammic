@@ -9,6 +9,14 @@ BrowserController = function($scope, $rootScope, github) {
     $scope.visible ? hideBrowser() : showBrowser();
   });
 
+  $rootScope.$on('showBrowser', function(e) {
+    if(!$scope.visible) {  showBrowser(); }
+  });
+
+  $rootScope.$on('hideBrowser', function(e){
+    if($scope.visible) { hideBrowser(); }
+  });
+
   var hideBrowser = function() {
     $scope.visible = false;
     $scope.$element.fadeOut(env.browserFadeOutTime);

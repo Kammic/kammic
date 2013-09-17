@@ -4,7 +4,7 @@ describe('controller: EditorController', function() {
     $("body").append("<div id='editor'></div>");
   });
 
-  afterEach(function(){
+  afterEach(function() {
     $("#editor").remove();
   });
 
@@ -16,6 +16,16 @@ describe('controller: EditorController', function() {
       $rootScope: this.scope
     });
   }));
+
+  it('emits hideBrowser when clicked', function(){
+    var done = false;
+    this.scope.$on('hideBrowser', function(e) {
+      done = true;
+    });
+
+    waitsFor(function() { return done; }, 'emit hideBrowser on click', 100);
+    this.scope.$element.click();
+  });
 
   describe('Event: windowResized', function() {
     it('resizes the element on windowResized', function() {

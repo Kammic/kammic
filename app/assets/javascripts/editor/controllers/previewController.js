@@ -10,6 +10,10 @@ PreviewController = function($scope, $rootScope) {
     $scope.preview = mdToHTML(rawText);
   }
   
+  $scope.$element.click(function() {
+    $scope.$emit('hideBrowser');
+  });
+
   $rootScope.$on('markdownUpdated', function(e, rawText) {
     if($scope.$$phase == '$apply')
       updatePreview(rawText);

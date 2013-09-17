@@ -59,6 +59,24 @@ describe('controller: BrowserController', function() {
     });
   });
 
+  describe('Event: showBrowser', function(){
+    it('shows the browser', function(){
+      this.scope.visible = false;
+      this.scope.$emit('showBrowser');
+      waitsFor(function(){ return this.scope.visible; }, 'showBrowser', 100);
+      expect(this.scope.visible).toEqual(true);
+    });
+  });
+
+  describe('Event: hideBrowser', function(){
+    it('hides the browser', function(){
+      this.scope.visible = true;
+      this.scope.$emit('hideBrowser');
+      waitsFor(function(){ return !(this.scope.visible); }, 'hideBrowser', 100);
+      expect(this.scope.visible).toEqual(false);
+    });
+  });
+
   describe('Event: fileSelected', function() {
     it('hides the browser when a file is selected', function(){
       this.scope.visible = true;

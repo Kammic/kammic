@@ -19,7 +19,7 @@ src_files:
   - app/assets/javascripts/lib/github/base64.js
   - app/assets/javascripts/lib/github/underscore.js
   - app/assets/javascripts/lib/github/octokit.js
-  - app/assets/javascripts/lib/keyboard/keyboard.js
+  - app/assets/javascripts/lib/keyboard/keymaster.min.js
   - app/assets/javascripts/editor/lib/env.js
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js

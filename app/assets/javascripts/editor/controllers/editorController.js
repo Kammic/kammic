@@ -6,6 +6,10 @@ EditorController = function($scope, $rootScope, github) {
     return $scope.editor.getSession().getValue();
   }
 
+  $scope.$element.click(function() {
+    $scope.$emit('hideBrowser');
+  });
+
   $scope.editor.setTheme("ace/theme/tomorrow_night");
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
@@ -24,17 +28,18 @@ EditorController = function($scope, $rootScope, github) {
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {
     github.getFile(selectedFile.path).then(function(response) {
-      $rootScope.$emit('loadFile', response);
+      $scope.$emit('loadFile', response);
     });
   });
 
   $rootScope.$on('saveFile', function(e) {
-    var contents = $scope.editor.getSession().getValue();
-    $rootScope.branch.write(
-      $scope.file.path,contents, "Updated " + $scope.file.path)
-      .done(function() {
-        console.debug("Done saving!");
-      });
+    console.debug('here');
+    // var contents = $scope.editor.getSession().getValue();
+    // $rootScope.branch.write(
+    //   $scope.file.path, contents, "Updated " + $scope.file.path)
+    //   .done(function() {
+    //     console.debug("Done saving!");
+    //   });
   });
 
   $rootScope.$on('previewLoaded', function(e) {
