@@ -13,6 +13,23 @@ EditorController = function($scope, $rootScope, github) {
   $scope.editor.setTheme("ace/theme/tomorrow_night");
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
+
+  $scope.editor.commands.addCommand({
+    name: 'saveFile',
+    bindKey: {
+      win: 'Ctrl-S',
+      mac: 'Command-S',
+      sender: 'editor|cli',
+      passEvent: true,
+    },
+    exec: function(){ $scope.$emit('saveFile'); }
+  });
+
+  key('command+s, ctrl+s', function(){
+    $scope.$emit('saveFile');
+    return false;
+  });
+
   $scope.editor.on('change', function(e) {
     $scope.$emit('markdownUpdated', $scope.editor.getValue());
   });

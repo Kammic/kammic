@@ -5,5 +5,4 @@
 //= require ../lib/github/octokit
 //= require ../lib/keyboard/keymaster.min
 
-
 //= require_tree .

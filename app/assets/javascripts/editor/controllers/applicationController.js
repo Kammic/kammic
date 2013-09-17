@@ -9,17 +9,9 @@ ApplicationController = function($scope, $rootScope) {
     $(window).resize();
   });
 
-  key('⌘+s, ctrl+s', function(){
-    console.debug("here");
-    $scope.$emit('saveFile');
-    return false;
-  });
-
   key('esc', function(){
     $scope.$emit('toggleBrowser');
   });
-
-  key('⌘+r, ctrl+r', function(){ });
 
   var cooldownTimer = null;
   $(window).resize(function() {

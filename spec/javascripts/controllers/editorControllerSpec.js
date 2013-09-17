@@ -27,6 +27,19 @@ describe('controller: EditorController', function() {
     this.scope.$element.click();
   });
 
+  xdescribe('Keyboard events', function(){
+    it('emits saveFile when command+s', function(){
+      skip();
+      var done = false;
+      this.scope.$on('saveFile', function(e) {
+        done = true;
+      });      
+      waitsFor(function() { return done; }, 'emit saveFile on command+s', 100);
+      $(".ace_content").simulate('keyboardEvent', 
+                                  'keyUp', { metaKey: true, keyCode: 83 });
+    });
+  });
+
   describe('Event: windowResized', function() {
     it('resizes the element on windowResized', function() {
       var originalWidth = this.scope.$element.width();
