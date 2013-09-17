@@ -174,4 +174,42 @@ describe('service: github', function() {
       waitsFor(function() { return done; }, 'getFile', 500);
     });
   });
+
+  describe('#saveFile', function(){
+    beforeEach(function() {
+      $.mockjaxClear();
+      mock_ajax('*/user', {login: github_user, id: '1245'});
+      subject.init(auth_token);
+      waitsFor(function() { return subject.user; }, 'subject init', 500);
+      runs(function(){
+        subject.setRepo(repoName);
+      });
+    });
+
+    it('does not save without a path', function(){
+      expect(function(){
+        subject.saveFile();
+      }).toThrow('path is required');
+    });
+
+    it('sends content to github', function(){
+      var done = false;
+      var fake_head = {
+        "ref": "refs/heads/master",
+        "url": "https://api.github.com/repos/Ortuna/progit-bana/git/refs/heads/master",
+        "object": {
+          "sha": "d1e3e6208ecb1eff116a6046bc863cffbe70076a",
+          "type": "commit",
+          "url": "https://api.github.com/repos/Ortuna/progit-bana/git/commits/d1e3e6208ecb1eff116a6046bc863cffbe70076a"
+        }
+      }
+
+      mock_ajax(/heads/, fake_head);
+      subject.saveFile('manifest.yml', 'content').then(function() {
+        done = true;
+      });
+
+      waitsFor(function() { return done; }, 'saveFile', 500);
+    });
+  });
 });

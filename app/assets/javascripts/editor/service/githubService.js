@@ -35,5 +35,11 @@ Application.service('github', function() {
     return github.branch.read(path);
   }
 
+  github.saveFile = function(path, content) {
+    if(typeof path === 'undefined')
+      throw 'path is required';
+    return github.branch.write(path, content, "Updated " + path);
+  }
+
   return github;
 });
