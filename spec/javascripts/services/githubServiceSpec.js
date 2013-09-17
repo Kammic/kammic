@@ -204,7 +204,7 @@ describe('service: github', function() {
         }
       }
 
-      mock_ajax(/heads/, fake_head);
+      mock_ajax(/heads|repos/, fake_head);
       subject.saveFile('manifest.yml', 'content').then(function() {
         done = true;
       });
