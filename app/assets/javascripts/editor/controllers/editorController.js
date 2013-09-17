@@ -1,4 +1,5 @@
 EditorController = function($scope, $rootScope, github) {
+  var context    = this;
   $scope.editor  = ace.edit("editor");
   $scope.$element = $('#editor');
 
@@ -45,23 +46,18 @@ EditorController = function($scope, $rootScope, github) {
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {
     github.getFile(selectedFile.path).then(function(response) {
+      response.path = selectedFile.path;
       $scope.$emit('loadFile', response);
     });
   });
 
   $rootScope.$on('saveFile', function(e) {
-    console.debug('here');
-    // var contents = $scope.editor.getSession().getValue();
-    // $rootScope.branch.write(
-    //   $scope.file.path, contents, "Updated " + $scope.file.path)
-    //   .done(function() {
-    //     console.debug("Done saving!");
-    //   });
+    github.saveFile($scope.file.path, context.markdown());
   });
 
   $rootScope.$on('previewLoaded', function(e) {
     $scope.$emit('markdownUpdated', $scope.editor.getValue());
   });
 
-  $scope.$emit('editorLoaded', this.markdown());
+  $scope.$emit('editorLoaded', context.markdown());
 };

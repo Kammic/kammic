@@ -78,6 +78,18 @@ describe('controller: EditorController', function() {
       waitsFor(function(){ return done; }, 'emit loadFile w/ content', 100);
       this.scope.$emit('fileSelected', {path: 'some_remote_path'});
     });
+
+    it('sets the path on the response', function(){
+      spy_and_return(this.github, 'getFile', {content: 'test content'});
+      var done = false;
+      this.scope.$on('loadFile', function(e, file) {
+        expect(file.path).toEqual('some_remote_path');
+        done = true;
+      });
+
+      waitsFor(function(){ return done; }, 'emit loadFile w/ content', 100);
+      this.scope.$emit('fileSelected', {path: 'some_remote_path'});
+    });
   });
 
   describe('Event: previewLoaded', function(){
