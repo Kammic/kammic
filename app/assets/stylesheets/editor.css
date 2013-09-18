@@ -79,3 +79,10 @@ body {
 #browser td {  
   padding: .3em;
 }
+
+#browser .spinner {
+  width: 24px;
+  position: absolute;
+  left: 49%;
+  top: 49%;
+}

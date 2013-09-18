@@ -2,7 +2,7 @@ BrowserController = function($scope, $rootScope, github) {
   $scope.$element = $('#browser');
   $scope.$element.hide();
   $scope.visible  = false;
-
+  $scope.loading  = false;
   $scope.currentPath = [];
 
   $rootScope.$on('toggleBrowser', function(e) {
@@ -33,10 +33,18 @@ BrowserController = function($scope, $rootScope, github) {
     });
   }
 
+  var setLoading = function(value) {
+    $scope.$apply(function(){
+      $scope.loading = value;
+    });
+  }
+
   var browseToDirectory = function(treeArray) {
+    setLoading(true);
     github.getTree(treeArray.join('/')).then(function(files) {
       $scope.currentPath = treeArray;
       updateFilesList(files);
+      setLoading(false);
     });
   }
 

@@ -24,6 +24,15 @@ describe('controller: BrowserController', function() {
   it('should init the github service', function() {
     expect(this.github.api).toBeDefined();
   });
+  
+  describe('loading', function() {
+    it('sets $scope.loading when browsing directory', function(){
+      this.scope.loading = true;
+      spy_and_return(this.github, 'getTree', [{}]);
+      this.scope.$emit('dirSelected', {path: 'test'});
+      expect(this.scope.loading).toEqual(false);
+    });
+  });
 
   describe('Event: dirSelected', function() {
     it('sets the current path correctly', function() {
