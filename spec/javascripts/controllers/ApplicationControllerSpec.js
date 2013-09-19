@@ -1,6 +1,7 @@
 describe('controller: ApplicationController', function() {
   beforeEach(function() {
     module('Application');
+    $("body").append("<div id='preview'></div>");
   });
 
   beforeEach(inject(function($rootScope, $controller) {
