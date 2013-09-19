@@ -9,6 +9,19 @@ ApplicationController = function($scope, $rootScope) {
     $(window).resize();
   });
 
+  $rootScope.$on('notify', function(e, message){
+    $.bootstrapGrowl(message, {
+      ele: 'body',
+      type: 'success',
+      offset: {from: 'bottom', amount: 20},
+      align: 'left',
+      width: 'auto',
+      delay: 1000,
+      allow_dismiss: true,
+      stackup_spacing: 3
+    });
+  });
+
   key('esc', function(){
     $scope.$emit('toggleBrowser');
   });

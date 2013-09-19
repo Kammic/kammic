@@ -10,6 +10,26 @@ describe('controller: ApplicationController', function() {
     });
   }));
 
+  describe('Notifications', function(){
+    describe('Event: notify', function(){
+      it('shows notifications when notify is emitted', function(){
+        this.scope.$emit('notify', 'some message');
+        waitsFor(function(){
+          return $('.bootstrap-growl').length > 0
+        }, 100);
+      });
+
+      it('shows the correct message', function(){
+        this.scope.$emit('notify', 'my_message');
+        waitsFor(function(){
+          return $('.bootstrap-growl').length > 0
+        }, 100);
+
+        expect($('.bootstrap-growl').text()).toMatch(/my_message/);
+      });
+    });
+  });
+
   describe('Events: previewLoaded, editorLoaded', function(){
     it('calls window resize on previewLoaded', function(){
       var done = false;

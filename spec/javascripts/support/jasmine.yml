@@ -13,6 +13,7 @@
 src_files:
   - app/assets/javascripts/lib/jquery/jquery-1.10.2.min.js
   - app/assets/javascripts/lib/jquery/jquery.simulate.js
+  - app/assets/javascripts/lib/bootstrap/jquery.bootstrap-growl.min.js
   - app/assets/javascripts/lib/angular/angular.min.js
   - app/assets/javascripts/lib/angular/angular-mocks.js
   - app/assets/javascripts/lib/angular/jquery.mockjax.js

@@ -52,7 +52,9 @@ EditorController = function($scope, $rootScope, github) {
   });
 
   $rootScope.$on('saveFile', function(e) {
-    github.saveFile($scope.file.path, context.markdown());
+    github.saveFile($scope.file.path, context.markdown()).then(function(){
+      $rootScope.$emit('notify', "Saved " + $scope.file.path);
+    });
   });
 
   $rootScope.$on('previewLoaded', function(e) {
