@@ -5,7 +5,7 @@
   </div>
 
   <div id="browser" data-ng-controller='BrowserController'>
-    <div ng-show="loading">
+    <div ng-show="loading == true">
       <%= image_tag('spinner.gif', class: 'spinner') %>
     </div>
     <div ng-show="loading == false">
