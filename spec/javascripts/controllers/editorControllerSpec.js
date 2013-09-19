@@ -27,6 +27,65 @@ describe('controller: EditorController', function() {
     this.scope.$element.click();
   });
 
+  describe('localstorage', function() {
+    beforeEach(function() {
+      localStorage.clear();
+      this.scope.file = {path: 'some_path.md'};
+    });
+
+    var read_file = function(path) {
+      return localStorage.getItem('some_path.md');
+    }
+
+    var has_data = function(path) {
+      return (localStorage.getItem('some_path.md') != null) ? true: false;
+    }
+
+    it('Saves to localstorage when changed', function() {
+      this.scope.editor.getSession().setValue('xyz');
+      waitsFor(function() { return has_data('some_path.md')}, 'savesLocalFile', 200);
+      runs(function() {
+        expect(read_file('some_path.md')).toEqual('xyz');  
+      });
+    });
+
+    it('Saves to localstorage on timer', function(){
+      this.scope.editor.getSession().setValue('old data');
+      this.scope.editor.getSession().setValue('new data');
+      waitsFor(function() { return has_data('some_path.md')}, 'savesLocalFile', 200);
+      runs(function() {
+        expect(read_file('some_path.md')).toEqual('new data');
+      });
+    });
+
+    it('Clears the data for file when performing save', function(){
+      var done = false;
+      this.scope.$on('saveFile', function() {
+        done = true;
+      });
+      spy_and_return(this.github, 'saveFile', {content: 'test content'});
+      this.scope.editor.getSession().setValue('xyz');
+      this.scope.$emit('saveFile');
+
+      waitsFor(function() { return done}, 'notify', 100);
+      runs(function() {
+        expect(read_file('some_path.md')).toEqual(null);  
+      });
+    });
+
+    describe('Emit: savedLocal, clearedLocal', function(){
+      it('emits savedLocal when lsSave', function(){
+        check_emit(this.scope, 'savedLocal');
+        this.ctrl.lsSave();
+      });
+
+      it('emits clearedLocal when lsClear', function(){
+        check_emit(this.scope, 'clearedLocal');
+        this.ctrl.lsClear();
+      });
+    });
+  });
+
   xdescribe('Keyboard events', function(){
     it('emits saveFile when command+s', function(){
       skip();

@@ -49,13 +49,13 @@
 
   <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')">
     <a href="#" >
-      <i class='icon-tasks icon-white'></i>
+      <i class='icon-list-alt icon-white'></i>
     </a>
   </div>
 
-  <div id="menu-changes" class="menu-button" ng-click="$emit('toggleStaging')">
+  <div id="menu-changes" class="menu-button" ng-click="$emit('toggleStaging')"  ng-controller="SaveStatusController">
     <a href="#" >
-      <i class='icon-info-sign icon-white'></i>
+      <i ng-class="class" class='icon-white'></i>
     </a>
   </div>
 </div>

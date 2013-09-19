@@ -1,10 +1,22 @@
 EditorController = function($scope, $rootScope, github) {
-  var context    = this;
-  $scope.editor  = ace.edit("editor");
-  $scope.$element = $('#editor');
+  var context         = this;
+  $scope.editor       = ace.edit("editor");
+  $scope.$element     = $('#editor');
 
   this.markdown = function() {
     return $scope.editor.getSession().getValue();
+  }
+
+  this.lsSave = function() {
+    if(typeof $scope.file == 'undefined')
+      return;
+    $rootScope.$emit('savedLocal');
+    localStorage.setItem($scope.file.path, context.markdown());
+  }
+
+  this.lsClear = function() {
+    $rootScope.$emit('clearedLocal');
+    localStorage.removeItem($scope.file.path);
   }
 
   $scope.$element.click(function() {
@@ -32,7 +44,17 @@ EditorController = function($scope, $rootScope, github) {
   });
 
   $scope.editor.on('change', function(e) {
+    $scope.$emit('saveLocalFile');
     $scope.$emit('markdownUpdated', $scope.editor.getValue());
+  });
+
+  $rootScope.$on('saveLocalFile', function(e){
+    if(typeof $scope.timer !== 'undefined')
+      clearTimeout($scope.timer);
+
+    $scope.timer = setTimeout(function() {
+      context.lsSave();
+    }, env.localStorageCoolDownTime);
   });
 
   $rootScope.$on('windowResized', function(e, width, height) {
@@ -52,7 +74,8 @@ EditorController = function($scope, $rootScope, github) {
   });
 
   $rootScope.$on('saveFile', function(e) {
-    github.saveFile($scope.file.path, context.markdown()).then(function(){
+    github.saveFile($scope.file.path, context.markdown()).then(function() {
+      context.lsClear();
       $rootScope.$emit('notify', "Saved " + $scope.file.path);
     });
   });

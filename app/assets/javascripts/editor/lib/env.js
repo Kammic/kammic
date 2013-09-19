@@ -5,3 +5,5 @@ env.windowResizedCoolDownTime = 100;
 
 env.browserFadeOutTime = 100;
 env.browserFadeInTime = 100;
+
+env.localStorageCoolDownTime = 1000;

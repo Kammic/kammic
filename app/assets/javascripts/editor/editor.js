@@ -3,7 +3,7 @@
 //= require ../lib/github/base64
 //= require ../lib/github/underscore
 //= require ../lib/github/octokit
-//= require ../lib/keyboard/keymaster.min
+//= require ../lib/misc/keymaster.min
 //= require ../lib/bootstrap/jquery.bootstrap-growl.min
 
 //= require_tree .
