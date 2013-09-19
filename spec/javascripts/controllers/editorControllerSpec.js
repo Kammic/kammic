@@ -28,6 +28,7 @@ describe('controller: EditorController', function() {
   });
 
   describe('localstorage', function() {
+    env.localStorageCoolDownTime = 100;
     beforeEach(function() {
       localStorage.clear();
       this.scope.file = {path: 'some_path.md'};
