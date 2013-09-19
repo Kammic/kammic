@@ -11,9 +11,9 @@ ApplicationController = function($scope, $rootScope) {
 
   $rootScope.$on('notify', function(e, message){
     $.bootstrapGrowl(message, {
-      ele: 'body',
+      ele: '#preview',
       type: 'success',
-      offset: {from: 'bottom', amount: 20},
+      offset: {from: 'bottom', amount: 10},
       align: 'left',
       width: 'auto',
       delay: 1000,

@@ -3,7 +3,6 @@
 
   <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="preview">
   </div>
-
   <div id="browser" data-ng-controller='BrowserController'>
     <div ng-show="loading == true">
       <%= image_tag('spinner.gif', class: 'spinner') %>
@@ -48,9 +47,15 @@
     </div>
   </div>
 
-  <div id="menu-button" ng-click="$emit('toggleBrowser')">
+  <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')">
     <a href="#" >
       <i class='icon-tasks icon-white'></i>
+    </a>
+  </div>
+
+  <div id="menu-changes" class="menu-button" ng-click="$emit('toggleStaging')">
+    <a href="#" >
+      <i class='icon-info-sign icon-white'></i>
     </a>
   </div>
 </div>

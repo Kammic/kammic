@@ -25,33 +25,45 @@ body {
   max-width: none;
 }
 
-#menu-button {
-  position: absolute;
+.menu-button#menu-browser {
   right: 1em;
+}
+
+.menu-button#menu-changes {
+  right: 3.5em;
+}
+
+
+.menu-button {
+  position: absolute;
   bottom: 1em;
   background-color: #000;
   border-radius: .2em;
-  padding: .5em;
   opacity: 0.5;
-
+  padding: .5em;
   transition: opacity .25s ease-in-out;
   -moz-transition: opacity .25s ease-in-out;
   -webkit-transition: opacity .25s ease-in-out;
 }
 
-#menu-button:hover {
+.menu-button:hover {
   opacity: 1;
+}
+
+.modal {
+
+
 }
 
 #browser {
   display: none;
-  z-index: 5;
   position: absolute;
   overflow: auto;
+  padding: 1em;
+  z-index: 5;  
   background-color: #fff;
   border-radius: 5px;
   border: 5px solid rgba(0,0,0,0.2);
-  padding: 1em;
 }
 
 #browser a,
@@ -86,3 +98,4 @@ body {
   left: 49%;
   top: 49%;
 }
+
