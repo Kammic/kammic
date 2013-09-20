@@ -150,6 +150,13 @@ describe('controller: EditorController', function() {
       waitsFor(function(){ return done; }, 'emit loadFile w/ content', 100);
       this.scope.$emit('fileSelected', {path: 'some_remote_path'});
     });
+
+    it('loads localstorage file if available', function() {
+      localStorage.setItem('some_path.md', '112233');
+      check_emit(this.scope, 'loadFile');
+      this.scope.$emit('loadFile', {path: 'some_path.md', content: 'xyz'});
+      expect(this.ctrl.markdown()).toEqual('112233');
+    });
   });
 
   describe('Event: previewLoaded', function(){

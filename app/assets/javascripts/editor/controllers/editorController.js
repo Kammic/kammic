@@ -19,6 +19,10 @@ EditorController = function($scope, $rootScope, github) {
     localStorage.removeItem($scope.file.path);
   }
 
+  this.lsReadFile = function() {
+    return localStorage.getItem($scope.file.path); 
+  }
+
   $scope.$element.click(function() {
     $scope.$emit('hideBrowser');
   });
@@ -63,7 +67,8 @@ EditorController = function($scope, $rootScope, github) {
 
   $rootScope.$on('loadFile', function(e, file) {
     $scope.file = file;
-    $scope.editor.getSession().setValue(file.content);
+    var content = context.lsReadFile() ? context.lsReadFile() : file.content;
+    $scope.editor.getSession().setValue(content);
   });
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {
