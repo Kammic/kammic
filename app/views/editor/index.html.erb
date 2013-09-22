@@ -47,15 +47,10 @@
     </div>
   </div>
 
-  <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')">
+  <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')" ng-controller="SaveStatusController">
     <a href="#" >
-      <i class='icon-list-alt icon-white'></i>
-    </a>
-  </div>
-
-  <div id="menu-changes" class="menu-button" ng-click="$emit('toggleStaging')"  ng-controller="SaveStatusController">
-    <a href="#" >
-      <i ng-class="class" class='icon-white'></i>
+      <span class="glyphicon glyphicon-flash"></span>
+      <i ng-class="class" class='icon-list-alt icon-white'></i>
     </a>
   </div>
 </div>
