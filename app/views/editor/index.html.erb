@@ -17,7 +17,7 @@
         </tr>
         <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
           <td>
-            <a href="#"><i class="icon-circle-arrow-up"></i></a>
+            <a href="#"><span class="glyphicon glyphicon-chevron-up"></span></a>
           </td>
           <td>
             <a href="#">..</a>
@@ -27,10 +27,10 @@
         </tr>
         <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
           <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
-            <a href="#"><i class="icon-file"></i></a>
+            <a href="#"><span class="glyphicon glyphicon-file"></span></a>
           </td>
           <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
-            <a href="#"><i class="icon-folder-close"></i></a>
+            <a href="#"><span class="glyphicon glyphicon-folder-close"></span></a>
           </td>
           <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
             <a href="#">{{file.name}}</a>
@@ -49,8 +49,7 @@
 
   <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')" ng-controller="SaveStatusController">
     <a href="#" >
-      <span class="glyphicon glyphicon-flash"></span>
-      <i ng-class="class" class='icon-list-alt icon-white'></i>
+      <span ng-class="class" class="glyphicon glyphicon-list-alt"></span>
     </a>
   </div>
 </div>
