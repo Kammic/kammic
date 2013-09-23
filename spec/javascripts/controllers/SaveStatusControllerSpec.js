@@ -23,12 +23,12 @@ describe('controller: SaveStatusController', function() {
   it('changes class on savedLocal', function(){
     check_emit(this.scope, 'savedLocal');
     this.scope.$emit('savedLocal');
-    expect(this.scope.class).toEqual(['icon-warning-sign']);
+    expect(this.scope.class).toEqual(['glyphicon-warning-sign']);
   });
 
   it('changes class on clearedLocal', function(){
     check_emit(this.scope, 'clearedLocal');
     this.scope.$emit('clearedLocal');
-    expect(this.scope.class).toEqual(['icon-ok-circle']);
+    expect(this.scope.class).toEqual(['glyphicon-ok-circle']);
   });
 });

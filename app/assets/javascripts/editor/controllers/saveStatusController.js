@@ -1,17 +1,17 @@
 SaveStatusController = function($scope, $rootScope) {
-  $scope.$element = $("#menu-changes");
-  $scope.class    = ['icon-info-sign'];
+  $scope.$element = $("#menu-browser");
+  $scope.class    = ['glyphicon-list-alt'];
 
   $rootScope.$on('savedLocal', function() {
     $scope.$apply(function(){
-      $scope.class = ['icon-warning-sign'];  
+      $scope.class = ['glyphicon-warning-sign'];  
     });
     
   });
 
   $rootScope.$on('clearedLocal', function() {
     $scope.$apply(function() {
-      $scope.class = ['icon-ok-circle'];
+      $scope.class = ['glyphicon-ok-circle'];
     });
   });
 }
