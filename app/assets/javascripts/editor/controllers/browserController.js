@@ -1,31 +1,6 @@
 BrowserController = function($scope, $rootScope, github) {
-  $scope.$element = $('#browser');
-  $scope.$element.hide();
-  $scope.visible  = false;
   $scope.loading  = false;
   $scope.currentPath = [];
-
-  $rootScope.$on('toggleBrowser', function(e) {
-    $scope.visible ? hideBrowser() : showBrowser();
-  });
-
-  $rootScope.$on('showBrowser', function(e) {
-    if(!$scope.visible) {  showBrowser(); }
-  });
-
-  $rootScope.$on('hideBrowser', function(e){
-    if($scope.visible) { hideBrowser(); }
-  });
-
-  var hideBrowser = function() {
-    $scope.visible = false;
-    $scope.$element.fadeOut(env.browserFadeOutTime);
-  }
-
-  var showBrowser = function() {
-    $scope.visible = true;
-    $scope.$element.fadeIn(env.browserFadeInTime);
-  }
 
   var updateFilesList = function(files) {
     $scope.$apply(function() {
@@ -70,17 +45,8 @@ BrowserController = function($scope, $rootScope, github) {
   });
 
   $rootScope.$on('fileSelected', function(e) {
-    $scope.$emit('toggleBrowser');
+    $rootScope.$emit('hideMenu');
   });
-  
-  $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width/2.05);
-    $scope.$element.height(height/2.05);
-
-    $scope.$element.css('top', height/4.05);
-    $scope.$element.css('left', width/4.05);
-  });
-  $(window).resize();
 
   $scope.$emit('browserLoaded');
 }

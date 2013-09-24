@@ -2,51 +2,64 @@
   <div id="editor" data-ng-controller='EditorController'><%= render 'code' %></div>
   <div id="preview" data-ng-controller='PreviewController' ng-bind-html-unsafe="preview">
   </div>
-  <div id="browser" data-ng-controller='BrowserController'>
-    <div ng-show="loading == true">
-      <%= image_tag('spinner.gif', class: 'spinner') %>
-    </div>
-    <div ng-show="loading == false">
-      <table>
-        <tr>
-          <td></td>
-          <td>Name</td>
-          <td>Sha</td>
-          <td>Size</td>
-        </tr>
-        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
-          <td>
-            <a href="#"><span class="glyphicon glyphicon-chevron-up"></span></a>
-          </td>
-          <td>
-            <a href="#">..</a>
-          </td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
-          <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
-            <a href="#"><span class="glyphicon glyphicon-file"></span></a>
-          </td>
-          <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
-            <a href="#"><span class="glyphicon glyphicon-folder-close"></span></a>
-          </td>
-          <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
-            <a href="#">{{file.name}}</a>
-          </td>
-          <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
-            <a href="#">{{file.name}}</a>
-          </td>
-          <td>
-            <a href="#">{{file.sha.substring(0, 10)}}</a>
-          </td>
-          <td>{{file.size}}</td>
-        </tr>
-      </table>
+    <div id='menu-panel' data-ng-controller='MenuPanelController'>
+      <div class='menu-header'>
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#">Files</a></li>
+          <li><a href="#">Pending</a></li>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Assets</a></li>
+        </ul>
+      </div>
+      <div id="browser" data-ng-controller='BrowserController'>
+        <div class='browser-inner'>
+          <div ng-show="loading == true">
+            <%= image_tag('spinner.gif', class: 'spinner') %>
+          </div>
+          <div ng-show="loading == false">
+            <table>
+              <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Sha</td>
+                <td>Size</td>
+              </tr>
+              <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
+                <td>
+                  <a href="#"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                </td>
+                <td>
+                  <a href="#">..</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
+                <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
+                  <a href="#"><span class="glyphicon glyphicon-file"></span></a>
+                </td>
+                <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+                  <a href="#"><span class="glyphicon glyphicon-folder-close"></span></a>
+                </td>
+                <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
+                  <a href="#">{{file.name}}</a>
+                </td>
+                <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+                  <a href="#">{{file.name}}</a>
+                </td>
+                <td>
+                  <a href="#">{{file.sha.substring(0, 10)}}</a>
+                </td>
+                <td>{{file.size}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="menu-browser" class="menu-button" ng-click="$emit('toggleBrowser')" ng-controller="SaveStatusController">
+  <div id="menu-browser" class="menu-button" ng-click="$emit('toggleMenu')" ng-controller="SaveStatusController">
     <a href="#">
       <span ng-class="class" class="glyphicon"></span>
     </a>

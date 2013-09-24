@@ -58,15 +58,18 @@ body {
 
 .modal {}
 
-#browser {
+#browser .browser-inner {
+  padding: 1em;
+}
+
+#menu-panel {
   display: none;
   position: absolute;
   overflow: auto;
-  padding: 1em;
   z-index: 5;  
   background-color: #fff;
   border-radius: 5px;
-  border: 5px solid rgba(0,0,0,0.2);
+  border: 5px solid rgba(0,0,0,0.2);  
 }
 
 #browser a,
@@ -102,3 +105,6 @@ body {
   top: 49%;
 }
 
+#menu-panel {
+  padding: 1em;
+}
