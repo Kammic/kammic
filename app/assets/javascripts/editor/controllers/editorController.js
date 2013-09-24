@@ -24,7 +24,7 @@ EditorController = function($scope, $rootScope, github) {
   }
 
   $scope.$element.click(function() {
-    $scope.$emit('hideBrowser');
+    $scope.$emit('hideMenu');
   });
 
   $scope.editor.setTheme("ace/theme/tomorrow_night");

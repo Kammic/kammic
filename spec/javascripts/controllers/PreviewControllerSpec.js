@@ -21,13 +21,13 @@ describe('controller: PreviewController', function() {
     expect(this.scope.$element.width()).toNotEqual(originalWidth);
   });
 
-  it('emits hideBrowser when clicked', function(){
+  it('emits hideMenu when clicked', function(){
     var done = false;
-    this.scope.$on('hideBrowser', function(e) {
+    this.scope.$on('hideMenu', function(e) {
       done = true;
     });
 
-    waitsFor(function() { return done; }, 'emit hideBrowser on click', 100);
+    waitsFor(function() { return done; }, 'emit hideMenu on click', 100);
     this.scope.$element.click();
   });
 

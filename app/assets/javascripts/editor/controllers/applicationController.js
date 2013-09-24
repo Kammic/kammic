@@ -23,7 +23,7 @@ ApplicationController = function($scope, $rootScope) {
   });
 
   key('esc', function(){
-    $scope.$emit('toggleBrowser');
+    $scope.$emit('toggleMenu');
   });
 
   var cooldownTimer = null;

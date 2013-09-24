@@ -18,12 +18,12 @@ describe('controller: MenuPanel', function() {
   }));
 
   it('defaults to browser as selected', function(){
-    expect(this.scope.selected).toEqual('browser');
+    expect(this.scope.selected).toEqual('Browser');
   });
 
   describe('#isActive', function(){
     it('responds with the active item', function(){
-      expect(this.scope.isActive('browser')).toEqual(true);
+      expect(this.scope.isActive('Browser')).toEqual(true);
       expect(this.scope.isActive('something_else')).toEqual(false);
 
       this.scope.$emit('menuSelect', 'files');

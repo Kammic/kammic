@@ -11,7 +11,7 @@ PreviewController = function($scope, $rootScope) {
   }
   
   $scope.$element.click(function() {
-    $scope.$emit('hideBrowser');
+    $scope.$emit('hideMenu');
   });
 
   $rootScope.$on('markdownUpdated', function(e, rawText) {
