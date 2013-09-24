@@ -5,13 +5,10 @@
     <div id='menu-panel' data-ng-controller='MenuPanelController'>
       <div class='menu-header'>
         <ul class="nav nav-pills">
-          <li class="active"><a href="#">Files</a></li>
-          <li><a href="#">Pending</a></li>
-          <li><a href="#">History</a></li>
-          <li><a href="#">Assets</a></li>
+          <li ng-repeat="item in items" ng-class="{ active: isActive(item)}" ><a ng-click="$emit('menuSelect', item)" href="#">{{item}}</a></li>
         </ul>
       </div>
-      <div id="browser" data-ng-controller='BrowserController'>
+      <div id="browser" data-ng-controller='BrowserController' ng-show="selected == 'Browser'">
         <div class='browser-inner'>
           <div ng-show="loading == true">
             <%= image_tag('spinner.gif', class: 'spinner') %>

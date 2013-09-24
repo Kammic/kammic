@@ -17,6 +17,30 @@ describe('controller: MenuPanel', function() {
     });
   }));
 
+  it('defaults to browser as selected', function(){
+    expect(this.scope.selected).toEqual('browser');
+  });
+
+  describe('#isActive', function(){
+    it('responds with the active item', function(){
+      expect(this.scope.isActive('browser')).toEqual(true);
+      expect(this.scope.isActive('something_else')).toEqual(false);
+
+      this.scope.$emit('menuSelect', 'files');
+      expect(this.scope.isActive('files')).toEqual(true);
+    });
+  });
+
+  describe('Event: menuSelect', function(){
+    it('sets selected to the passed in item', function(){
+      this.scope.$emit('menuSelect', 'files');
+      expect(this.scope.selected).toEqual('files');
+
+      this.scope.$emit('menuSelect', 'other');
+      expect(this.scope.selected).toEqual('other');
+    });
+  });
+
   describe('Event: toggleMenu', function() {
     it('hides the menu', function() {
       this.scope.visible = false;

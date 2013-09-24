@@ -2,6 +2,16 @@ MenuPanelController = function($scope, $rootScope) {
   $scope.$element = $('#menu-panel');
   $scope.$element.hide();
   $scope.visible  = false;
+  $scope.selected = 'Browser';
+  $scope.items    = ['Browser', 'Pending', 'History', 'Assets'];
+
+  $scope.isActive = function(item) {
+    return $scope.selected == item;
+  };
+
+  $rootScope.$on('menuSelect', function(e, item){
+    $scope.selected = item;
+  });
 
   $rootScope.$on('toggleMenu', function(e) {
     $scope.visible ? hideMenu() : showMenu();
