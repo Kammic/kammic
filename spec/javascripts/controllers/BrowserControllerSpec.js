@@ -52,9 +52,13 @@ describe('controller: BrowserController', function() {
   });
 
   describe('Event: fileSelected', function() {
-    it('hides the browser when a file is selected', function(){
-      check_emit(this.scope, 'hideMenu');
-      this.scope.$emit('fileSelected', {});
+    xit('hides the browser when a file is selected', function(){
+      var done = false;
+      this.scope.$on('hideMenu', function(){
+        done = true;
+      });
+      this.scope.$emit('fileSelected');
+      waitsFor(function(){ return done; }, 'emit hideMenu', 100);
     });
   });
 
