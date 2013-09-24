@@ -27,7 +27,7 @@ EditorController = function($scope, $rootScope, github) {
     $scope.$emit('hideMenu');
   });
 
-  $scope.editor.setTheme("ace/theme/tomorrow_night");
+  $scope.editor.setTheme("ace/theme/monokai");
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
 
