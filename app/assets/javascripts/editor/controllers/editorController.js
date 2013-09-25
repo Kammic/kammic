@@ -83,6 +83,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue) {
     github.saveFile($scope.file.path, context.markdown()).then(function() {
       context.lsClear();
       $rootScope.$emit('notify', "Saved " + $scope.file.path);
+      $rootScope.$emit('saved', $scope.file.path);
     });
   });
 

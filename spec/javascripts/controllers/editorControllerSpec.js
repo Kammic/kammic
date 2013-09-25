@@ -79,6 +79,12 @@ describe('controller: EditorController', function() {
       });
     });
 
+    it('Emits saved when saveFile is successful', function(){
+      spy_and_return(this.github, 'saveFile', {content: 'test content'});
+      check_emit(this.scope, 'saved');
+      this.scope.$emit('saveFile');
+    });
+
     it('Saves the file path in changedFiles', function(){
       this.ctrl.lsSave();
       expect(this.changedFileQueue.changedFiles()).toEqual({'some_path.md':true});
