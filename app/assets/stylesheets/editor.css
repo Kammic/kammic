@@ -78,23 +78,23 @@ body {
   color:#0099ff;
 }
 
-#browser table {
+table.file-list {
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
   width: 100%;
 }
 
-#browser tr {
+.file-list tr {
   border-bottom: 1px solid #eee;
   cursor: hand;
   cursor: pointer;
 }
 
-#browser tr:hover {
+.file-list tr:hover {
   background-color: #EEE;
 }
 
-#browser td {  
+.file-list td {  
   padding: .3em;
 }
 

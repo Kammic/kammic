@@ -1,14 +1,12 @@
-      <div id="pending" data-ng-controller='PendingController' ng-show="selected == 'Pending'"
-      >
-        <table>
-          <tr>
-            <td></td>
-            <td>Name</td>
-          </tr>
-          <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
-            <td></td>
-            <td>files</td>
-          </tr>
-        </table>
-        {{changed()}}
-      </div>
+    <div id="pending" data-ng-controller='PendingController' ng-show="selected == 'Pending'">
+      <table class='file-list'>
+        <tr>
+          <td></td>
+          <td>Name</td>
+        </tr>
+        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
+          <td><a href="#"><span class="glyphicon glyphicon-file"></span></a></td>
+          <td><a href="#">{{file}}</a></td>
+        </tr>
+      </table>
+    </div>
