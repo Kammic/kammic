@@ -1,0 +1,45 @@
+      <div id="browser" data-ng-controller='BrowserController' ng-show="selected == 'Browser'">
+        <div class='browser-inner'>
+          <div ng-show="loading == true">
+            <%= image_tag('spinner.gif', class: 'spinner') %>
+          </div>
+          <div ng-show="loading == false">
+            <table>
+              <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Sha</td>
+                <td>Size</td>
+              </tr>
+              <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
+                <td>
+                  <a href="#"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                </td>
+                <td>
+                  <a href="#">..</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in files">
+                <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
+                  <a href="#"><span class="glyphicon glyphicon-file"></span></a>
+                </td>
+                <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+                  <a href="#"><span class="glyphicon glyphicon-folder-close"></span></a>
+                </td>
+                <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
+                  <a href="#">{{file.name}}</a>
+                </td>
+                <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
+                  <a href="#">{{file.name}}</a>
+                </td>
+                <td>
+                  <a href="#">{{file.sha.substring(0, 10)}}</a>
+                </td>
+                <td>{{file.size}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>

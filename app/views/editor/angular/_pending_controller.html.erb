@@ -1,0 +1,14 @@
+      <div id="pending" data-ng-controller='PendingController' ng-show="selected == 'Pending'"
+      >
+        <table>
+          <tr>
+            <td></td>
+            <td>Name</td>
+          </tr>
+          <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
+            <td></td>
+            <td>files</td>
+          </tr>
+        </table>
+        {{changed()}}
+      </div>
