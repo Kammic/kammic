@@ -4,7 +4,7 @@
           <td></td>
           <td>Name</td>
         </tr>
-        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
+        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()" ng-click="$emit('fileSelected', {path: file})">
           <td><a href="#"><span class="glyphicon glyphicon-file"></span></a></td>
           <td><a href="#">{{file}}</a></td>
         </tr>

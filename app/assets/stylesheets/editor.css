@@ -108,3 +108,11 @@ table.file-list {
 #menu-panel {
   padding: 1em;
 }
+
+.menu-header .nav li {
+  padding: .3em;
+}
+
+.menu-header .nav li a {
+  padding: .5em;
+}
