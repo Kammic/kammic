@@ -1,4 +1,4 @@
-EditorController = function($scope, $rootScope, github) {
+EditorController = function($scope, $rootScope, github, changedFileQueue) {
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
@@ -7,33 +7,12 @@ EditorController = function($scope, $rootScope, github) {
     return $scope.editor.getSession().getValue();
   }
 
-  this.changedFiles = function() {
-    var object = JSON.parse(localStorage.getItem('changedFiles'));
-    return object ? object : {};
-  }
-
-  this.fileChanged = function(path) {
-    if(typeof path === 'undefined')
-      return;
-    var object = context.changedFiles();
-    object[path] = true;
-    localStorage.setItem('changedFiles', JSON.stringify(object));
-  }
-
-  this.resetFile = function(path) {
-    if(typeof path === 'undefined')
-      return;
-    var object = context.changedFiles();
-    delete object[path];
-    localStorage.setItem('changedFiles', JSON.stringify(object));
-  }
-
   this.lsSave = function() {
     if(typeof $scope.file == 'undefined')
       return;
     $rootScope.$emit('savedLocal');
     localStorage.setItem($scope.file.path, context.markdown());
-    context.fileChanged($scope.file.path);
+    changedFileQueue.fileChanged($scope.file.path);
   }
 
   this.lsClear = function() {

@@ -8,8 +8,9 @@ describe('controller: EditorController', function() {
     $("#editor").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, github) {
+  beforeEach(inject(function($rootScope, $controller, github, changedFileQueue) {
     this.github = github;
+    this.changedFileQueue = changedFileQueue;
     this.scope  = $rootScope.$new();
     this.ctrl   = $controller('EditorController', {
       $scope: this.scope,
@@ -80,7 +81,7 @@ describe('controller: EditorController', function() {
 
     it('Saves the file path in changedFiles', function(){
       this.ctrl.lsSave();
-      expect(this.ctrl.changedFiles()).toEqual({'some_path.md':true});
+      expect(this.changedFileQueue.changedFiles()).toEqual({'some_path.md':true});
     });
 
     describe('Emit: savedLocal, clearedLocal', function(){
@@ -93,51 +94,6 @@ describe('controller: EditorController', function() {
         check_emit(this.scope, 'clearedLocal');
         this.ctrl.lsClear();
         expect(has_data('some_path.md')).toEqual(false);
-      });
-    });
-
-    describe('#resetFile', function(){
-      it('removes a file from changedFiles', function(){
-        this.ctrl.fileChanged('a.md');
-        this.ctrl.fileChanged('b.md');
-
-        this.ctrl.resetFile('a.md');
-        expect(this.ctrl.changedFiles()).toEqual({'b.md':true});
-      });
-
-      it('works with a null path', function(){
-        this.ctrl.fileChanged('a.md');
-        this.ctrl.fileChanged('b.md');
-
-        this.ctrl.resetFile();
-        expect(this.ctrl.changedFiles()).toEqual({'a.md':true,'b.md':true});
-      });
-    });
-
-    describe('#fileChanged', function(){
-      it('appends to changedFiles', function(){
-        this.ctrl.fileChanged('a.md');
-        this.ctrl.fileChanged('b.md');
-        this.ctrl.fileChanged('b.md');
-        expect(this.ctrl.changedFiles()).toEqual({'a.md':true, 'b.md':true});
-      });
-
-      it('doesnt append when path is null', function(){
-        this.ctrl.fileChanged();
-        expect(this.ctrl.changedFiles()).toEqual({});
-      });
-    });
-
-    describe('#changedFiles', function(){
-      it('gives back a list of changed files in changedFiles', function(){
-        files = {'test.md' : true, 'something_else.md': true};
-        localStorage.setItem('changedFiles', JSON.stringify(files));
-        expect(this.ctrl.changedFiles()).toEqual(files);
-      });
-
-      it('returns an empty array when changedFiles is not set', function(){
-        localStorage.clear();
-        expect(this.ctrl.changedFiles()).toEqual({});
       });
     });
 
