@@ -41,5 +41,11 @@ Application.service('github', function() {
     return github.branch.write(path, content, "Updated " + path);
   }
 
+  github.getCommits = function(options) {
+    if(typeof options === 'undefined')
+      options = {};
+    return github.repo.getCommits(options);
+  }
+
   return github;
 });

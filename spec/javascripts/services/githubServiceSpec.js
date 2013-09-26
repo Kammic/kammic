@@ -212,4 +212,25 @@ describe('service: github', function() {
       waitsFor(function() { return done; }, 'saveFile', 500);
     });
   });
+
+  describe('#getCommits', function(){
+    beforeEach(function(){
+      $.mockjaxClear();
+      mock_ajax('*/user', {login: github_user, id: '1245'});
+      subject.init(auth_token);
+      waitsFor(function() { return subject.user; }, 'subject init', 500);
+      runs(function(){
+        subject.setRepo(repoName);
+        $.mockjaxClear();
+      });
+    });
+
+    it('returns the repos commits', function(){
+      mock_ajax(/commits/, [{'test':true}]);
+      subject.getCommits().then(function(commits){
+        expect(commits).toEqual([{'test':true}]);
+      });
+    });
+  });
+
 });

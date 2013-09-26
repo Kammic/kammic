@@ -11,6 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
+  - app/assets/javascripts/editor/lib/env.js
   - app/assets/javascripts/lib/jquery/jquery-1.10.2.min.js
   - app/assets/javascripts/lib/jquery/jquery.simulate.js
   - app/assets/javascripts/lib/bootstrap/jquery.bootstrap-growl.min.js
@@ -22,7 +23,6 @@ src_files:
   - app/assets/javascripts/lib/github/underscore.js
   - app/assets/javascripts/lib/github/octokit.js
   - app/assets/javascripts/lib/misc/keymaster.min.js
-  - app/assets/javascripts/editor/lib/env.js
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js
   - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js

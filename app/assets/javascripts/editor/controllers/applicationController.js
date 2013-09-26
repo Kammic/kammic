@@ -1,4 +1,4 @@
-ApplicationController = function($scope, $rootScope) {
+ApplicationController = function($scope, $rootScope, github) {
   var context = this;
 
   $scope.$on('previewLoaded', function(e) {
@@ -20,6 +20,10 @@ ApplicationController = function($scope, $rootScope) {
       allow_dismiss: true,
       stackup_spacing: 3
     });
+  });
+
+  github.init(env.auth_token).then(function() {
+    $scope.$emit('githubLoaded');
   });
 
   key('esc', function(){

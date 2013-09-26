@@ -63,6 +63,7 @@ body {
 }
 
 #menu-panel {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif;
   display: none;
   position: absolute;
   overflow: auto;
@@ -79,7 +80,6 @@ body {
 }
 
 table.file-list {
-  font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
   width: 100%;
 }
@@ -115,4 +115,12 @@ table.file-list {
 
 .menu-header .nav li a {
   padding: .5em;
+}
+
+#history img {
+  border-radius: 10em;
+}
+
+#history .commit {
+  padding: 1em;
 }

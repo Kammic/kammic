@@ -23,7 +23,7 @@ BrowserController = function($scope, $rootScope, github) {
     });
   }
 
-  github.init(env.auth_token).then(function() {
+  $rootScope.$on('githubLoaded', function(){
     setLoading(true);
     github.setRepo('progit-bana');
     github.getTree().then(function(files){

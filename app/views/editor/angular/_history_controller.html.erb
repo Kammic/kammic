@@ -1,0 +1,12 @@
+    <div id="history" data-ng-controller='HistoryController' ng-show="selected == 'History'">
+<div class="media" ng-repeat="commit in commits" class="commit">
+  <a class="pull-left" href="#">
+    <img class="media-object" height="36" src="{{commit.author.avatar_url}}">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">{{commit.sha}}</h4>
+    {{commit.commit.message}}
+    <p>{{commit.author.login}}</p>
+  </div>
+</div>
+    </div>
