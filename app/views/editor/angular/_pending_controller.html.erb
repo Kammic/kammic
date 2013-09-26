@@ -2,11 +2,23 @@
       <table class='file-list table table-striped table-condensed'>
         <tr>
           <td></td>
+          <td>Reset</td>
           <td>Name</td>
         </tr>
-        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()" ng-click="$emit('fileSelected', {path: file})">
-          <td><a href="#"><span class="glyphicon glyphicon-file"></span></a></td>
-          <td><a href="#">{{file}}</a></td>
+        <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
+          <td ng-click="$emit('fileSelected', {path: file})">
+            <a href="#">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </td>
+          <td ng-click="$emit('remove', file)">
+            <a href="#">
+              <span class="glyphicon glyphicon-remove-circle"></span>
+            </a>
+          </td>
+          <td ng-click="$emit('fileSelected', {path: file})">
+            <a href="#">{{file}}</a>
+          </td>
         </tr>
       </table>
     </div>

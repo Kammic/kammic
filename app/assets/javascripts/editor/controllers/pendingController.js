@@ -13,4 +13,10 @@ PendingController = function($scope, $rootScope, changedFileQueue) {
   $rootScope.$on('saved', function(e, path) {
     $scope.saved(path);
   });
+
+  $rootScope.$on('remove', function(e, path) {
+    changedFileQueue.resetFile(path);
+    localStorage.removeItem(path);
+    $scope.$emit('fileSelected', {path: path});
+  });
 };

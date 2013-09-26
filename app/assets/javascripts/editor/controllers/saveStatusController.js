@@ -4,7 +4,7 @@ SaveStatusController = function($scope, $rootScope) {
 
   $rootScope.$on('savedLocal', function() {
     $scope.$apply(function(){
-      $scope.class = ['glyphicon-warning-sign'];  
+      $scope.class = ['glyphicon-warning-sign'];
     });
     
   });

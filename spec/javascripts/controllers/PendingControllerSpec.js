@@ -40,6 +40,29 @@ describe('controller: PendingController', function() {
     });
   });
 
+  describe('Event: remove', function(){
+    it('Removes a file from pending', function() {
+      this.changedFileQueue.fileChanged('a.md');
+      check_emit(this.scope, 'remove');
+      this.scope.$emit('remove', 'a.md');
+
+      expect(this.scope.changed()).toEqual([]);
+    });
+
+    it('Clears the file from localStorage', function(){
+      localStorage.setItem('a.md', 'example item');
+      check_emit(this.scope, 'remove');
+      this.scope.$emit('remove', 'a.md');
+
+      expect(localStorage.getItem('a.md')).toEqual(null);
+    });
+
+    it('Emits: fileSelected', function(){
+      check_emit(this.scope, 'fileSelected');
+      this.scope.$emit('remove', 'a.md');
+    });
+  });
+
   describe('Event: saved', function(){
     it('removes the saved file from the queue', function(){
       this.changedFileQueue.fileChanged('a.md');

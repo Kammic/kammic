@@ -1,4 +1,4 @@
-EditorController = function($scope, $rootScope, github, changedFileQueue) {
+EditorController = function($scope, $rootScope, github, changedFileQueue, editorState) {
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
@@ -8,20 +8,25 @@ EditorController = function($scope, $rootScope, github, changedFileQueue) {
   }
 
   this.lsSave = function() {
-    if(typeof $scope.file == 'undefined')
+    if(typeof editorState.currentFile() == 'undefined')
       return;
     $rootScope.$emit('savedLocal');
-    localStorage.setItem($scope.file.path, context.markdown());
-    changedFileQueue.fileChanged($scope.file.path);
+    localStorage.setItem(context.currentPath(), context.markdown());
+    changedFileQueue.fileChanged(context.currentPath());
   }
 
   this.lsClear = function() {
     $rootScope.$emit('clearedLocal');
-    localStorage.removeItem($scope.file.path);
+    localStorage.removeItem(context.currentPath());
   }
 
   this.lsReadFile = function() {
-    return localStorage.getItem($scope.file.path); 
+    return localStorage.getItem(context.currentPath()); 
+  }
+
+  this.currentPath = function() {
+    var currentFile = editorState.currentFile();
+    return (typeof currentFile.path === 'undefined') ? null : currentFile.path;
   }
 
   $scope.$element.click(function() {
@@ -67,7 +72,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue) {
   });
 
   $rootScope.$on('loadFile', function(e, file) {
-    $scope.file = file;
+    editorState.currentFile(file);
     var content = context.lsReadFile() ? context.lsReadFile() : file.content;
     $scope.editor.getSession().setValue(content);
   });
@@ -80,10 +85,10 @@ EditorController = function($scope, $rootScope, github, changedFileQueue) {
   });
 
   $rootScope.$on('saveFile', function(e) {
-    github.saveFile($scope.file.path, context.markdown()).then(function() {
+    github.saveFile(context.currentPath(), context.markdown()).then(function() {
       context.lsClear();
-      $rootScope.$emit('notify', "Saved " + $scope.file.path);
-      $rootScope.$emit('saved', $scope.file.path);
+      $rootScope.$emit('notify', "Saved " + context.currentPath());
+      $rootScope.$emit('saved', context.currentPath());
     });
   });
 
