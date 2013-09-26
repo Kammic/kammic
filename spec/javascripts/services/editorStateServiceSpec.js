@@ -4,11 +4,20 @@ describe('service: editorState', function() {
     subject = editorState;
   }));
 
-  describe('currentFile', function(){
+  describe('#currentFile', function(){
     it('can set/get currentFile', function(){
       subject.currentFile({path: 'test.md'});
       expect(subject.currentFile()).toEqual({path: 'test.md'});
     });
-
   });
+
+  describe('#currentPath', function(){
+    it('can get currentPath', function(){
+      expect(subject.currentFile()).toEqual(null);
+
+      subject.currentFile({path: 'test.md'});
+      expect(subject.currentPath()).toEqual('test.md');
+    });
+  });
+
 });

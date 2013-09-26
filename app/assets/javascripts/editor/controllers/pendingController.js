@@ -1,4 +1,4 @@
-PendingController = function($scope, $rootScope, changedFileQueue) {
+PendingController = function($scope, $rootScope, changedFileQueue, editorState) {
   var context         = this;
   $scope.$element     = $('#pending');
   $scope.changed = function() {
@@ -17,6 +17,7 @@ PendingController = function($scope, $rootScope, changedFileQueue) {
   $rootScope.$on('remove', function(e, path) {
     changedFileQueue.resetFile(path);
     localStorage.removeItem(path);
-    $scope.$emit('fileSelected', {path: path});
+    if(editorState.currentPath() == path)
+      $scope.$emit('fileSelected', {path: path});
   });
 };

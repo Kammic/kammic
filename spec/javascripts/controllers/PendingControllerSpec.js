@@ -8,9 +8,10 @@ describe('controller: PendingController', function() {
     $("#pending").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, changedFileQueue) {
+  beforeEach(inject(function($rootScope, $controller, changedFileQueue, editorState) {
     this.scope  = $rootScope.$new();
     this.changedFileQueue = changedFileQueue;
+    this.editorState = editorState;
     this.ctrl   = $controller('PendingController', {
       $scope: this.scope,
     });
@@ -57,7 +58,8 @@ describe('controller: PendingController', function() {
       expect(localStorage.getItem('a.md')).toEqual(null);
     });
 
-    it('Emits: fileSelected', function(){
+    it('Emits: fileSelected when current file is removed', function(){
+      this.editorState.currentFile({path: 'a.md'});
       check_emit(this.scope, 'fileSelected');
       this.scope.$emit('remove', 'a.md');
     });
