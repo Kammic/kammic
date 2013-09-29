@@ -1,10 +1,10 @@
-PendingController = function($scope, $rootScope, github, editorState) {
+PendingController = function($scope, $rootScope, github, editor) {
   var context         = this;
   $scope.$element     = $('#pending');
 
-  $scope.changed = function() { return editorState.changedFiles(); };
-  $scope.changedWithContent = function() { return editorState.changedWithContent(); }
-  $scope.saved = function(path) { editorState.resetFile(path); };
+  $scope.changed = function() { return editor.changedFiles(); };
+  $scope.changedWithContent = function() { return editor.changedWithContent(); }
+  $scope.saved = function(path) { editor.resetFile(path); };
 
   $scope.saveAll = function() {
     var files = $scope.changedWithContent();
@@ -26,7 +26,7 @@ PendingController = function($scope, $rootScope, github, editorState) {
   $rootScope.$on('remove', function(e, path) {
     $scope.saved(path);
     localStorage.removeItem(path);
-    if(editorState.currentPath() == path)
+    if(editor.currentPath() == path)
       $scope.$emit('fileSelected', {path: path});
   });
 };

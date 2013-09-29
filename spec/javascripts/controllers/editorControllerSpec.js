@@ -8,9 +8,9 @@ describe('controller: EditorController', function() {
     $("#editor").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, editorState, github, changedFileQueue) {
+  beforeEach(inject(function($rootScope, $controller, editor, github, changedFileQueue) {
     this.github = github;
-    this.editorState = editorState;
+    this.editor = editor;
     this.changedFileQueue = changedFileQueue;
     this.scope  = $rootScope.$new();
     this.ctrl   = $controller('EditorController', {
@@ -33,7 +33,7 @@ describe('controller: EditorController', function() {
     env.localStorageCoolDownTime = 100;
     beforeEach(function() {
       localStorage.clear();
-      this.editorState.currentFile({path: 'some_path.md'});
+      this.editor.currentFile({path: 'some_path.md'});
     });
 
     var read_file = function(path) {
@@ -106,7 +106,7 @@ describe('controller: EditorController', function() {
 
     describe('#lsSave', function(){
       it('skips saving when the file is undefined', function(){
-        this.editorState.currentFile({});
+        this.editor.currentFile({});
         this.ctrl.lsSave();
         expect(has_data('some_path.md')).toEqual(false);
       });
@@ -140,17 +140,17 @@ describe('controller: EditorController', function() {
   });
 
   describe('currentPath', function(){
-    it('can get the currentPath from editorState', function(){
-      this.editorState.currentFile({path: 'stuff.md'});
+    it('can get the currentPath from editor', function(){
+      this.editor.currentFile({path: 'stuff.md'});
       expect(this.ctrl.currentPath()).toEqual('stuff.md');      
     });
   });
 
   describe('Event: loadFile', function() {
-    it('updates the editorState service', function(){
-      this.editorState.currentFile({});
+    it('updates the editor service', function(){
+      this.editor.currentFile({});
       this.scope.$emit('loadFile', {path: 'object_as_string'});
-      expect(this.editorState.currentFile()).toEqual({path: 'object_as_string'});
+      expect(this.editor.currentFile()).toEqual({path: 'object_as_string'});
     });
 
     it('sets the ace editor value to object.content', function() {

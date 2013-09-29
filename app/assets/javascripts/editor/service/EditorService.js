@@ -1,26 +1,26 @@
-Application.service('editorState', function(changedFileQueue) {
-  var editorState = {}
+Application.service('editor', function(changedFileQueue) {
+  var editor = {}
   var currentFile = null;
 
-  editorState.currentFile = function(path) {
+  editor.currentFile = function(path) {
     if(typeof path === 'undefined')
       return currentFile;
     currentFile = path;  
   }
 
-  editorState.currentPath = function() {
+  editor.currentPath = function() {
     if(typeof currentFile === 'undefined' || currentFile == null)
       return null;
-    return editorState.currentFile().path;
+    return editor.currentFile().path;
   }
 
-  editorState.changedFiles = function() {
+  editor.changedFiles = function() {
     var changedFiles = changedFileQueue.changedFiles();
     return Object.keys(changedFiles);
   }
 
-  editorState.changedWithContent = function() {
-    var changedFiles = editorState.changedFiles();
+  editor.changedWithContent = function() {
+    var changedFiles = editor.changedFiles();
     var changedFilesWithContent = {}
     for(var i = 0; i < changedFiles.length; i++) {
       changedFilesWithContent[changedFiles[i]] = localStorage.getItem(changedFiles[i]);
@@ -28,9 +28,9 @@ Application.service('editorState', function(changedFileQueue) {
     return changedFilesWithContent;
   }
 
-  editorState.resetFile = function(path) {
+  editor.resetFile = function(path) {
     changedFileQueue.resetFile(path);
   }
 
-  return editorState;
+  return editor;
 });

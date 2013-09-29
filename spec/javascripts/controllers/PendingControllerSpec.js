@@ -8,11 +8,11 @@ describe('controller: PendingController', function() {
     $("#pending").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, github, changedFileQueue, editorState) {
+  beforeEach(inject(function($rootScope, $controller, github, changedFileQueue, editor) {
     this.scope  = $rootScope.$new();
     this.github = github;
     this.changedFileQueue = changedFileQueue;
-    this.editorState = editorState;
+    this.editor = editor;
     this.ctrl   = $controller('PendingController', {
       $scope: this.scope,
     });
@@ -50,7 +50,7 @@ describe('controller: PendingController', function() {
     });
 
     it('Emits: fileSelected when current file is removed', function(){
-      this.editorState.currentFile({path: 'a.md'});
+      this.editor.currentFile({path: 'a.md'});
       check_emit(this.scope, 'fileSelected');
       this.scope.$emit('remove', 'a.md');
     });

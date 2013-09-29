@@ -1,4 +1,4 @@
-EditorController = function($scope, $rootScope, github, changedFileQueue, editorState) {
+EditorController = function($scope, $rootScope, github, changedFileQueue, editor) {
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
@@ -8,7 +8,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
   }
 
   this.lsSave = function() {
-    if(typeof editorState.currentFile() == 'undefined')
+    if(typeof editor.currentFile() == 'undefined')
       return;
     $rootScope.$emit('savedLocal');
     localStorage.setItem(context.currentPath(), context.markdown());
@@ -25,7 +25,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
   }
 
   this.currentPath = function() {
-    var currentFile = editorState.currentFile();
+    var currentFile = editor.currentFile();
     return (typeof currentFile.path === 'undefined') ? null : currentFile.path;
   }
 
@@ -72,7 +72,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
   });
 
   $rootScope.$on('loadFile', function(e, file) {
-    editorState.currentFile(file);
+    editor.currentFile(file);
     var content = context.lsReadFile() ? context.lsReadFile() : file.content;
     $scope.editor.getSession().setValue(content);
   });

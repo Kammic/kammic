@@ -1,7 +1,7 @@
-describe('service: editorState', function() {
+describe('service: editor', function() {
   beforeEach(module('Application'));
-  beforeEach(inject(function(editorState, changedFileQueue) {
-    subject = editorState;
+  beforeEach(inject(function(editor, changedFileQueue) {
+    subject = editor;
     queue   = changedFileQueue;
   }));
 
