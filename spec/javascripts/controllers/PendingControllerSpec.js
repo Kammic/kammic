@@ -18,38 +18,6 @@ describe('controller: PendingController', function() {
     });
   }));
 
-  beforeEach(function(){
-    localStorage.clear();
-  });
-
-  describe('#changed', function(){
-    it('retrieves the list of changed files', function(){
-      this.changedFileQueue.fileChanged('a.md');
-      this.changedFileQueue.fileChanged('b.md');
-      expect(this.scope.changed())
-       .toEqual(['a.md', 'b.md']);
-    });
-  });
-
-  describe('#saved', function(){
-    it('removes file from changedFileQueue', function(){
-      this.changedFileQueue.fileChanged('a.md');
-      this.changedFileQueue.fileChanged('b.md');
-
-      this.scope.saved('a.md');
-      expect(this.scope.changed())
-       .toEqual(['b.md']);
-    });
-  });
-
-  describe('#changedWithContent', function(){
-    it('returns the content and file names of changed files', function(){
-      this.changedFileQueue.fileChanged('a.md');
-      localStorage.setItem('a.md', 'xyz');
-      expect(this.scope.changedWithContent()).toEqual({'a.md':'xyz'});
-    });
-  });
-
   describe('#saveAll', function(){
     it('saves all files from the queue', function() {
       this.changedFileQueue.fileChanged('a.md');
