@@ -4,20 +4,18 @@
     </div> -->
     <div class="status">
       <div class="btn-group dropup">
-        <button  ng-click="$emit('toggleMenu')" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          Menu
-        </button>
-      </div>
-      <div class="btn-group dropup">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           <img class='avatar' src="{{user.avatar_url}}" alt="{{user.login}}">
           {{user.login}}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a href='#'>Repos</a></li>
-          <li><a href='#'>Save</a></li>
-          <li><a href='#'>Commit</a></li>
+          <li><a href='#' ng-click='$emit("showMenu", "Browser")'>File Browser</a></li>
+          <li><a href='#' ng-click='$emit("showMenu", "Pending")'>Pending Changes</a></li>
+          <li><a href='#' ng-click='$emit("showMenu", "History")'>History</a></li>
+          <li><a href='#' ng-click='$emit("showMenu", "Assets")'>Assets</a></li>
+          <li class="divider"></li> 
+          <li><a href='#'>Change Repo</a></li>
           <li class="divider"></li> 
           <li><a href='#'>Logout</a></li>
         </ul>

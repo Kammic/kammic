@@ -17,8 +17,10 @@ MenuPanelController = function($scope, $rootScope) {
     $scope.visible ? hideMenu() : showMenu();
   });
 
-  $rootScope.$on('showMenu', function(e) {
+  $rootScope.$on('showMenu', function(e, selectedItem) {
     if(!$scope.visible) {  showMenu(); }
+    if(typeof selectedItem !== 'undefined')
+      $scope.selected = selectedItem;
   });
 
   $rootScope.$on('hideMenu', function(e){

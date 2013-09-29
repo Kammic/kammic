@@ -65,6 +65,13 @@ describe('controller: MenuPanel', function() {
       waitsFor(function(){ return this.scope.visible; }, 'showMenu', 100);
       expect(this.scope.visible).toEqual(true);
     });
+
+    it('shows the menu at current selected item', function(){
+      this.scope.$emit('showMenu', 'Pending');
+      waitsFor(function(){ return this.scope.visible; }, 'showMenu', 100);
+      expect(this.scope.visible).toEqual(true);
+      expect(this.scope.selected).toEqual('Pending');
+    });
   });
 
   describe('Event: hideMenu', function(){
