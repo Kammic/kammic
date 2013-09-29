@@ -20,7 +20,7 @@ describe('service: github', function() {
   describe('#init', function() {
     it('Can not be initialized without a token', function() {
       expect(function(){
-        subject.init()
+        subject.init();
       }).toThrow('auth_token is required');
     });
 
@@ -49,6 +49,24 @@ describe('service: github', function() {
         expect(subject.user).toBeDefined();
         expect(subject.user.login).toBeDefined();
       });
+    });
+  });
+
+  describe('#getUser', function(){
+    it('Can return the current user after init', function(){
+      mock_ajax('*/user', {login: github_user});
+      var done = false;
+      subject.init(auth_token).then(function(){
+        done = true;
+      });
+      waitsFor(function() { return done; }, 'init promise', 500);
+      runs(function(){
+        expect(subject.getUser()).toEqual({login: github_user});
+      });
+    });
+
+    it('Should return null when no user is present', function(){
+      expect(subject.getUser()).toEqual(null);
     });
   });
 

@@ -6,6 +6,10 @@ describe('controller: ApplicationController', function() {
     $("body").append("<div id='preview'></div>");
   });
 
+  afterEach(function(){
+    $("#preview").remove();
+  });
+
   beforeEach(inject(function($rootScope, $controller, github) {
     this.scope = $rootScope.$new();
     this.github = github;

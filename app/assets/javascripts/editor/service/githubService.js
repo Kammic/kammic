@@ -16,6 +16,10 @@ Application.service('github', function() {
     return defer;
   }
 
+  github.getUser = function() {
+    return github.user;
+  }
+
   github.setRepo = function(repo) {
     if(typeof repo === 'undefined')
       throw 'repo is required';
