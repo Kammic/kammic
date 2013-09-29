@@ -39,6 +39,12 @@ Application.service('github', function() {
     return github.branch.read(path);
   }
 
+  github.saveFiles = function(files, message) {
+    if(typeof files == 'undefined')
+      throw 'files are required';
+    return github.branch.writeMany(files, message);
+  }
+
   github.saveFile = function(path, content) {
     if(typeof path === 'undefined')
       throw 'path is required';

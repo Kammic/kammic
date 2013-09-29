@@ -8,8 +8,9 @@ describe('controller: PendingController', function() {
     $("#pending").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, changedFileQueue, editorState) {
+  beforeEach(inject(function($rootScope, $controller, github, changedFileQueue, editorState) {
     this.scope  = $rootScope.$new();
+    this.github = github;
     this.changedFileQueue = changedFileQueue;
     this.editorState = editorState;
     this.ctrl   = $controller('PendingController', {
@@ -38,6 +39,28 @@ describe('controller: PendingController', function() {
       this.scope.saved('a.md');
       expect(this.scope.changed())
        .toEqual(['b.md']);
+    });
+  });
+
+  describe('#changedWithContent', function(){
+    it('returns the content and file names of changed files', function(){
+      this.changedFileQueue.fileChanged('a.md');
+      localStorage.setItem('a.md', 'xyz');
+      expect(this.scope.changedWithContent()).toEqual({'a.md':'xyz'});
+    });
+  });
+
+  describe('#saveAll', function(){
+    it('saves all files from the queue', function() {
+      this.changedFileQueue.fileChanged('a.md');
+      this.changedFileQueue.fileChanged('b.md');
+      spy_and_return(this.github, 'saveFiles', {done: true});
+      var done = false;
+      this.scope.saveAll().then(function(status){
+        done = true;
+      });
+      waitsFor(function(){return done;}, 'saveAll', 100);
+      expect(this.scope.changed()).toEqual([]);
     });
   });
 

@@ -193,6 +193,42 @@ describe('service: github', function() {
     });
   });
 
+  describe('#saveFiles', function(){
+    beforeEach(function() {
+      $.mockjaxClear();
+      mock_ajax('*/user', {login: github_user, id: '1245'});
+      subject.init(auth_token);
+      waitsFor(function() { return subject.user; }, 'subject init', 500);
+      runs(function(){
+        subject.setRepo(repoName);
+      });
+    });
+
+    it('does not save without files', function(){
+      expect(function(){
+        subject.saveFiles();
+      }).toThrow('files are required');
+    });
+
+    it('sends content to github', function(){
+      var done = false;
+      var fake_head = {
+        "ref": "refs/heads/master",
+        "url": "https://api.github.com/repos/Ortuna/progit-bana/git/refs/heads/master",
+        "object": {
+          "sha": "d1e3e6208ecb1eff116a6046bc863cffbe70076a",
+          "type": "commit",
+          "url": "https://api.github.com/repos/Ortuna/progit-bana/git/commits/d1e3e6208ecb1eff116a6046bc863cffbe70076a"
+        }
+      }
+
+      mock_ajax(/heads|repos/, fake_head);
+      files  = [{'manifest.yml':'content'},{'manifest2.yml':'content2'} ]
+      subject.saveFiles(files, 'some message').then(function() { done = true; });
+      waitsFor(function() { return done; }, 'saveFiles', 500);
+    });
+  });
+
   describe('#saveFile', function(){
     beforeEach(function() {
       $.mockjaxClear();
