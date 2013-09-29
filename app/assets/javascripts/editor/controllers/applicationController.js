@@ -34,8 +34,8 @@ ApplicationController = function($scope, $rootScope, github) {
   $(window).resize(function() {
     clearTimeout(cooldownTimer);
     cooldownTimer = setTimeout(function(){
-      var width  = $(document).width();
-      var height = $(document).height();
+      var width  = $(window).width();
+      var height = $(window).height();
       $rootScope.$emit('windowResized', width, height);
     }, env.windowResizedCoolDownTime);
   });
