@@ -1,0 +1,12 @@
+body {
+  overflow: hidden;
+}
+
+#editor,
+#preview {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+

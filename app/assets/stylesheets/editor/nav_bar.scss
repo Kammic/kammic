@@ -1,0 +1,17 @@
+
+.nav-bar {
+  z-index: 5;
+  position: absolute;
+  bottom: 1em;
+  background-color: #000;
+  border-radius: .2em;
+  opacity: 0.8;
+  padding: .5em;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+
+  a, a:visited, a:hover { color:#FFF; }
+}
+
+.nav-bar:hover { opacity: 1; }

@@ -1,0 +1,35 @@
+
+#menu-panel {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif;
+  display: none;
+  position: absolute;
+  overflow: auto;
+  z-index: 5;  
+  background-color: #fff;
+  border-radius: 5px;
+  border: 5px solid rgba(0,0,0,0.2);
+  padding: 1em;
+
+  .menu-header {
+    .nav li { padding: .3em; }
+    .nav li a { padding: .5em; }
+  }
+
+  .file-list {
+    line-height: 1.4;
+    width: 100%;
+
+    td { padding: .3em; }
+    tr {
+        border-bottom: 1px solid #eee;
+        cursor: hand;
+        cursor: pointer;
+    }
+    tr:hover { background-color: #EEE; }
+  }
+
+  #history {
+    img { border-radius: 10em; }
+    .commit { padding: 1em; }
+  }
+}
