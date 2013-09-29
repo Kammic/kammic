@@ -1,4 +1,4 @@
-Application.service('editor', function(changedFileQueue) {
+Application.service('editor', function(github, changedFileQueue) {
   var editor = {}
   var currentFile = null;
 
@@ -30,6 +30,15 @@ Application.service('editor', function(changedFileQueue) {
 
   editor.resetFile = function(path) {
     changedFileQueue.resetFile(path);
+  }
+
+  editor.saveAllChangedFiles = function() {
+    var files = editor.changedWithContent();
+    var changedFiles = editor.changedFiles();
+    for(var i = 0; i < changedFiles.length; i++) {
+      editor.resetFile(changedFiles[i]);
+    }
+    return github.saveFiles(files, 'Updated pending files');
   }
 
   return editor;

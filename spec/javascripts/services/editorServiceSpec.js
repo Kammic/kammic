@@ -1,8 +1,9 @@
 describe('service: editor', function() {
   beforeEach(module('Application'));
-  beforeEach(inject(function(editor, changedFileQueue) {
+  beforeEach(inject(function(editor, changedFileQueue, github) {
     subject = editor;
     queue   = changedFileQueue;
+    gh  = github;
   }));
 
   describe('#currentFile', function(){
@@ -55,6 +56,21 @@ describe('service: editor', function() {
         expect(subject.changedWithContent()).toEqual({'a.md':'xyz'});
       });
     });
+
+    describe('#saveAllChangedFiles', function(){
+      it('saves all files from the queue', function() {
+        queue.fileChanged('a.md');
+        queue.fileChanged('b.md');
+        spy_and_return(gh, 'saveFiles', {done: true});
+        var done = false;
+        subject.saveAllChangedFiles().then(function(status){
+          done = true;
+        });
+        waitsFor(function(){return done;}, 'saveAllChangedFiles', 100);
+        expect(subject.changedFiles()).toEqual([]);
+      });
+    });
+
   });
 
 });

@@ -17,20 +17,11 @@ describe('controller: PendingController', function() {
       $scope: this.scope,
     });
   }));
-
-  describe('#saveAll', function(){
-    it('saves all files from the queue', function() {
-      this.changedFileQueue.fileChanged('a.md');
-      this.changedFileQueue.fileChanged('b.md');
-      spy_and_return(this.github, 'saveFiles', {done: true});
-      var done = false;
-      this.scope.saveAll().then(function(status){
-        done = true;
-      });
-      waitsFor(function(){return done;}, 'saveAll', 100);
-      expect(this.scope.changed()).toEqual([]);
-    });
+  
+  beforeEach(function(){
+    localStorage.clear();
   });
+
 
   describe('Event: remove', function(){
     it('Removes a file from pending', function() {
