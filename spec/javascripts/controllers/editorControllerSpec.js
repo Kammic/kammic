@@ -86,34 +86,44 @@ describe('controller: EditorController', function() {
       this.scope.$emit('saveFile');
     });
 
-    it('Saves the file path in changedFiles', function(){
-      this.ctrl.lsSave();
-      expect(this.changedFileQueue.changedFiles()).toEqual({'some_path.md':true});
+    it('Saves the file path in changedFiles', function() {
+      var context = this;
+      var done = false;
+      spyOn(this.changedFileQueue, 'fileChanged');
+      this.scope.$on('savedLocal', function(){
+        expect(context.changedFileQueue.fileChanged).toHaveBeenCalled();
+        done = true;
+      });
+
+      waitsFor(function(){return done;}, 'done', 200);
+      this.scope.$emit('saveLocalFile');
     });
 
     describe('Emit: savedLocal, clearedLocal', function(){
       it('emits savedLocal when lsSave', function(){
         check_emit(this.scope, 'savedLocal');
-        this.ctrl.lsSave();
+        this.scope.$emit('saveLocalFile');
       });
 
-      it('emits clearedLocal when lsClear', function(){
+      it('emits clearedLocal when saveFile', function(){
+        spy_and_return(this.github, 'saveFile', {});
         check_emit(this.scope, 'clearedLocal');
-        this.ctrl.lsClear();
+        this.scope.$emit('saveFile');
         expect(has_data('some_path.md')).toEqual(false);
       });
     });
 
-    describe('#lsSave', function(){
+    describe('Event: saveLocalFile', function(){
       it('skips saving when the file is undefined', function(){
         this.editor.currentFile({});
-        this.ctrl.lsSave();
-        expect(has_data('some_path.md')).toEqual(false);
+        this.scope.$emit('saveLocalFile');
+        expect(has_data()).toEqual(false);
       });
 
       it('Saves the file', function(){
-        this.ctrl.lsSave();
-        expect(has_data('some_path.md')).toEqual(true);
+        this.editor.currentFile({path: 'some_path.md', content: 'stuff'});
+        this.scope.$emit('saveLocalFile');
+        waitsFor(function(){ return has_data();}, 'has data', 100);
       });
     });
   });
@@ -139,13 +149,6 @@ describe('controller: EditorController', function() {
     });
   });
 
-  describe('currentPath', function(){
-    it('can get the currentPath from editor', function(){
-      this.editor.currentFile({path: 'stuff.md'});
-      expect(this.ctrl.currentPath()).toEqual('stuff.md');      
-    });
-  });
-
   describe('Event: loadFile', function() {
     it('updates the editor service', function(){
       this.editor.currentFile({});
@@ -154,7 +157,7 @@ describe('controller: EditorController', function() {
     });
 
     it('sets the ace editor value to object.content', function() {
-      var file = {content: '#title'};
+      var file = {path: 'xyz.md', content: '#title'};
       this.scope.$emit('loadFile', file);
 
       var editorValue = this.scope.editor.getSession().getValue();

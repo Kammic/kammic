@@ -71,6 +71,56 @@ describe('service: editor', function() {
       });
     });
 
+    describe('#localStorage', function() {
+      beforeEach(function(){
+        localStorage.clear();
+      });
+
+      describe('#localSave', function() {
+        it('rejects without path and content', function() {
+          expect(function(){
+            subject.localSave();
+          }).toThrow('path is required');
+          expect(function(){
+            subject.localSave('some.md')
+          }).toThrow('content is required');
+        });
+
+        it('saves to localStorage', function() {
+          subject.localSave('test.md', 'test content');
+          var content = localStorage.getItem('test.md');
+          expect(content).toEqual('test content');
+        });
+      });
+
+      describe('#localDelete', function() {
+        it('reject without a path', function() {
+          expect(function(){
+            subject.localDelete();
+          }).toThrow('path is required');
+        });
+
+        it('deletes the item', function() {
+          localStorage.setItem('xyz.md', 'test content');
+          subject.localDelete('xyz.md');
+          expect(localStorage.getItem('xyz.md')).toEqual(null);
+        });
+      });
+
+      describe('#localRead', function() {
+        it('rejects without path', function(){
+          expect(function() {
+            subject.localRead();
+          }).toThrow('path is required');
+        });
+
+        it('reads from storage', function(){
+          localStorage.setItem('some_file.md', 'test content');
+          expect(subject.localRead('some_file.md')).toEqual('test content');
+        });
+      });
+
+    });
   });
 
 });
