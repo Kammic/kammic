@@ -1,32 +1,11 @@
-EditorController = function($scope, $rootScope, github, changedFileQueue, editor) {
+EditorController = function($scope, $rootScope, github, changedFileQueue, editor)
+{
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
 
   this.markdown = function() {
     return $scope.editor.getSession().getValue();
-  }
-
-  this.lsSave = function() {
-    if(typeof editor.currentFile() == 'undefined')
-      return;
-    $rootScope.$emit('savedLocal');
-    localStorage.setItem(context.currentPath(), context.markdown());
-    changedFileQueue.fileChanged(context.currentPath());
-  }
-
-  this.lsClear = function() {
-    $rootScope.$emit('clearedLocal');
-    localStorage.removeItem(context.currentPath());
-  }
-
-  this.lsReadFile = function() {
-    return localStorage.getItem(context.currentPath()); 
-  }
-
-  this.currentPath = function() {
-    var currentFile = editor.currentFile();
-    return (typeof currentFile.path === 'undefined') ? null : currentFile.path;
   }
 
   $scope.$element.click(function() {
@@ -63,7 +42,9 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
       clearTimeout($scope.timer);
 
     $scope.timer = setTimeout(function() {
-      context.lsSave();
+      editor.localSave(editor.currentPath(), context.markdown());
+      changedFileQueue.fileChanged(editor.currentPath());
+      $rootScope.$emit('savedLocal');
     }, env.localStorageCoolDownTime);
   });
 
@@ -73,7 +54,11 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
 
   $rootScope.$on('loadFile', function(e, file) {
     editor.currentFile(file);
-    var content = context.lsReadFile() ? context.lsReadFile() : file.content;
+    var content = "";
+    if(editor.localRead(file.path))
+      content = editor.localRead(file.path);
+    else
+      content = file.content;
     $scope.editor.getSession().setValue(content);
   });
   
@@ -85,10 +70,11 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
   });
 
   $rootScope.$on('saveFile', function(e) {
-    github.saveFile(context.currentPath(), context.markdown()).then(function() {
-      context.lsClear();
-      $rootScope.$emit('notify', "Saved " + context.currentPath());
-      $rootScope.$emit('saved', context.currentPath());
+    github.saveFile(editor.currentPath(), context.markdown()).then(function() {
+      editor.localDelete(editor.currentPath());
+      $rootScope.$emit('clearedLocal');
+      $rootScope.$emit('notify', "Saved " + editor.currentPath());
+      $rootScope.$emit('saved', editor.currentPath());
     });
   });
 

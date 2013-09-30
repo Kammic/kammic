@@ -1,6 +1,7 @@
 Application.service('editor', function(github, changedFileQueue) {
   var editor = {}
   var currentFile = null;
+  var storage     = localStorage;
 
   editor.currentFile = function(path) {
     if(typeof path === 'undefined')
@@ -23,7 +24,7 @@ Application.service('editor', function(github, changedFileQueue) {
     var changedFiles = editor.changedFiles();
     var changedFilesWithContent = {}
     for(var i = 0; i < changedFiles.length; i++) {
-      changedFilesWithContent[changedFiles[i]] = localStorage.getItem(changedFiles[i]);
+      changedFilesWithContent[changedFiles[i]] = storage.getItem(changedFiles[i]);
     }
     return changedFilesWithContent;
   }
@@ -41,5 +42,24 @@ Application.service('editor', function(github, changedFileQueue) {
     return github.saveFiles(files, 'Updated pending files');
   }
 
+  editor.localSave = function(path, content) {
+    if(typeof path === 'undefined')
+      throw('path is required');
+    if(typeof content === 'undefined')
+      throw('content is required');
+    storage.setItem(path, content);
+  }
+
+  editor.localDelete = function(path) {
+    if(typeof path === 'undefined')
+      throw('path is required');
+    storage.removeItem(path);
+  }
+
+  editor.localRead = function(path) {
+    if(typeof path === 'undefined')
+      throw('path is required');
+    return storage.getItem(path); 
+  }
   return editor;
 });
