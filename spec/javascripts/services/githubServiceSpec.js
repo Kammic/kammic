@@ -151,12 +151,9 @@ describe('service: github', function() {
     });
     
     it('fails without a file path', function(){
-      var done = false;
-      var expected_tree = {};
       expect(function() {
         subject.getFile();
       }).toThrow('path is required');
-
     });
 
     it('fetches a file', function(){
@@ -285,6 +282,32 @@ describe('service: github', function() {
         expect(commits).toEqual([{'test':true}]);
       });
     });
+  });
+
+  describe('#deleteFile', function() {
+    beforeEach(function(){
+      $.mockjaxClear();
+      mock_ajax('*/user', {login: github_user, id: '1245'});
+      subject.init(auth_token);
+      waitsFor(function() { return subject.user; }, 'subject init', 500);
+      runs(function(){
+        subject.setRepo(repoName);
+        $.mockjaxClear();
+      });
+    });
+
+    it('requires a path', function() {
+      expect(function(){
+        subject.deleteFile()
+      }).toThrow('path is required');
+    });
+
+    it('deletes the file', function() {
+      spyOn(subject.branch, 'remove');
+      subject.deleteFile('xyz.md');
+      expect(subject.branch.remove).toHaveBeenCalled();
+    });
+
   });
 
 });

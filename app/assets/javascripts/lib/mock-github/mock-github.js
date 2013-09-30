@@ -1,7 +1,9 @@
 github_user = 'ortuna';
 
-var mock_ajax = function(url, response) {
-  $.mockjax({url: url, responseText: response, responseTime: 50});
+var mock_ajax = function(url, response, type) {
+  if(typeof type == 'undefined')
+    type = 'GET'
+  $.mockjax({url: url, type: type, responseText: response, responseTime: 50});
 }
 
 var start_mocking = function() {

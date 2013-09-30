@@ -57,5 +57,11 @@ Application.service('github', function() {
     return github.repo.getCommits(options);
   }
 
+  github.deleteFile = function(path) {
+    if(typeof path === 'undefined')
+      throw 'path is required';
+    return github.branch.remove(path);
+  }
+
   return github;
 });

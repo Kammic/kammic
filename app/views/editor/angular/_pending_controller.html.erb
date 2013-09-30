@@ -21,5 +21,6 @@
           </td>
         </tr>
       </table>
-      <button type="button" class="btn btn-primary" ng-click="$emit('saveAll')">Save All</button>
+
+      <button ng-show="changed().length > 0" type="button" class="btn btn-primary" ng-click="$emit('saveAll')">Save All</button>
     </div>
