@@ -7,6 +7,7 @@
             <table class='file-list table table-striped table-condensed'>
               <tr>
                 <td></td>
+                <td></td>
                 <td>Name</td>
                 <td>Sha</td>
                 <td>Size</td>
@@ -27,6 +28,11 @@
                 </td>
                 <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
                   <a href="#"><span class="glyphicon glyphicon-folder-close"></span></a>
+                </td>
+                <td ng-click="$emit('deleteFile', file.path)">
+                  <a href="#">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                  </a>
                 </td>
                 <td ng-show="file.type == 'file'" ng-click="$emit('fileSelected', file)">
                   <a href="#">{{file.name}}</a>

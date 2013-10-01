@@ -14,7 +14,7 @@ BrowserController = function($scope, $rootScope, github) {
     });
   }
 
-  var browseToDirectory = function(treeArray) {
+  $scope.browseToDirectory = function(treeArray) {
     setLoading(true);
     github.getTree(treeArray.join('/')).then(function(files) {
       $scope.currentPath = treeArray;
@@ -32,16 +32,23 @@ BrowserController = function($scope, $rootScope, github) {
     });
   });
 
+  $rootScope.$on('deleteFile', function(e,path){
+    github.deleteFile(path).then(function(){
+      $scope.currentPath = [];
+      $scope.browseToDirectory([]);
+    });
+  });
+
   $rootScope.$on('dirSelected', function(e, dir) {
     var requestedPath = $scope.currentPath;
     requestedPath.push(dir.path);
-    browseToDirectory(requestedPath);
+    $scope.browseToDirectory(requestedPath);
   });
 
   $rootScope.$on('parentSelected', function(e) {
     var requestedPath = $scope.currentPath;
     requestedPath.pop();
-    browseToDirectory(requestedPath);
+    $scope.browseToDirectory(requestedPath);
   });
 
   $rootScope.$on('fileSelected', function(e) {

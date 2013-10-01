@@ -50,6 +50,14 @@ describe('controller: BrowserController', function() {
       expect(this.scope.currentPath).toEqual([]);
     });
   });
+  describe('Event: deleteFile', function(){
+    it('deletes a the file', function(){
+      spyOn(this.scope, 'browseToDirectory');
+      spy_and_return(this.github, 'deleteFile', {});
+      this.scope.$emit('deleteFile', 'test.md');
+      expect(this.scope.browseToDirectory).toHaveBeenCalled();
+    });
+  });
 
   describe('Event: fileSelected', function() {
     xit('hides the browser when a file is selected', function(){
