@@ -64,5 +64,17 @@ Application.service('editor', function(github, changedFileQueue) {
       throw('path is required');
     return storage.getItem(path); 
   }
+
+  editor.formats = {
+    'rb':  'ruby',
+    'md':  'markdown',
+    'yml': 'yaml'
+  }
+
+  editor.format = function(path) {
+    var regEx = /(?:\.([^.]+))?$/
+    return editor.formats[regEx.exec(path)[1]];
+  }
+
   return editor;
 });

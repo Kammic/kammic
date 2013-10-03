@@ -22,6 +22,16 @@ describe('service: editor', function() {
     });
   });
 
+  describe('#format', function(){
+    it('can find the correct format for a path', function(){
+      expect(subject.format('test.rb')).toEqual('ruby');
+      expect(subject.format('test.md')).toEqual('markdown');
+      expect(subject.format('test1.2.3.md')).toEqual('markdown');
+      expect(subject.format('test1.2.3.rb')).toEqual('ruby');
+      expect(subject.format('test.mdz')).toEqual(undefined);
+    });
+  });
+
   describe('changedFileQueue', function() {
 
     beforeEach(function(){

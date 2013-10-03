@@ -60,6 +60,11 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
     else
       content = file.content;
     $scope.editor.getSession().setValue(content);
+
+    var format = editor.format(file.path);
+    if(typeof format == 'undefined')
+      format = 'markdown';
+    $scope.editor.getSession().setMode("ace/mode/" + format);
   });
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {
