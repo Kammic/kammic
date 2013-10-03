@@ -3,7 +3,7 @@ MenuPanelController = function($scope, $rootScope) {
   $scope.$element.hide();
   $scope.visible  = false;
   $scope.selected = 'Browser';
-  $scope.items    = ['Browser', 'Pending', 'History', 'Assets'];
+  $scope.items    = ['Browser', 'Pending', 'History'];
 
   $scope.isActive = function(item) {
     return $scope.selected == item;

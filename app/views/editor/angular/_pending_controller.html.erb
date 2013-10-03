@@ -1,10 +1,5 @@
     <div id="pending" data-ng-controller='PendingController' ng-show="selected == 'Pending'">
       <table class='file-list table table-striped table-condensed'>
-        <tr>
-          <td></td>
-          <td>Reset</td>
-          <td>Name</td>
-        </tr>
         <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="file in changed()">
           <td ng-click="$emit('fileSelected', {path: file})">
             <a href="#">

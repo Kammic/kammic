@@ -5,11 +5,6 @@
           </div>
           <div ng-show="loading == false">
             <table class='file-list table table-striped table-condensed'>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>Name</td>
-              </tr>
               <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
                 <td>
                   <a href="#"><span class="glyphicon glyphicon-chevron-up"></span></a>
