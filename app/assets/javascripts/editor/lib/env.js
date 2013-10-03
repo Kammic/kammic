@@ -7,3 +7,4 @@ env.menuFadeOutTime = 100;
 env.menuFadeInTime = 100;
 
 env.localStorageCoolDownTime = 1000;
+env.previewUpdateCoolDownTime = 500;

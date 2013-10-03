@@ -34,7 +34,13 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
 
   $scope.editor.on('change', function(e) {
     $scope.$emit('saveLocalFile');
-    $scope.$emit('markdownUpdated', $scope.editor.getValue());
+    if(typeof $scope.previewUpdateTimer !== 'undefined')
+      clearTimeout($scope.timer);
+    
+    $scope.previewUpdateTimer = setTimeout(function() {
+      $scope.$emit('markdownUpdated', $scope.editor.getValue());
+    }, env.previewUpdateCoolDownTime);
+    
   });
 
   $rootScope.$on('saveLocalFile', function(e){
