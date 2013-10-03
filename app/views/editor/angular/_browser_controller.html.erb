@@ -9,8 +9,6 @@
                 <td></td>
                 <td></td>
                 <td>Name</td>
-                <td>Sha</td>
-                <td>Size</td>
               </tr>
               <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-click="$emit('parentSelected')" ng-show="currentPath.length > 0">
                 <td>
@@ -40,10 +38,6 @@
                 <td ng-show="file.type == 'dir'" ng-click="$emit('dirSelected', file)">
                   <a href="#">{{file.name}}</a>
                 </td>
-                <td>
-                  <a href="#">{{file.sha.substring(0, 10)}}</a>
-                </td>
-                <td>{{file.size}}</td>
               </tr>
             </table>
           </div>

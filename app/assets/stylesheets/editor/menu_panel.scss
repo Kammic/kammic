@@ -5,9 +5,11 @@
   overflow: auto;
   z-index: 5;  
   background-color: #fff;
-  border-radius: 5px;
-  border: 5px solid rgba(0,0,0,0.2);
-  padding: 1em;
+  padding: 0.2em;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 
   .menu-header {
     .nav li { padding: .3em; }

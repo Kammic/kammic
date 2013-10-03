@@ -38,11 +38,11 @@ MenuPanelController = function($scope, $rootScope) {
   }
 
   $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width/2.05);
-    $scope.$element.height(height/2.05);
+    $scope.$element.width(width/6);
+    $scope.$element.height(height);
 
-    $scope.$element.css('top', height/4.05);
-    $scope.$element.css('left', width/4.05);
+    $scope.$element.css('top', 0);
+    $scope.$element.css('right', 0);
   });
   $(window).resize();
 
