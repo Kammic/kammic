@@ -33,13 +33,16 @@ Application.service('editor', function(github, changedFileQueue) {
     changedFileQueue.resetFile(path);
   }
 
-  editor.saveAllChangedFiles = function() {
-    var files = editor.changedWithContent();
+  editor.resetAllFiles = function(){
     var changedFiles = editor.changedFiles();
     for(var i = 0; i < changedFiles.length; i++) {
       editor.resetFile(changedFiles[i]);
     }
-    return github.saveFiles(files, 'Updated pending files');
+  }
+
+  editor.saveAllChangedFiles = function() {
+    editor.resetAllFiles();
+    return github.saveFiles(editor.changedWithContent(), 'Updated pending files');
   }
 
   editor.localSave = function(path, content) {

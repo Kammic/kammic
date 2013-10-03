@@ -9,9 +9,13 @@ BrowserController = function($scope, $rootScope, github) {
   }
 
   var setLoading = function(value) {
-    $scope.$apply(function(){
+    if(!$scope.$$phase) {
+      $scope.$apply(function(){
+        $scope.loading = value;
+      });
+    } else {
       $scope.loading = value;
-    });
+    }
   }
 
   $scope.browseToDirectory = function(treeArray) {
@@ -24,12 +28,8 @@ BrowserController = function($scope, $rootScope, github) {
   }
 
   $rootScope.$on('githubLoaded', function(){
-    setLoading(true);
     github.setRepo('progit-bana');
-    github.getTree().then(function(files){
-      setLoading(false);
-      updateFilesList(files);
-    });
+    $scope.browseToDirectory([]);
   });
 
   $rootScope.$on('deleteFile', function(e,path){

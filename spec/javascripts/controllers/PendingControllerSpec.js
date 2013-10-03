@@ -18,10 +18,17 @@ describe('controller: PendingController', function() {
     });
   }));
   
-  beforeEach(function(){
+  beforeEach(function() {
     localStorage.clear();
   });
 
+  describe('#saveAll', function() {
+    it('calls editorService#saveAllChangedFiles', function() {
+      spyOn(this.editor, 'saveAllChangedFiles');
+      this.scope.saveAll();
+      expect(this.editor.saveAllChangedFiles).toHaveBeenCalled();
+    });
+  });
 
   describe('Event: remove', function(){
     it('Removes a file from pending', function() {

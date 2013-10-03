@@ -48,6 +48,16 @@ describe('service: editor', function() {
       });
     });
 
+    describe("#resetAllFiles", function(){
+      it('removes all the files from changedFileQueue', function(){
+        queue.fileChanged('a.md');
+        queue.fileChanged('b.md');
+
+        subject.resetAllFiles();
+        expect(subject.changedFiles()).toEqual([]);
+      });
+    });
+
     describe('#changedWithContent', function(){
       it('returns the content and file names of changed files', function(){
         queue.fileChanged('a.md');
