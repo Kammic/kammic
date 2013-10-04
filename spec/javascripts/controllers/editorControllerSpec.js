@@ -30,7 +30,9 @@ describe('controller: EditorController', function() {
   });
 
   describe('localstorage', function() {
-    env.localStorageCoolDownTime = 100;
+    env.localStorageCoolDownTime = 10;
+    env.previewUpdateCoolDownTime = 10;
+
     beforeEach(function() {
       localStorage.clear();
       this.editor.currentFile({path: 'some_path.md'});
@@ -57,9 +59,11 @@ describe('controller: EditorController', function() {
     it('Saves to localstorage on timer', function(){
       this.scope.editor.getSession().setValue('old data');
       this.scope.editor.getSession().setValue('new data');
+      this.scope.$emit('saveLocalFile');
+
       waitsFor(function() {
         return has_data('some_path.md');
-      }, 'savesLocalFile', 200);
+      }, 'savesLocalFile', 500);
       runs(function() {
         expect(read_file('some_path.md')).toEqual('new data');
       });
@@ -119,6 +123,8 @@ describe('controller: EditorController', function() {
         this.scope.$emit('saveLocalFile');
         expect(has_data()).toEqual(false);
       });
+
+
 
       it('Saves the file', function(){
         this.editor.currentFile({path: 'some_path.md', content: 'stuff'});
@@ -213,6 +219,12 @@ describe('controller: EditorController', function() {
         return done;
       }, 'emit markdownUpdated w/ previewLoaded', 100);
       this.scope.$emit('previewLoaded');
+    });
+
+    it('waits for a cooldown timer to emit markdownUpdated', function(){
+      expect(this.scope.previewUpdateTimer).toBeUndefined();
+      this.scope.editor.getSession().setValue('old data');
+      expect(this.scope.previewUpdateTimer).toBeDefined();
     });
   });
 });
