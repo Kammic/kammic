@@ -36,7 +36,7 @@ EditorController = function($scope, $rootScope,
   $scope.editor.on('change', function(e) {
     $scope.$emit('saveLocalFile');
     if(typeof $scope.previewUpdateTimer !== 'undefined')
-      clearTimeout($scope.timer);
+      clearTimeout($scope.previewUpdateTimer);
     
     $scope.previewUpdateTimer = setTimeout(function() {
       $scope.$emit('markdownUpdated', $scope.editor.getValue());
@@ -45,8 +45,7 @@ EditorController = function($scope, $rootScope,
   });
 
   $rootScope.$on('saveLocalFile', function(e){
-    if(typeof $scope.timer !== 'undefined')
-      clearTimeout($scope.timer);
+    if(typeof $scope.timer !== 'undefined') { clearTimeout($scope.timer); }
 
     $scope.timer = setTimeout(function() {
       editor.localSave(editor.currentPath(), context.markdown());
