@@ -8,7 +8,8 @@ describe('controller: EditorController', function() {
     $("#editor").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, editor, github, changedFileQueue) {
+  beforeEach(inject(function($rootScope, $controller, 
+                              editor, github, changedFileQueue) {
     this.github = github;
     this.editor = editor;
     this.changedFileQueue = changedFileQueue;

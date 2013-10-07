@@ -1,5 +1,5 @@
-EditorController = function($scope, $rootScope, github, changedFileQueue, editor)
-{
+EditorController = function($scope, $rootScope, 
+                            github, changedFileQueue, editor) {
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
