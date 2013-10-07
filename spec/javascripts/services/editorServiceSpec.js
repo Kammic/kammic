@@ -106,6 +106,11 @@ describe('service: editor', function() {
           }).toThrow('content is required');
         });
 
+        it('rejects a file if path is null', function(){
+          subject.localSave(null, 'xyz');
+          expect(localStorage.getItem('null')).toEqual(null);
+        });
+
         it('saves to localStorage', function() {
           subject.localSave('test.md', 'test content');
           var content = localStorage.getItem('test.md');

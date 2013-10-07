@@ -156,7 +156,7 @@ describe('controller: EditorController', function() {
   });
 
   describe('Event: loadFile', function() {
-    it('updates the editor service', function(){
+    it('updates the editor service', function() {
       this.editor.currentFile({});
       this.scope.$emit('loadFile', {path: 'object_as_string'});
       expect(this.editor.currentFile()).toEqual({path: 'object_as_string'});
@@ -168,6 +168,12 @@ describe('controller: EditorController', function() {
 
       var editorValue = this.scope.editor.getSession().getValue();
       expect(editorValue).toEqual('#title');
+    });
+
+    it('sets the editor to be writable', function() {
+      var file = {path: 'xyz.md', content: '#title'};
+      this.scope.$emit('loadFile', file);
+      expect(this.scope.editor.getReadOnly()).toEqual(false);
     });
   });
 

@@ -13,6 +13,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
   });
 
   $scope.editor.setTheme("ace/theme/tomorrow_night");
+  $scope.editor.setReadOnly(true);
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
 
@@ -71,6 +72,7 @@ EditorController = function($scope, $rootScope, github, changedFileQueue, editor
     if(typeof format == 'undefined')
       format = 'markdown';
     $scope.editor.getSession().setMode("ace/mode/" + format);
+    $scope.editor.setReadOnly(false);
   });
   
   $rootScope.$on('fileSelected', function(e, selectedFile) {

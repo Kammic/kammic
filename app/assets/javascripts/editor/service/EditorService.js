@@ -3,23 +3,39 @@ Application.service('editor', function(github, changedFileQueue) {
   var currentFile = null;
   var storage     = localStorage;
 
+  /*
+    Returns the current file object
+    @return Object
+  */
   editor.currentFile = function(path) {
     if(typeof path === 'undefined')
       return currentFile;
     currentFile = path;  
   }
 
+  /*
+    Returns the current files path
+    @return String
+  */
   editor.currentPath = function() {
     if(typeof currentFile === 'undefined' || currentFile == null)
       return null;
     return editor.currentFile().path;
   }
 
+  /*
+    Returns all the files changed in the queue
+    @return Array[String]
+  */
   editor.changedFiles = function() {
     var changedFiles = changedFileQueue.changedFiles();
     return Object.keys(changedFiles);
   }
 
+  /*
+    Returns all the files changed an their content
+    @return Array[Object]
+  */
   editor.changedWithContent = function() {
     var changedFiles = editor.changedFiles();
     var changedFilesWithContent = {}
@@ -29,10 +45,16 @@ Application.service('editor', function(github, changedFileQueue) {
     return changedFilesWithContent;
   }
 
+  /*
+    Remove a file from the changed queue
+  */
   editor.resetFile = function(path) {
     changedFileQueue.resetFile(path);
   }
 
+  /*
+    Removes all files from the changed queue
+  */
   editor.resetAllFiles = function(){
     var changedFiles = editor.changedFiles();
     for(var i = 0; i < changedFiles.length; i++) {
@@ -40,25 +62,40 @@ Application.service('editor', function(github, changedFileQueue) {
     }
   }
 
+  /*
+    Saves all files in the changed queue
+    @return Promise
+  */
   editor.saveAllChangedFiles = function() {
     editor.resetAllFiles();
     return github.saveFiles(editor.changedWithContent(), 'Updated pending files');
   }
 
+  /*
+    Save a file locally
+  */
   editor.localSave = function(path, content) {
     if(typeof path === 'undefined')
       throw('path is required');
     if(typeof content === 'undefined')
       throw('content is required');
+    if(path == null)
+      return;
     storage.setItem(path, content);
   }
 
+  /*
+    Remove a file from localStorage
+  */
   editor.localDelete = function(path) {
     if(typeof path === 'undefined')
       throw('path is required');
     storage.removeItem(path);
   }
 
+  /*
+    Read a file from localStorage
+  */
   editor.localRead = function(path) {
     if(typeof path === 'undefined')
       throw('path is required');
@@ -71,6 +108,10 @@ Application.service('editor', function(github, changedFileQueue) {
     'yml': 'yaml'
   }
 
+  /*
+    Detect a files extension type 
+    @return String
+  */
   editor.format = function(path) {
     var regEx = /(?:\.([^.]+))?$/
     return editor.formats[regEx.exec(path)[1]];
