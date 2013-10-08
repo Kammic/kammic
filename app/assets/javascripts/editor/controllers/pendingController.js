@@ -3,11 +3,11 @@ PendingController = function($scope, $rootScope, github, editor) {
   $scope.$element     = $('#pending');
 
   $scope.changed = function() { return editor.changedFiles(); };
-  $scope.changedWithContent = function() { return editor.changedWithContent(); }
   $scope.saved = function(path) { editor.resetFile(path); };
 
-  $scope.saveAll = function() {    
-    editor.saveAllChangedFiles();
+  $scope.saveAll = function() {
+    editor.saveAllChangedFiles($scope.message);
+    editor.resetAllFiles();
   }
 
   $rootScope.$on('saved', function(e, path) {

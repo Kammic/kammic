@@ -16,6 +16,8 @@
           </td>
         </tr>
       </table>
-
-      <button ng-show="changed().length > 0" type="button" class="btn btn-primary" ng-click="$emit('saveAll')">Save All</button>
+      <form role="form" ng-show="changed().length > 0">
+        <textarea ng-model="message" placeholder="Commit Message" class="form-control" rows="3"></textarea>
+        <button type="button" class="btn btn-primary" ng-click="$emit('saveAll')">Save All</button>
+      </form>
     </div>

@@ -66,9 +66,11 @@ Application.service('editor', function(github, changedFileQueue) {
     Saves all files in the changed queue
     @return Promise
   */
-  editor.saveAllChangedFiles = function() {
-    editor.resetAllFiles();
-    return github.saveFiles(editor.changedWithContent(), 'Updated pending files');
+  editor.saveAllChangedFiles = function(commitMessage) {
+    var message = 'Updated pending files';
+    if(typeof commitMessage !== 'undefined')
+      message = commitMessage;
+    return github.saveFiles(editor.changedWithContent(), message);
   }
 
   /*

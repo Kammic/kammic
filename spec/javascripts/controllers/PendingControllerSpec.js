@@ -54,6 +54,22 @@ describe('controller: PendingController', function() {
     });
   });
 
+  describe('Event: saveAll', function(){
+    it('calls scope.saveAll without a save message', function(){
+      spyOn(this.editor, 'saveAllChangedFiles');
+      this.scope.$emit('saveAll');
+      expect(this.editor.saveAllChangedFiles).toHaveBeenCalledWith(undefined);
+    });
+
+    it('calls scope.saveAll with the save message', function() {
+      this.scope.message = "test commit";
+
+      spyOn(this.editor, 'saveAllChangedFiles');
+      this.scope.$emit('saveAll');
+      expect(this.editor.saveAllChangedFiles).toHaveBeenCalledWith('test commit');
+    });
+  });
+
   describe('Event: saved', function(){
     it('removes the saved file from the queue', function(){
       this.changedFileQueue.fileChanged('a.md');

@@ -80,14 +80,21 @@ describe('service: editor', function() {
     describe('#saveAllChangedFiles', function(){
       it('saves all files from the queue', function() {
         queue.fileChanged('a.md');
+        spyOn(gh, 'saveFiles');
+
+        var expectedFiles = {'a.md': null};
+        subject.saveAllChangedFiles();
+        expect(gh.saveFiles).toHaveBeenCalledWith(expectedFiles, 'Updated pending files');
+      });
+
+      it('saves all files with custom message', function(){
+        queue.fileChanged('a.md');
         queue.fileChanged('b.md');
-        spy_and_return(gh, 'saveFiles', {done: true});
-        var done = false;
-        subject.saveAllChangedFiles().then(function(status){
-          done = true;
-        });
-        waitsFor(function(){return done;}, 'saveAllChangedFiles', 100);
-        expect(subject.changedFiles()).toEqual([]);
+        spyOn(gh, 'saveFiles');
+        var expectedFiles = {'a.md': null, 'b.md': null};
+
+        subject.saveAllChangedFiles('my changes');
+        expect(gh.saveFiles).toHaveBeenCalledWith(expectedFiles, 'my changes');
       });
     });
 
