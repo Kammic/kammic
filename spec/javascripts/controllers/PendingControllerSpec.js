@@ -68,6 +68,14 @@ describe('controller: PendingController', function() {
       this.scope.$emit('saveAll');
       expect(this.editor.saveAllChangedFiles).toHaveBeenCalledWith('test commit');
     });
+
+    it('resets the custom message after saving', function(){
+      spyOn(this.editor, 'saveAllChangedFiles');
+
+      this.scope.message = "test commit";
+      this.scope.$emit('saveAll');
+      expect(this.scope.message).toEqual(null);
+    });
   });
 
   describe('Event: saved', function(){

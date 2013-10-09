@@ -7,7 +7,6 @@ PendingController = function($scope, $rootScope, github, editor) {
 
   $scope.saveAll = function() {
     editor.saveAllChangedFiles($scope.message);
-    editor.resetAllFiles();
   }
 
   $rootScope.$on('saved', function(e, path) {
@@ -16,6 +15,8 @@ PendingController = function($scope, $rootScope, github, editor) {
 
   $rootScope.$on('saveAll', function(e) {
     $scope.saveAll();
+    editor.resetAllFiles();
+    $scope.message = null;
   });
 
   $rootScope.$on('remove', function(e, path) {
