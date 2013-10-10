@@ -24,7 +24,53 @@ describe('controller: BrowserController', function() {
   it('should init the github service', function() {
     expect(this.github.api).toBeDefined();
   });
-  
+
+  describe('#createFile', function() {
+    beforeEach(function(){
+      var dfd = new jQuery.Deferred();
+      dfd.resolve({});
+      spyOn(this.github, 'getTree').andReturn(dfd);
+    });
+
+    it('can\'t be called without path', function(){
+      var context = this;
+      expect(function(){
+        context.scope.createFile();
+      }).toThrow('path is required');
+    });
+
+    it('calls saveFile on github service', function(){
+      spyOn(this.github, 'saveFile');
+      this.scope.createFile('new_file.md');
+      expect(this.github.saveFile).toHaveBeenCalledWith('new_file.md', '');
+    });
+
+    it('creates a file at the current path', function(){
+      this.scope.currentPath = ['example', 'sub_dir'];
+
+      spyOn(this.github, 'saveFile');
+      this.scope.createFile('new_file.md');
+      expect(this.github.saveFile).toHaveBeenCalledWith('example/sub_dir/new_file.md', '');
+    });
+  });
+
+  describe('#updateFileList', function() {
+    it('updates the file list to value', function() {
+      this.scope.updateFilesList([1,2,3]);
+      expect(this.scope.files).toEqual([1,2,3]);
+    });
+  });
+
+  describe('#setLoading', function() {
+    it('sets loading to value',function(){
+      this.scope.setLoading(true);
+      expect(this.scope.loading).toEqual(true);
+
+      this.scope.setLoading(false);
+      expect(this.scope.loading).toEqual(false);
+    });
+  });
+
   describe('loading', function() {
     it('sets $scope.loading when browsing directory', function(){
       this.scope.loading = true;
