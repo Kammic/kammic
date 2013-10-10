@@ -30,6 +30,7 @@ describe('controller: BrowserController', function() {
       var dfd = new jQuery.Deferred();
       dfd.resolve({});
       spyOn(this.github, 'getTree').andReturn(dfd);
+      spyOn(this.github, 'saveFile').andReturn(dfd);
     });
 
     it('can\'t be called without path', function(){
@@ -40,7 +41,6 @@ describe('controller: BrowserController', function() {
     });
 
     it('calls saveFile on github service', function(){
-      spyOn(this.github, 'saveFile');
       this.scope.createFile('new_file.md');
       expect(this.github.saveFile).toHaveBeenCalledWith('new_file.md', '');
     });
@@ -48,7 +48,6 @@ describe('controller: BrowserController', function() {
     it('creates a file at the current path', function(){
       this.scope.currentPath = ['example', 'sub_dir'];
 
-      spyOn(this.github, 'saveFile');
       this.scope.createFile('new_file.md');
       expect(this.github.saveFile).toHaveBeenCalledWith('example/sub_dir/new_file.md', '');
     });
