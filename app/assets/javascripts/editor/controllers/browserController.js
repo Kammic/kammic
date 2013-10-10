@@ -73,7 +73,7 @@ BrowserController = function($scope, $rootScope, github) {
   });
 
   $rootScope.$on('fileSelected', function(e) {
-    $rootScope.$emit('hideMenu');
+    $scope.$emit('hideMenu');
   });
 
   $scope.$emit('browserLoaded');

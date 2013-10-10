@@ -37,11 +37,11 @@ EditorController = function($scope, $rootScope,
     $scope.$emit('saveLocalFile');
     if(typeof $scope.previewUpdateTimer !== 'undefined')
       clearTimeout($scope.previewUpdateTimer);
-    
+
     $scope.previewUpdateTimer = setTimeout(function() {
       $scope.$emit('markdownUpdated', $scope.editor.getValue());
     }, env.previewUpdateCoolDownTime);
-    
+
   });
 
   $rootScope.$on('saveLocalFile', function(e){
