@@ -73,11 +73,13 @@ EditorController = function($scope, $rootScope,
     $scope.editor.getSession().setMode("ace/mode/" + format);
     $scope.editor.setReadOnly(false);
   });
-  
+
   $rootScope.$on('fileSelected', function(e, selectedFile) {
+    $scope.$emit('startLoadFile');
     github.getFile(selectedFile.path).then(function(response) {
       response.path = selectedFile.path;
       $scope.$emit('loadFile', response);
+      $scope.$emit('endLoadFile');
     });
   });
 

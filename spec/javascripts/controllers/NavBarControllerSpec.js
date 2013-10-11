@@ -22,13 +22,31 @@ describe('controller: NavBarController', function() {
     expect($('#nav').width()).toEqual(500);
   });
 
+  describe('#setLoading', function() {
+    it('sets loading to true/false', function() {
+      this.scope.setLoading(true);
+      expect(this.scope.loading).toEqual(true);
+
+      this.scope.setLoading(false);
+      expect(this.scope.loading).toEqual(false);
+      var context = this;
+      expect(function(){ context.scope.setLoading(); }).toThrow('value is required');
+    });
+  });
+
   describe('#updateUser', function(){
-    it('sets user to the current github service user', function(){
-      spyOn(this.github, 'getUser').andCallFake(function(){
-        return {login: 'ortuna'};
-      });
+    beforeEach(function(){
+      spyOn(this.github, 'getUser').andReturn({login: 'ortuna', avatar_url: 'tmp'});
+    });
+
+    it('sets the users avatar', function() {
       this.scope.updateUser();
-      expect(this.scope.user).toEqual({login: 'ortuna'});
+      expect(this.scope.avatar).toEqual('tmp');
+    });
+
+    it('sets user to the current github service user', function(){
+      this.scope.updateUser();
+      expect(this.scope.user.login).toEqual('ortuna');
     });
   });
 });
