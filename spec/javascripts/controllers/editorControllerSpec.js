@@ -205,6 +205,13 @@ describe('controller: EditorController', function() {
       this.scope.$emit('fileSelected', {path: 'some_remote_path'});
     });
 
+    it('emits startLoadFile and endLoadFile', function(){
+      spy_and_return(this.github, 'getFile', {content: 'test content'});
+      check_emit(this.scope, 'startLoadFile');
+      check_emit(this.scope, 'endLoadFile');
+      this.scope.$emit('fileSelected', {path: 'some_remote_path'});
+    });
+
     it('loads localstorage file if available', function() {
       localStorage.setItem('some_path.md', '112233');
       check_emit(this.scope, 'loadFile');
