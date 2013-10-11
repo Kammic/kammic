@@ -2,21 +2,28 @@ NavBarController = function($scope, $rootScope, github) {
   $scope.$element = $('#nav');
   $scope.loading  = false;
 
-  $scope.setLoading = function(value){
+  $scope.setLoading = function(value) {
     if(typeof value === 'undefined') { throw('value is required'); }
-    $scope.loading = value;
-  };
+    if(!$scope.$$phase) {
+      $scope.$apply(function(){
+        $scope.loading = value;
+      });
+    } else {
+      $scope.loading = value;
+    }
+  }
+
 
   $scope.updateUser = function() {
     $scope.user   = github.getUser();
     $scope.avatar = $scope.user.avatar_url;
   }
 
-  $rootScope.$on('startLoadFile', function(e){
+  $rootScope.$on('showLoading', function(e){
     $scope.setLoading(true);
   });
 
-  $rootScope.$on('endLoadFile', function(e){
+  $rootScope.$on('hideLoading', function(e){
     $scope.setLoading(false);
   });
 

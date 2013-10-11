@@ -70,38 +70,48 @@ describe('controller: EditorController', function() {
       });
     });
 
-    it('Clears the data for file when performing save', function(){
-      var done = false;
-      this.scope.$on('saveFile', function() {
-        done = true;
-      });
-      spy_and_return(this.github, 'saveFile', {content: 'test content'});
-      this.scope.editor.getSession().setValue('xyz');
-      this.scope.$emit('saveFile');
+    describe('Event: saveFile', function() {
+      it('emits showLoading and hideLoading when saving', function(){
+        check_emit(this.scope, 'showLoading');
+        check_emit(this.scope, 'hideLoading');
+        spy_and_return(this.github, 'saveFile', {content: 'test content'});
 
-      waitsFor(function() { return done}, 'notify', 100);
-      runs(function() {
-        expect(read_file('some_path.md')).toEqual(null);  
-      });
-    });
-
-    it('Emits saved when saveFile is successful', function(){
-      spy_and_return(this.github, 'saveFile', {content: 'test content'});
-      check_emit(this.scope, 'saved');
-      this.scope.$emit('saveFile');
-    });
-
-    it('Saves the file path in changedFiles', function() {
-      var context = this;
-      var done = false;
-      spyOn(this.changedFileQueue, 'fileChanged');
-      this.scope.$on('savedLocal', function(){
-        expect(context.changedFileQueue.fileChanged).toHaveBeenCalled();
-        done = true;
+        this.scope.$emit('saveFile');
       });
 
-      waitsFor(function(){return done;}, 'done', 200);
-      this.scope.$emit('saveLocalFile');
+      it('Clears the data for file when performing save', function(){
+        var done = false;
+        this.scope.$on('saveFile', function() {
+          done = true;
+        });
+        spy_and_return(this.github, 'saveFile', {content: 'test content'});
+        this.scope.editor.getSession().setValue('xyz');
+        this.scope.$emit('saveFile');
+
+        waitsFor(function() { return done}, 'notify', 100);
+        runs(function() {
+          expect(read_file('some_path.md')).toEqual(null);  
+        });
+      });
+
+      it('Emits saved when saveFile is successful', function(){
+        spy_and_return(this.github, 'saveFile', {content: 'test content'});
+        check_emit(this.scope, 'saved');
+        this.scope.$emit('saveFile');
+      });
+
+      it('Saves the file path in changedFiles', function() {
+        var context = this;
+        var done = false;
+        spyOn(this.changedFileQueue, 'fileChanged');
+        this.scope.$on('savedLocal', function(){
+          expect(context.changedFileQueue.fileChanged).toHaveBeenCalled();
+          done = true;
+        });
+
+        waitsFor(function(){return done;}, 'done', 200);
+        this.scope.$emit('saveLocalFile');
+      });
     });
 
     describe('Emit: savedLocal, clearedLocal', function(){
@@ -141,7 +151,7 @@ describe('controller: EditorController', function() {
       var done = false;
       this.scope.$on('saveFile', function(e) {
         done = true;
-      });      
+      });
       waitsFor(function() { return done; }, 'emit saveFile on command+s', 100);
       $(".ace_content").simulate('keyboardEvent', 
                                   'keyUp', { metaKey: true, keyCode: 83 });
@@ -207,8 +217,8 @@ describe('controller: EditorController', function() {
 
     it('emits startLoadFile and endLoadFile', function(){
       spy_and_return(this.github, 'getFile', {content: 'test content'});
-      check_emit(this.scope, 'startLoadFile');
-      check_emit(this.scope, 'endLoadFile');
+      check_emit(this.scope, 'showLoading');
+      check_emit(this.scope, 'hideLoading');
       this.scope.$emit('fileSelected', {path: 'some_remote_path'});
     });
 

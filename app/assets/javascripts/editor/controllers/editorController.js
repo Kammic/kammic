@@ -75,20 +75,22 @@ EditorController = function($scope, $rootScope,
   });
 
   $rootScope.$on('fileSelected', function(e, selectedFile) {
-    $scope.$emit('startLoadFile');
+    $scope.$emit('showLoading');
     github.getFile(selectedFile.path).then(function(response) {
       response.path = selectedFile.path;
       $scope.$emit('loadFile', response);
-      $scope.$emit('endLoadFile');
+      $scope.$emit('hideLoading');
     });
   });
 
   $rootScope.$on('saveFile', function(e) {
+    $scope.$emit('showLoading');
     github.saveFile(editor.currentPath(), context.markdown()).then(function() {
       editor.localDelete(editor.currentPath());
-      $rootScope.$emit('clearedLocal');
-      $rootScope.$emit('notify', "Saved " + editor.currentPath());
-      $rootScope.$emit('saved', editor.currentPath());
+      $scope.$emit('clearedLocal');
+      $scope.$emit('notify', "Saved " + editor.currentPath());
+      $scope.$emit('saved', editor.currentPath());
+      $scope.$emit('hideLoading');
     });
   });
 

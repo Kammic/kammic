@@ -16,10 +16,18 @@ describe('controller: NavBarController', function() {
     });
   }));
 
-  it('sets the element width on resize', function(){
+  it('sets the element width on resize', function() {
     $('#nav').width(5);
     this.scope.$emit('windowResized', 500, 500);
     expect($('#nav').width()).toEqual(500);
+  });
+
+  describe('showLoading/hideLoading', function() {
+    it('calls #setLoading(true) on showLoading', function() {
+      spyOn(this.scope, 'setLoading');
+      this.scope.$emit('showLoading');
+      expect(this.scope.setLoading).toHaveBeenCalledWith(true);
+    });
   });
 
   describe('#setLoading', function() {
