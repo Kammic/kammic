@@ -1,4 +1,4 @@
-BrowserController = function($scope, $rootScope, github) {
+BrowserController = function($scope, $rootScope, github, editor) {
   $scope.loading  = false;
   $scope.currentPath = [];
 
@@ -49,6 +49,9 @@ BrowserController = function($scope, $rootScope, github) {
   $rootScope.$on('githubLoaded', function() {
     github.setRepo('progit-bana');
     $scope.browseToDirectory([]);
+
+    if(editor.lastEditedFile())
+      $scope.$emit('fileSelected', {path: editor.lastEditedFile()});
   });
 
   $rootScope.$on('deleteFile', function(e, path) {

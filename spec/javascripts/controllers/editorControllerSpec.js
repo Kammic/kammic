@@ -8,7 +8,7 @@ describe('controller: EditorController', function() {
     $("#editor").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, 
+  beforeEach(inject(function($rootScope, $controller,
                               editor, github, changedFileQueue) {
     this.github = github;
     this.editor = editor;
@@ -20,7 +20,7 @@ describe('controller: EditorController', function() {
     });
   }));
 
-  it('emits hideMenu when clicked', function(){
+  it('emits hideMenu when clicked', function() {
     var done = false;
     this.scope.$on('hideMenu', function(e) {
       done = true;

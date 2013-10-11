@@ -7,10 +7,11 @@ Application.service('editor', function(github, changedFileQueue) {
     Returns the current file object
     @return Object
   */
-  editor.currentFile = function(path) {
-    if(typeof path === 'undefined')
+  editor.currentFile = function(file) {
+    if(typeof file === 'undefined')
       return currentFile;
-    currentFile = path;  
+    editor.lastEditedFile(file.path);
+    currentFile = file;
   }
 
   /*
@@ -22,6 +23,16 @@ Application.service('editor', function(github, changedFileQueue) {
       return null;
     return editor.currentFile().path;
   }
+
+  /*
+    Gets/Sets the lastEditedFile object
+    @return Object
+  */
+  editor.lastEditedFile = function(path) {
+    if(typeof path === 'undefined')
+      return localStorage.getItem('lastEditedFile');
+    localStorage.setItem('lastEditedFile', path);
+  };
 
   /*
     Returns all the files changed in the queue

@@ -8,10 +8,11 @@ describe('controller: BrowserController', function() {
     $("#browser").remove();
   });
 
-  beforeEach(inject(function($rootScope, $controller, github) {
+  beforeEach(inject(function($rootScope, $controller, github, editor) {
     env.auth_token = '1235';
     this.scope  = $rootScope.$new();
     this.github = github;
+    this.editor = editor;
     this.ctrl   = $controller('BrowserController', {
       $scope: this.scope,
     });
@@ -24,6 +25,28 @@ describe('controller: BrowserController', function() {
   it('should init the github service', function() {
     expect(this.github.api).toBeDefined();
   });
+
+  describe('Event: githubLoaded', function() {
+    it('Emits fileSelected w/ last opened file', function() {
+      var done = false;
+      spy_and_return(this.github,
+                     'getFile',
+                     {path:'test.md', content:'content'});
+      spyOn(this.github, 'setRepo').andReturn({});
+      spyOn(this.scope,  'browseToDirectory').andReturn({});
+
+      this.editor.lastEditedFile('test.md');
+      this.scope.$on('fileSelected', function(e, file){
+        expect(file.path).toEqual('test.md');
+        done = true;
+      });
+
+      waitsFor(function(){ return done; }, 'emit fileSelected', 100);
+      this.scope.$emit('githubLoaded');
+    });
+
+  });
+
 
   describe('#createFile', function() {
     beforeEach(function(){
@@ -49,7 +72,8 @@ describe('controller: BrowserController', function() {
       this.scope.currentPath = ['example', 'sub_dir'];
 
       this.scope.createFile('new_file.md');
-      expect(this.github.saveFile).toHaveBeenCalledWith('example/sub_dir/new_file.md', '');
+      expect(this.github.saveFile)
+        .toHaveBeenCalledWith('example/sub_dir/new_file.md', '');
     });
   });
 

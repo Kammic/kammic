@@ -41,7 +41,7 @@ describe('controller: ApplicationController', function() {
       beforeEach(function(){
         spy_and_return(this.github, 'init', {});
       });
-      
+
       it('emits githubLoaded after loading github', function() {
         var done = false;
         this.scope.$on('githubLoaded', function(){ done = true });

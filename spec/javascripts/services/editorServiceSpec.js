@@ -6,10 +6,16 @@ describe('service: editor', function() {
     gh  = github;
   }));
 
-  describe('#currentFile', function(){
-    it('can set/get currentFile', function(){
+  describe('#currentFile', function() {
+    it('can set/get currentFile', function() {
       subject.currentFile({path: 'test.md'});
       expect(subject.currentFile()).toEqual({path: 'test.md'});
+    });
+
+    it('calls lastEditedFile w/ the file object', function() {
+      spyOn(subject, 'lastEditedFile');
+      subject.currentFile({path: 'xyz.md'});
+      expect(subject.lastEditedFile).toHaveBeenCalledWith('xyz.md');
     });
   });
 
@@ -30,6 +36,23 @@ describe('service: editor', function() {
       expect(subject.format('test1.2.3.rb')).toEqual('ruby');
       expect(subject.format('test.mdz')).toEqual(undefined);
     });
+  });
+
+  describe('#lastEditedFile', function(){
+    beforeEach(function(){
+      localStorage.clear();
+    });
+
+    it('returns the lastEditedFile without a path', function(){
+      subject.lastEditedFile('xyzz.md');
+      expect(subject.lastEditedFile()).toEqual('xyzz.md');
+    });
+
+    it('returns the lastEditedFile without a path', function(){
+      localStorage.setItem('lastEditedFile', 'xyz.md');
+      expect(subject.lastEditedFile()).toEqual('xyz.md');
+    });
+
   });
 
   describe('changedFileQueue', function() {
