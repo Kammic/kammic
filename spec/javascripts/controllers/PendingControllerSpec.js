@@ -17,16 +17,37 @@ describe('controller: PendingController', function() {
       $scope: this.scope,
     });
   }));
-  
+
   beforeEach(function() {
     localStorage.clear();
   });
 
   describe('#saveAll', function() {
+    beforeEach(function(){
+      spy_and_return(this.editor, 'saveAllChangedFiles', {});
+    });
+
     it('calls editorService#saveAllChangedFiles', function() {
-      spyOn(this.editor, 'saveAllChangedFiles');
       this.scope.saveAll();
       expect(this.editor.saveAllChangedFiles).toHaveBeenCalled();
+    });
+
+    it('resets $scope.message', function() {
+      this.scope.messgae = 'xyz';
+      this.scope.saveAll();
+      expect(this.scope.message).toEqual(null);
+    });
+
+    it('calls EditorService#resetAllFiles', function() {
+      spyOn(this.editor, 'resetAllFiles');
+      this.scope.saveAll();
+      expect(this.editor.resetAllFiles).toHaveBeenCalled();
+    });
+
+    it('emits showLoading/hideLoading', function(){
+      check_emit(this.scope, 'showLoading');
+      check_emit(this.scope, 'hideLoading');
+      this.scope.saveAll();
     });
   });
 
@@ -55,8 +76,11 @@ describe('controller: PendingController', function() {
   });
 
   describe('Event: saveAll', function(){
+    beforeEach(function(){
+      spy_and_return(this.editor, 'saveAllChangedFiles', {});
+    });
+
     it('calls scope.saveAll without a save message', function(){
-      spyOn(this.editor, 'saveAllChangedFiles');
       this.scope.$emit('saveAll');
       expect(this.editor.saveAllChangedFiles).toHaveBeenCalledWith(undefined);
     });
@@ -64,14 +88,11 @@ describe('controller: PendingController', function() {
     it('calls scope.saveAll with the save message', function() {
       this.scope.message = "test commit";
 
-      spyOn(this.editor, 'saveAllChangedFiles');
       this.scope.$emit('saveAll');
       expect(this.editor.saveAllChangedFiles).toHaveBeenCalledWith('test commit');
     });
 
     it('resets the custom message after saving', function(){
-      spyOn(this.editor, 'saveAllChangedFiles');
-
       this.scope.message = "test commit";
       this.scope.$emit('saveAll');
       expect(this.scope.message).toEqual(null);
