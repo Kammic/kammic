@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
     QC.enqueue("User.queue_update_repos_from_github", self.id)
   end
 
-  def update_repos_from_github 
+  def update_repos_from_github
     github_repos = Github::RepoFinder.find_repos(auth_token)
     github_repos.each do |github_repo|
-      repo = Repo.new(github_repo)
+      repo = Repo.new(github_repo.with_indifferent_access)
       repo.user_id = self.id
       repo.save
     end
