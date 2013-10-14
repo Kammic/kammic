@@ -11,10 +11,12 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
 
+gem "lana", path:"../lana"
 gem "queue_classic", "~> 2.2"
 gem "pg"
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'jasmine'

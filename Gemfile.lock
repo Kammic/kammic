@@ -1,3 +1,11 @@
+PATH
+  remote: ../lana
+  specs:
+    lana (1.0.0)
+      activesupport (~> 4.0)
+      grit
+      pandoc-ruby (~> 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +38,7 @@ GEM
     builder (3.1.4)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -43,6 +52,10 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.0)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -70,6 +83,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.1)
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
@@ -89,8 +103,14 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    pandoc-ruby (0.7.5)
     pg (0.16.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     queue_classic (2.2.2)
       pg (~> 0.16.0)
     rack (1.5.2)
@@ -138,6 +158,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
+    slop (3.4.6)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -176,9 +197,11 @@ DEPENDENCIES
   jasmine-rails
   jbuilder (~> 1.2)
   jquery-rails
+  lana!
   omniauth
   omniauth-github
   pg
+  pry
   queue_classic (~> 2.2)
   rails (= 4.0.0)
   rspec
