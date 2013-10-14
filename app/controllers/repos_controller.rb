@@ -3,6 +3,5 @@ class ReposController < ApplicationController
 
   def show
     @repos = Repo.where(user_id: current_user[:id])
-    render text: 'here'
   end
 end

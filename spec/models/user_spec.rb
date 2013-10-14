@@ -5,19 +5,22 @@ describe User do
     it 'creates a user with a given auth hash' do
       auth = {
         provider: 'github',
-        uid:      'ortuna',
+        uid:      '12345',
         info: {
-          image: 'image url',
-          name:  'test user',
+          image:     'image url',
+          name:      'test user',
+          nickname:  'nick_name',
         },
         credentials: {
           token: 'xyz'
         }
       }.with_indifferent_access
       expect(User.create_with_omniauth(auth)).to_not be_nil
-      user = User.where(uid: 'ortuna').first
+      user = User.where(uid: '12345').first
 
       expect(user[:provider]).to eq('github')
+      expect(user[:uid]).to eq('12345')
+      expect(user[:login]).to eq('nick_name')
       expect(user[:name]).to eq('test user')
       expect(user[:auth_token]).to eq('xyz')
       expect(user[:image_url]).to eq('image url')

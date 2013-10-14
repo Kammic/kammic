@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
     user.attributes = {
       provider:  auth['provider'],
       uid:       auth['uid'],
+      login:     (auth['info'] && auth['info']['nickname'])  || nil,
       name:      (auth['info'] && auth['info']['name'])  || nil,
       image_url: (auth['info'] && auth['info']['image']) || nil,
       auth_token:(auth['credentials'] && auth['credentials']['token']) || nil,

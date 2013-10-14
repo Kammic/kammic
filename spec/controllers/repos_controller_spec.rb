@@ -16,7 +16,7 @@ describe ReposController do
     end
   end
 
-  context '#index' do
+  context '#show' do
     before :each do
       session[:user_id] = 1234
       create_user(id: 1234)

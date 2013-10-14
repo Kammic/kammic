@@ -1,0 +1,17 @@
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <% if user %>
+        <li>
+          <%= link_to 'Repos', repos_path %>
+        </li>
+        <li>
+          <a href="#">
+            <%= user.login %>
+            <%= image_tag user.image_url, class: 'avatar' %>
+          </a>
+        </li>
+      <% else %>
+        <li><a href="#">Login via Github</a></li>
+      <% end %>
+    </ul>
+  </div>

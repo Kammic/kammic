@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html data-ng-app='Application'>
+<html>
 <head>
-  <title>Kammic</title>
+  <title>Writing.is</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<nav class="navbar navbar-default navbar-inverse fixed-top" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">Writing.is</a>
+  </div>
+  <%= render 'navigation' %>
+</nav>
 <%= yield %>
 
 </body>
