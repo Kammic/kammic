@@ -32,18 +32,32 @@ describe User do
     end
   end
 
-  context '#update_repos_from_github' do
-    before do
-      original_verbose, $VERBOSE = $VERBOSE, nil
-      Github::RepoFinder = double()
-      $VERBOSE = original_verbose
+  context ".queue_update_repos_from_github" do
+    it "calls #queue_update_repos_from_github on given user_id" do
+      user = double()
+      user.should_receive(:update_repos_from_github)
+      User.stub(:where).and_return([user])
+      User.queue_update_repos_from_github(42)
+    end
+  end
+
+  context '#queue_update_repos_from_github' do
+    before do 
+      stub_const "QC", double("QC")
       create_user(uid: 'user', auth_token: 'some_token', id: 42)
     end
 
-    after do
-      original_verbose, $VERBOSE = $VERBOSE, nil
-      Github::RepoFinder = @repo_const
-      $VERBOSE = original_verbose
+    it 'sends the user repo update to the queue' do
+      QC.should_receive(:enqueue)
+        .with("User.queue_update_repos_from_github", 42)
+      User.where(id: 42).first.queue_update_repos_from_github
+    end
+  end
+
+  context '#update_repos_from_github' do
+    before do
+      stub_const "Github::RepoFinder", double("Github::RepoFinder")
+      create_user(uid: 'user', auth_token: 'some_token', id: 42)
     end
 
     it 'should call Github::RepoFinder with the correct auth_token' do

@@ -25,6 +25,16 @@ class User < ActiveRecord::Base
     User.where(uid: auth[:uid]).first
   end
 
+  def self.queue_update_repos_from_github(user_id)
+    User.where(id: user_id).each do |user|
+      user.update_repos_from_github
+    end
+  end
+
+  def queue_update_repos_from_github
+    QC.enqueue("User.queue_update_repos_from_github", self.id)
+  end
+
   def update_repos_from_github 
     github_repos = Github::RepoFinder.find_repos(auth_token)
     github_repos.each do |github_repo|
