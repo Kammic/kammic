@@ -13,6 +13,7 @@ gem 'jquery-rails'
 
 gem "lana", path:"../lana"
 gem "queue_classic", "~> 2.2"
+gem "octokit", '~> 2.0'
 gem "pg"
 
 group :development, :test do

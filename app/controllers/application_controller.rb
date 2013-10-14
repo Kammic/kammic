@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     nil
   end
+
+  def check_login
+    head :forbidden unless current_user
+  end
 end

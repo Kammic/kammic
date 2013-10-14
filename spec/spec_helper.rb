@@ -40,3 +40,15 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+
+def create_user(options = {})
+  options = {
+    uid: 1,
+    id:  1,
+    provider: 'github',
+    name: 'test user',
+    auth_token: 'token',
+  }.merge(options)
+  User.create(options)
+end
