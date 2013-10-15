@@ -3,6 +3,7 @@ EditorController = function($scope, $rootScope,
   var context         = this;
   $scope.editor       = ace.edit("editor");
   $scope.$element     = $('#editor');
+  $scope.loading      = false;
 
   this.markdown = function() {
     return $scope.editor.getSession().getValue();
@@ -34,7 +35,8 @@ EditorController = function($scope, $rootScope,
   });
 
   $scope.editor.on('change', function(e) {
-    $scope.$emit('saveLocalFile');
+    if(!$scope.loading)
+      $scope.$emit('saveLocalFile');
     if(typeof $scope.previewUpdateTimer !== 'undefined')
       clearTimeout($scope.previewUpdateTimer);
 
@@ -44,7 +46,15 @@ EditorController = function($scope, $rootScope,
 
   });
 
-  $rootScope.$on('saveLocalFile', function(e){
+  $rootScope.$on('showLoading', function() {
+    $scope.loading = true;
+  });
+
+  $rootScope.$on('hideLoading', function() {
+    $scope.loading = false;
+  });
+
+  $rootScope.$on('saveLocalFile', function(e) {
     if(typeof $scope.timer !== 'undefined') { clearTimeout($scope.timer); }
 
     $scope.timer = setTimeout(function() {

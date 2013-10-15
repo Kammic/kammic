@@ -70,6 +70,18 @@ describe('controller: EditorController', function() {
       });
     });
 
+    describe('editor.on change', function(){
+      it('files saveLocalFile only if not loading', function(){
+        var called = false;
+        this.scope.loading = true;
+        this.scope.$on('saveLocalFile', function(){
+          called = true;
+        });
+        this.scope.editor.getSession().setValue('old data');
+        expect(called).toEqual(false);
+      });
+    });
+
     describe('Event: saveFile', function() {
       it('emits showLoading and hideLoading when saving', function(){
         check_emit(this.scope, 'showLoading');
@@ -185,6 +197,20 @@ describe('controller: EditorController', function() {
       var file = {path: 'xyz.md', content: '#title'};
       this.scope.$emit('loadFile', file);
       expect(this.scope.editor.getReadOnly()).toEqual(false);
+    });
+  });
+
+  describe('Event: showLoading/hideLoading', function(){
+    it('showLoading sets $scope.loading to true', function(){
+      this.scope.loading = false;
+      this.scope.$emit('showLoading');
+      expect(this.scope.loading).toEqual(true);
+    });
+
+    it('hideLoading sets $scope.loading to false', function(){
+      this.scope.loading = true;
+      this.scope.$emit('hideLoading');
+      expect(this.scope.loading).toEqual(false);
     });
   });
 
