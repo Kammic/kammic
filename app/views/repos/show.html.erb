@@ -15,7 +15,7 @@
         <%= link_to 'Editor', repo_editor_path(repo[:name]), class: 'btn btn-primary btn-sm' %>
       </td>
       <td>
-        <a href="#" class="btn btn-primary btn-sm">Builds</a>
+        <%= link_to 'Builds', repo_build_path(repo[:name]), class: 'btn btn-primary btn-sm' %>
       </td>
     </tr>
   <% end %>

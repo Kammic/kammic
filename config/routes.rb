@@ -8,7 +8,8 @@ Kammic::Application.routes.draw do
   get '/auth/github/callback', to: 'omniauth_github#callback'
 
   resource :repos
-  get '/repos/:id/editor', to: 'editor#index', as: :repo_editor
-  get '/repos/refresh', to: 'repos#refresh', as: :refresh_repos
+  get '/repos/:id/editor', to: 'editor#index',  as: :repo_editor
+  get '/repos/:id/build',  to: 'repos#build',   as: :repo_build
+  get '/repos/refresh',    to: 'repos#refresh', as: :refresh_repos
 
 end
