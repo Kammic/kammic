@@ -3,8 +3,15 @@ describe('service: editor', function() {
   beforeEach(inject(function(editor, changedFileQueue, github) {
     subject = editor;
     queue   = changedFileQueue;
-    gh  = github;
+    gh      = github;
   }));
+
+  describe('#repoName', function(){
+    it('can set/get repoName', function() {
+      subject.repoName({path: 'test'});
+      expect(subject.repoName()).toEqual({path: 'test'});
+    });
+  });
 
   describe('#currentFile', function() {
     it('can set/get currentFile', function() {
@@ -49,7 +56,8 @@ describe('service: editor', function() {
     });
 
     it('returns the lastEditedFile without a path', function(){
-      localStorage.setItem('lastEditedFile', 'xyz.md');
+      subject.repoName('repo');
+      localStorage.setItem('repo-lastEditedFile', 'xyz.md');
       expect(subject.lastEditedFile()).toEqual('xyz.md');
     });
 

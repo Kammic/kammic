@@ -2,6 +2,16 @@ Application.service('editor', function(github, changedFileQueue) {
   var editor = {}
   var currentFile = null;
   var storage     = localStorage;
+  var repoName    = null;
+
+  /*
+    Gets/Sets the current repoName
+  */
+  editor.repoName = function(name) {
+    if(typeof name === 'undefined')
+      return repoName;
+    repoName = name;
+  }
 
   /*
     Returns the current file object
@@ -30,8 +40,8 @@ Application.service('editor', function(github, changedFileQueue) {
   */
   editor.lastEditedFile = function(path) {
     if(typeof path === 'undefined')
-      return localStorage.getItem('lastEditedFile');
-    localStorage.setItem('lastEditedFile', path);
+      return localStorage.getItem(repoName + '-lastEditedFile');
+    localStorage.setItem(repoName + '-lastEditedFile', path);
   };
 
   /*

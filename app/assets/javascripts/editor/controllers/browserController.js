@@ -50,6 +50,7 @@ BrowserController = function($scope, $rootScope, github, editor) {
     github.setRepo(repo_name);
     $scope.browseToDirectory([]);
 
+    editor.repoName(repo_name);
     if(editor.lastEditedFile())
       $scope.$emit('fileSelected', {path: editor.lastEditedFile()});
   });

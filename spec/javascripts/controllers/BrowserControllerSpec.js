@@ -8,8 +8,9 @@ describe('controller: BrowserController', function() {
     $("#browser").remove();
   });
 
+  repo_name  = 'progit-bana';
+
   beforeEach(inject(function($rootScope, $controller, github, editor) {
-    env.auth_token = '1235';
     this.scope  = $rootScope.$new();
     this.github = github;
     this.editor = editor;
@@ -27,24 +28,32 @@ describe('controller: BrowserController', function() {
   });
 
   describe('Event: githubLoaded', function() {
-    it('Emits fileSelected w/ last opened file', function() {
-      var done = false;
+    beforeEach(function(){
       spy_and_return(this.github,
                      'getFile',
                      {path:'test.md', content:'content'});
       spyOn(this.github, 'setRepo').andReturn({});
       spyOn(this.scope,  'browseToDirectory').andReturn({});
+      this.editor.repoName(repo_name);
+    });
 
+    it('Emits fileSelected w/ last opened file', function() {
+      var done = false;
       this.editor.lastEditedFile('test.md');
       this.scope.$on('fileSelected', function(e, file){
         expect(file.path).toEqual('test.md');
         done = true;
       });
 
-      waitsFor(function(){ return done; }, 'emit fileSelected', 100);
+      waitsFor(function(){ return done; }, 'emit fileSelected', 200);
       this.scope.$emit('githubLoaded');
     });
 
+    it('sets the github repo to repo_name', function(){
+      spyOn(this.editor, 'repoName');
+      this.scope.$emit('githubLoaded');
+      expect(this.editor.repoName).toHaveBeenCalledWith('progit-bana');
+    });
   });
 
 
