@@ -28,24 +28,26 @@ ActiveRecord::Schema.define(version: 20131014220351) do
   create_table "repos", force: true do |t|
     t.string   "name"
     t.string   "full_name"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "private"
     t.string   "clone_url"
     t.string   "master_branch"
-    t.string   "pushed_at"
+    t.datetime "pushed_at"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string "uid"
-    t.string "provider"
-    t.string "name"
-    t.string "auth_token"
-    t.string "image_url"
-    t.string "role"
-    t.string "login"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "name"
+    t.string   "auth_token"
+    t.string   "image_url"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "login"
   end
 
 end

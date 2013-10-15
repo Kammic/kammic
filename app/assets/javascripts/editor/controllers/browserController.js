@@ -47,7 +47,7 @@ BrowserController = function($scope, $rootScope, github, editor) {
   });
 
   $rootScope.$on('githubLoaded', function() {
-    github.setRepo('progit-bana');
+    github.setRepo(repo_name);
     $scope.browseToDirectory([]);
 
     if(editor.lastEditedFile())

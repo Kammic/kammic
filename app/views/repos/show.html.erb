@@ -1,1 +1,22 @@
-here
+<%= link_to 'Refresh Repos', refresh_repos_path, class: 'btn btn-primary btn-sm pull-right refresh-button' %>
+
+<table class="table table-striped table-hover table-responsive table-condensed">
+  <tr>
+    <th>Repo Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @repos.each do |repo| %>
+    <tr>
+      <td><%= link_to repo.name, repo_editor_path(repo[:name]) %></td>
+      <td><%= repo.description %></td>
+      <td>
+        <%= link_to 'Editor', repo_editor_path(repo[:name]), class: 'btn btn-primary btn-sm' %>
+      </td>
+      <td>
+        <a href="#" class="btn btn-primary btn-sm">Builds</a>
+      </td>
+    </tr>
+  <% end %>
+</table>

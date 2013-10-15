@@ -9,4 +9,14 @@ describe Github::RepoFinder do
     Octokit::Client.stub(:repos).and_raise(Octokit::Unauthorized)
     expect(Github::RepoFinder.find_repos('xyz')).to eq([])
   end
+
+  context '#clean_hash' do
+    it 'returns only allowed attributes in Repo' do
+      dirty_hash = {id: 1235, private: true, pushed_at: 12345, other: 1}
+      clean_hash = Github::RepoFinder.clean_hash(dirty_hash)
+      expect(clean_hash[:id]).to eq(1235)
+      expect(clean_hash[:private]).to eq(true)
+      expect(clean_hash[:other]).to eq(nil)
+    end
+  end
 end
