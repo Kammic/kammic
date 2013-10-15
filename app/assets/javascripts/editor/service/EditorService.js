@@ -2,15 +2,16 @@ Application.service('editor', function(github, changedFileQueue) {
   var editor = {}
   var currentFile = null;
   var storage     = localStorage;
-  var repoName    = null;
+  var namespace    = '';
 
   /*
-    Gets/Sets the current repoName
+    Gets/Sets the current namespace
   */
-  editor.repoName = function(name) {
+  editor.namespace = function(name) {
     if(typeof name === 'undefined')
-      return repoName;
-    repoName = name;
+      return namespace;
+    namespace = name;
+    changedFileQueue.namespace(name);
   }
 
   /*
@@ -40,8 +41,8 @@ Application.service('editor', function(github, changedFileQueue) {
   */
   editor.lastEditedFile = function(path) {
     if(typeof path === 'undefined')
-      return localStorage.getItem(repoName + '-lastEditedFile');
-    localStorage.setItem(repoName + '-lastEditedFile', path);
+      return localStorage.getItem(namespace + '-lastEditedFile');
+    localStorage.setItem(namespace + '-lastEditedFile', path);
   };
 
   /*

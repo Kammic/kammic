@@ -1,26 +1,33 @@
 Application.service('changedFileQueue', function() {
-  var changedFileQueue = {}
+  var service   = {}
+  var namespace = '';
 
-  changedFileQueue.changedFiles = function() {
-    var object = JSON.parse(localStorage.getItem('changedFiles'));
+  service.namespace = function(ns) {
+    if(typeof ns === 'undefined')
+      return namespace;
+    namespace = ns;
+  }
+
+  service.changedFiles = function() {
+    var object = JSON.parse(localStorage.getItem(namespace + 'changedFiles'));
     return object ? object : {};
   }
 
-  changedFileQueue.fileChanged = function(path) {
+  service.fileChanged = function(path) {
     if(typeof path === 'undefined')
       return;
-    var object = changedFileQueue.changedFiles();
+    var object = service.changedFiles();
     object[path] = true;
-    localStorage.setItem('changedFiles', JSON.stringify(object));
+    localStorage.setItem(namespace + 'changedFiles', JSON.stringify(object));
   }
 
-  changedFileQueue.resetFile = function(path) {
+  service.resetFile = function(path) {
     if(typeof path === 'undefined')
       return;
-    var object = changedFileQueue.changedFiles();
+    var object = service.changedFiles();
     delete object[path];
-    localStorage.setItem('changedFiles', JSON.stringify(object));
+    localStorage.setItem(namespace + 'changedFiles', JSON.stringify(object));
   }
 
-  return changedFileQueue;
+  return service;
 });

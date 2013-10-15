@@ -6,10 +6,17 @@ describe('service: editor', function() {
     gh      = github;
   }));
 
-  describe('#repoName', function(){
-    it('can set/get repoName', function() {
-      subject.repoName({path: 'test'});
-      expect(subject.repoName()).toEqual({path: 'test'});
+
+  describe('#namespace', function(){
+    it('can set/get namespace', function() {
+      subject.namespace('test');
+      expect(subject.namespace()).toEqual('test');
+    });
+
+    it('calls namespace on queue', function(){
+      spyOn(queue, 'namespace');
+      subject.namespace('test');
+      expect(queue.namespace).toHaveBeenCalledWith('test');
     });
   });
 
@@ -56,7 +63,7 @@ describe('service: editor', function() {
     });
 
     it('returns the lastEditedFile without a path', function(){
-      subject.repoName('repo');
+      subject.namespace('repo');
       localStorage.setItem('repo-lastEditedFile', 'xyz.md');
       expect(subject.lastEditedFile()).toEqual('xyz.md');
     });

@@ -34,7 +34,7 @@ describe('controller: BrowserController', function() {
                      {path:'test.md', content:'content'});
       spyOn(this.github, 'setRepo').andReturn({});
       spyOn(this.scope,  'browseToDirectory').andReturn({});
-      this.editor.repoName(repo_name);
+      this.editor.namespace(repo_name);
     });
 
     it('Emits fileSelected w/ last opened file', function() {
@@ -50,9 +50,9 @@ describe('controller: BrowserController', function() {
     });
 
     it('sets the github repo to repo_name', function(){
-      spyOn(this.editor, 'repoName');
+      spyOn(this.editor, 'namespace');
       this.scope.$emit('githubLoaded');
-      expect(this.editor.repoName).toHaveBeenCalledWith('progit-bana');
+      expect(this.editor.namespace).toHaveBeenCalledWith('progit-bana');
     });
   });
 
