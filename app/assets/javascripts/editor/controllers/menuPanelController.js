@@ -38,7 +38,7 @@ MenuPanelController = function($scope, $rootScope) {
   }
 
   $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width/4);
+    $scope.$element.width(width/2.2);
     $scope.$element.height(height);
 
     $scope.$element.css('top', 0);
