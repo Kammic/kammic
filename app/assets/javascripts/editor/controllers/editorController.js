@@ -13,7 +13,7 @@ EditorController = function($scope, $rootScope,
     $scope.$emit('hideMenu');
   });
 
-  $scope.editor.setTheme("ace/theme/tomorrow_night");
+  $scope.editor.setTheme("ace/theme/tomorrow_night_bright");
   $scope.editor.setReadOnly(true);
   $scope.editor.getSession().setUseWrapMode(true);
   $scope.editor.getSession().setMode("ace/mode/markdown");
