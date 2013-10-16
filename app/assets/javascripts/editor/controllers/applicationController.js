@@ -5,10 +5,6 @@ ApplicationController = function($scope, $rootScope, github) {
     $(window).resize();
   });
 
-  $scope.$on('editorLoaded', function(e, value) {
-    $(window).resize();
-  });
-
   $rootScope.$on('notify', function(e, message){
     $.bootstrapGrowl(message, {
       ele: '#preview',
@@ -28,15 +24,5 @@ ApplicationController = function($scope, $rootScope, github) {
 
   key('esc', function(){
     $scope.$emit('toggleMenu');
-  });
-
-  var cooldownTimer = null;
-  $(window).resize(function() {
-    clearTimeout(cooldownTimer);
-    cooldownTimer = setTimeout(function(){
-      var width  = $(window).width();
-      var height = $(window).height();
-      $rootScope.$emit('windowResized', width, height);
-    }, env.windowResizedCoolDownTime);
   });
 };

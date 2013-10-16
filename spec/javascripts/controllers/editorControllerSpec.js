@@ -170,14 +170,6 @@ describe('controller: EditorController', function() {
     });
   });
 
-  describe('Event: windowResized', function() {
-    it('resizes the element on windowResized', function() {
-      var originalWidth = this.scope.$element.width();
-      this.scope.$emit('windowResized', 50, 1);
-      expect(this.scope.$element.width()).toNotEqual(originalWidth);
-    });
-  });
-
   describe('Event: loadFile', function() {
     it('updates the editor service', function() {
       this.editor.currentFile({});

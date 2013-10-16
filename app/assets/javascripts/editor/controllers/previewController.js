@@ -24,9 +24,5 @@ PreviewController = function($scope, $rootScope) {
     }
   });
 
-  $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width/2.05);
-  });
-
   $scope.$emit('previewLoaded');
 }

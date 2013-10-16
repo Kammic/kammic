@@ -37,14 +37,5 @@ MenuPanelController = function($scope, $rootScope) {
     $scope.$element.fadeIn(env.menuFadeInTime);
   }
 
-  $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width/2.2);
-    $scope.$element.height(height);
-
-    $scope.$element.css('top', 0);
-    $scope.$element.css('right', 0);
-  });
-  $(window).resize();
-
   $scope.$emit('menuPanelLoaded');
 }

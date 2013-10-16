@@ -64,10 +64,6 @@ EditorController = function($scope, $rootScope,
     }, env.localStorageCoolDownTime);
   });
 
-  $rootScope.$on('windowResized', function(e, width, height) {
-    $scope.$element.width(width/2.05);
-  });
-
   $rootScope.$on('loadFile', function(e, file) {
     editor.currentFile(file);
     var content = "";

@@ -15,12 +15,6 @@ describe('controller: PreviewController', function() {
     });
   }));
 
-  it('resizes the element on windowResized', function(){
-    var originalWidth = this.scope.$element.width();
-    this.scope.$emit('windowResized', 50, 1);
-    expect(this.scope.$element.width()).toNotEqual(originalWidth);
-  });
-
   it('emits hideMenu when clicked', function(){
     var done = false;
     this.scope.$on('hideMenu', function(e) {

@@ -57,13 +57,6 @@ describe('controller: ApplicationController', function() {
       this.scope.$emit('previewLoaded');
       waitsFor(function(){ return done; }, 100);
     });
-
-    it('calls window resize on editorLoaded', function(){
-      var done = false;
-      $(window).resize(function(){ done = true; });
-      this.scope.$emit('editorLoaded');
-      waitsFor(function(){ return done; }, 100);
-    });
   });
 });
 
