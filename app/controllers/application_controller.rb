@@ -3,15 +3,12 @@ class ApplicationController < ActionController::Base
   helper_attr :user
 
   private
-  def user 
+  def user
     @user ||= current_user
   end
 
   def current_user
-    user_id = session[:user_id]
-    user_id ? User.find(user_id) : nil
-  rescue ActiveRecord::RecordNotFound
-    nil
+    User.find_by_id(session[:user_id])
   end
 
   def check_login

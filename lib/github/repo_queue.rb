@@ -9,6 +9,8 @@ module Github
         github_repos.each do |github_repo|
           create_from_hash github_repo, user_id
         end
+        user[:loading_repos] = false
+        user.save
       end
 
       private

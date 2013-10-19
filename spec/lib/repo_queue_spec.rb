@@ -7,6 +7,19 @@ describe Github::RepoQueue do
     create_user(uid: 'user', auth_token: 'some_token', id: 42)
   end
 
+  context 'user#loading_repos' do
+    it 'sets the loading_repos param to false once done' do
+      User.find(42).tap {|user| user[:loading_repos] = true}
+      
+      Github::RepoFinder.stub(:find_repos).and_return([])
+      subject.update_from_github(42)
+
+      User.find(42).tap do |user|
+        expect(user[:loading_repos]).to eq(false)
+      end
+    end
+  end
+
   context '#create_from_hash' do
     it 'creates a repo from a given hash and user_id' do
       hash = {

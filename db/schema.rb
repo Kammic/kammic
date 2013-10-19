@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20131019030946) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "login"
-    t.boolean  "loading_repos"
+    t.boolean  "loading_repos", default: false
   end
 
 end
