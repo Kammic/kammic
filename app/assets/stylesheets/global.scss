@@ -11,4 +11,8 @@
   .refresh-button {
     margin-bottom: 1em;
   }
+
+  .repo-list {
+    .no-wrap, th { white-space: nowrap; }
+  }
 }

@@ -8,16 +8,18 @@
   </tr>
   <% @books.each do |book| %>
     <tr>
-      <td><%= book.repo.name %></td>
+      <td>
+        <%= link_to book.repo.name, repo_editor_path(book.repo[:name]) %>
+      </td>
       <td><%= book.repo.description %></td>
       <td>
-        <%= link_to 'Editor', repo_editor_path(book.repo[:name]), class: 'btn btn-primary btn-sm' %>
+        <%= link_to 'Editor', repo_editor_path(book.repo[:name]), class: 'btn btn-primary btn-xs' %>
       </td>
       <td>
-        <%= link_to 'Builds', repo_build_path(book.repo[:name]), class: 'btn btn-primary btn-sm' %>
+        <%= link_to 'Builds', repo_build_path(book.repo[:name]), class: 'btn btn-primary btn-xs' %>
       </td>
       <td>
-        <%= link_to 'Remove', book_path(book), method: :delete , class: 'btn btn-danger btn-sm'  %>
+        <%= link_to 'Remove', book_path(book), method: :delete , class: 'btn btn-danger btn-xs'  %>
       </td>
     </tr>
   <% end %>
