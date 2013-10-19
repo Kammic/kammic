@@ -52,3 +52,17 @@ def create_user(options = {})
   }.merge(options)
   User.create(options)
 end
+
+def create_repo(options = {})
+  options = {
+    "id" => 42,
+    "name" => "repo_name",
+    "full_name" => "user/repo_one",
+    "description" => "xyz",
+    "private" => false,
+    "clone_url" => "http://github.com/clone_me",
+    "master_branch" => "master",
+    "pushed_at" => Time.now,
+    }.merge(options)
+  Repo.create(options)
+end

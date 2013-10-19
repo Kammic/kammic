@@ -88,18 +88,7 @@ describe ReposController do
     before :each do
       session[:user_id] = 1234
       create_user(id: 1234)
-
-      Repo.create({
-        "id" => 42,
-        "name" => "repo_name",
-        "full_name" => "user/repo_one",
-        "description" => "xyz",
-        "private" => false,
-        "clone_url" => "http://github.com/clone_me",
-        "master_branch" => "master",
-        "pushed_at" => Time.now,
-        "user" => User.find(1234)
-      })
+      create_repo("user" => User.find(1234))
     end
 
     it 'adds a book model from a repo' do

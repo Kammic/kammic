@@ -16,6 +16,34 @@ describe BooksController do
     end
   end
 
+  describe '#show' do
+    before do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+
+      create_repo("user" => User.find(1234))
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+    end
+
+    it '404s when book is not present' do
+      get :show, id: 000
+      assert_response :missing
+    end
+
+    it 'reads the right book' do
+      get :show, id: 55
+      expect(assigns(:book)[:id]).to eq(55)
+    end
+
+    it 'gets the manifest and repo relationship' do
+      get :show, id: 55
+
+      book = assigns(:book)
+      expect(book.repo).to_not be_nil
+      # expect(book.manifest).to_not be_nil
+    end
+  end
+ 
   describe '#index' do
     before do
       session[:user_id] = 1234
@@ -35,21 +63,10 @@ describe BooksController do
     end
 
     it '@books returns defined repos' do
-      Repo.create({
-        "id" => 42,
-        "name" => "repo_name",
-        "full_name" => "user/repo_one",
-        "description" => "xyz",
-        "private" => false,
-        "clone_url" => "http://github.com/clone_me",
-        "master_branch" => "master",
-        "pushed_at" => Time.now,
-        "user" => User.find(1234)
-      })
+      create_repo("user" => User.find(1234))
       Book.create!(user_id: 1234, repo_id: 42)
       Book.create!(user_id: 1234, repo_id: 41)
       Book.create!(user_id: 1234, repo_id: 40)
-
       get :index
       expect(assigns(:books).count).to eq(1)
     end

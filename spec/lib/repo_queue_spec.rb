@@ -29,6 +29,7 @@ describe Github::RepoQueue do
           "description" => "xyz",
           "private" => false,
           "clone_url" => "http://github.com/clone_me",
+          "html_url" => "http://github.com/clone_me",
           "master_branch" => "master",
           "pushed_at" => Time.now,
       }
@@ -37,23 +38,13 @@ describe Github::RepoQueue do
       repo = Repo.find(42)
       expect(repo[:name]).to eq('repo_name')
       expect(repo[:user_id]).to eq(42)
+      expect(repo[:html_url]).to eq("http://github.com/clone_me")
     end
   end
 
   context '#delete_if_exists' do
     it 'it deletes a repo if it exists in the DB' do
-      Repo.create({
-          "id" => 42,
-          "name" => "repo_old",
-          "full_name" => "user/repo_one",
-          "description" => "xyz",
-          "private" => false,
-          "clone_url" => "http://github.com/clone_me",
-          "master_branch" => "master",
-          "pushed_at" => Time.now,
-          "user_id" => 42
-      })
-
+      create_repo("user_id" => 42)
       expect {
         subject.send(:delete_if_exists, 42)
       }.to change{Repo.count}.from(1).to(0)      

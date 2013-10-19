@@ -10,4 +10,9 @@ class BooksController < ApplicationController
     Book.destroy(params[:id])
     redirect_to books_path
   end
+
+  def show
+    @book = Book.includes(:repo).find_by_id(params[:id])
+    render nothing: true, status: 404 unless @book
+  end
 end
