@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:Kammic/lana.git
+  revision: 451df1d915fbfd1943461560a6b3ea9a2e81cbd9
+  specs:
+    lana (1.0.0)
+      activesupport (~> 4.0)
+      grit
+      pandoc-ruby (~> 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -38,6 +47,10 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.0)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -84,8 +97,10 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    pandoc-ruby (0.7.5)
     pg (0.16.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -177,6 +192,7 @@ DEPENDENCIES
   jasmine
   jasmine-rails
   jquery-rails
+  lana!
   octokit (~> 2.0)
   omniauth
   omniauth-github
