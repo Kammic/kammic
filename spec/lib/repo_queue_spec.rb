@@ -21,7 +21,7 @@ describe Github::RepoQueue do
       }
 
       subject.send(:create_from_hash, hash, 42)
-      repo = Repo.where(id: 42).first
+      repo = Repo.find(42)
       expect(repo[:name]).to eq('repo_name')
       expect(repo[:user_id]).to eq(42)
     end
@@ -87,7 +87,7 @@ describe Github::RepoQueue do
       Github::RepoFinder.stub(:find_repos).and_return(expected_hash)
       subject.update_from_github(42)
 
-      expect(User.where(id: 42).first.repos.count).to eq(2)
+      expect(User.find(42).repos.count).to eq(2)
       expect(Repo.where(user_id: 42).count).to eq(2)
 
       repo_one = Repo.where(user_id: 42, name: 'repo_one').first
@@ -134,7 +134,7 @@ describe Github::RepoQueue do
       Github::RepoFinder.stub(:find_repos).and_return(expected_hash)
       subject.update_from_github(42)
       expect(Repo.count).to eq(2)
-      expect(Repo.where(id: 42).first.name).to eq('repo_new')
+      expect(Repo.find(42).name).to eq('repo_new')
     end
   end
 end

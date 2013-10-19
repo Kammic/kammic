@@ -2,6 +2,7 @@ class ReposController < ApplicationController
   before_filter :check_login
 
   def show
+    @loading_repos = current_user[:loading_repos]
     @repos = Repo.where(user_id: current_user[:id]).order("pushed_at desc")
   end
 

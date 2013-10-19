@@ -26,5 +26,10 @@ describe ReposController do
       get :show
       assert_not_nil assigns(:repos)
     end
+
+    it 'sets loading_repos according to the db' do
+      get :show
+      assert_not_nil assigns(:loading_repos)
+    end
   end
 end

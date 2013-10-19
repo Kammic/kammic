@@ -2,7 +2,7 @@ module Github
   class RepoQueue
     class << self
       def update_from_github(user_id)
-        user = User.where(id: user_id).first
+        user = User.find_by_id(user_id)
         return false unless user && user.auth_token
 
         github_repos = Github::RepoFinder.find_repos(user.auth_token)
@@ -20,7 +20,7 @@ module Github
       end
 
       def delete_if_exists(repo_id)
-        old_repo = Repo.where(id: repo_id).first
+        old_repo = Repo.find_by_id(repo_id)
         old_repo && old_repo.delete
       end
     end
