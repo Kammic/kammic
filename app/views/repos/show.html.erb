@@ -4,17 +4,13 @@
     <th>Repo Name</th>
     <th>Description</th>
     <th></th>
-    <th></th>
   </tr>
   <% @repos.each do |repo| %>
     <tr>
-      <td><%= link_to repo.name, repo_editor_path(repo[:name]) %></td>
+      <td><%= repo.name %></td>
       <td><%= repo.description %></td>
       <td>
-        <%= link_to 'Editor', repo_editor_path(repo[:name]), class: 'btn btn-primary btn-sm' %>
-      </td>
-      <td>
-        <%= link_to 'Builds', repo_build_path(repo[:name]), class: 'btn btn-primary btn-sm' %>
+        <%= render 'book_add_button', repo: repo, user: user, repo_book_ids: @repo_book_ids %>
       </td>
     </tr>
   <% end %>

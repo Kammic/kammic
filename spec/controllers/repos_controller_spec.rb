@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe ReposController do
   context 'login' do
     it 'errors when not logged in' do
@@ -67,6 +66,48 @@ describe ReposController do
     it 'sets User#loading_repos to true' do
       get :refresh
       expect(User.find(1234)[:loading_repos]).to eq(true)
+    end
+  end
+
+  context '#add_as_book' do
+    before :each do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+
+      Repo.create({
+        "id" => 42,
+        "name" => "repo_name",
+        "full_name" => "user/repo_one",
+        "description" => "xyz",
+        "private" => false,
+        "clone_url" => "http://github.com/clone_me",
+        "master_branch" => "master",
+        "pushed_at" => Time.now,
+        "user" => User.find(1234)
+      })
+    end
+
+    it 'adds a book model from a repo' do
+      get :add_as_book, {id: 42}
+      expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
+      assert_response :redirect
+    end
+
+    it 'returns 404 on non-existing repos' do
+      get :add_as_book, {id: 40}
+      assert_response :missing
+    end
+
+    it 'redirects to repos_path once successful' do
+      expect(get(:add_as_book, {id: 42})).to redirect_to repos_path
+
+    end
+
+    it 'works if a book is already added' do
+      get :add_as_book, {id: 42}
+      get :add_as_book, {id: 42}
+      expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
+      assert_response :redirect
     end
   end
 end

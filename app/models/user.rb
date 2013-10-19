@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :repos
+  has_many :books
 
   validates_presence_of   :uid, :provider, :name, :auth_token
   validates_uniqueness_of :uid
