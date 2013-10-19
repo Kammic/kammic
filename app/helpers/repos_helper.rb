@@ -1,5 +1,5 @@
 module ReposHelper
-  def books_button_class(is_book)
+  def follow_button_class(is_book)
     'disabled' if is_book
   end
 

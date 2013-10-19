@@ -1,6 +1,9 @@
 class BooksController < ApplicationController
-  def index 
+  before_filter :check_login
+
+  def index
     @books = Book.includes(:repo).where(user: user)
+    @books = @books.keep_if {|book| book.repo && book.repo[:name]}
   end
 
   def destroy

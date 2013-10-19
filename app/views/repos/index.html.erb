@@ -16,7 +16,7 @@
       <td><%= repo.master_branch %></td>
       <td><%= repo.private %></td>
       <td>
-        <%= render 'book_add_button', repo: repo, user: user, repo_book_ids: @repo_book_ids %>
+        <%= render 'follow_button', repo: repo, user: user, repo_book_ids: @repo_book_ids %>
       </td>
     </tr>
   <% end %>

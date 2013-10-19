@@ -12,7 +12,7 @@ Kammic::Application.routes.draw do
     get '/:id/editor', to: 'editor#index',  as: :repo_editor
     get '/:id/build',  to: 'repos#build',   as: :repo_build
     get '/refresh',    to: 'repos#refresh', as: :refresh_repos
-    get '/:id/add_as_book', to: 'repos#add_as_book', as: :add_repo_as_book
+    get '/:id/follow', to: 'repos#follow', as: :follow
   end
 
   resources :books, only: [:index, :destroy]

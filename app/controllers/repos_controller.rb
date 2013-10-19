@@ -16,7 +16,7 @@ class ReposController < ApplicationController
     redirect_to repos_path
   end
 
-  def add_as_book
+  def follow
     repo   = Repo.find_by_id(params[:id])
     if repo
       Book.create(repo: repo, user: user)

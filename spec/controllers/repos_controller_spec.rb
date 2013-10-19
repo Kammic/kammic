@@ -69,7 +69,7 @@ describe ReposController do
     end
   end
 
-  context '#add_as_book' do
+  context '#follow' do
     before :each do
       session[:user_id] = 1234
       create_user(id: 1234)
@@ -88,24 +88,24 @@ describe ReposController do
     end
 
     it 'adds a book model from a repo' do
-      get :add_as_book, {id: 42}
+      get :follow, {id: 42}
       expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
       assert_response :redirect
     end
 
     it 'returns 404 on non-existing repos' do
-      get :add_as_book, {id: 40}
+      get :follow, {id: 40}
       assert_response :missing
     end
 
     it 'redirects to repos_path once successful' do
-      expect(get(:add_as_book, {id: 42})).to redirect_to repos_path
+      expect(get(:follow, {id: 42})).to redirect_to repos_path
 
     end
 
     it 'works if a book is already added' do
-      get :add_as_book, {id: 42}
-      get :add_as_book, {id: 42}
+      get :follow, {id: 42}
+      get :follow, {id: 42}
       expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
       assert_response :redirect
     end
