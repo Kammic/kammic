@@ -2,7 +2,7 @@ require 'spec_helper'
 describe ReposController do
   context 'login' do
     it 'errors when not logged in' do
-      get :show
+      get :index
       assert_response :forbidden
    end
 
@@ -10,7 +10,7 @@ describe ReposController do
       session[:user_id] = 1234
       create_user(id: 1234)
 
-      get :show
+      get :index
       assert_response :success
     end
   end
@@ -22,14 +22,14 @@ describe ReposController do
     end
 
     it 'gets the list of repos' do
-      get :show
+      get :index
       assert_not_nil assigns(:repos)
     end
 
     context 'loading repos status' do
 
       it 'refresh_button_caption should be \'Refresh Repos\' when not loading' do
-        get :show
+        get :index
         expect(assigns(:refresh_button_caption)).to eq('Refresh Repos')
       end
 
@@ -39,7 +39,7 @@ describe ReposController do
           user.save
         end
 
-        get :show
+        get :index
         expect(assigns(:refresh_button_caption)).to eq('Refreshing')
       end
     end

@@ -2,7 +2,7 @@ class ReposController < ApplicationController
   include ReposHelper
   before_filter :check_login
 
-  def show
+  def index
     @refresh_button_caption = user[:loading_repos] ? 'Refreshing' : 'Refresh Repos'
     @repo_book_ids = repo_book_ids(user[:id])
     @repos = Repo.where(user_id: user[:id]).order("pushed_at desc")
