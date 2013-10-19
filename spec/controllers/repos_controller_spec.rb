@@ -15,7 +15,7 @@ describe ReposController do
     end
   end
 
-  context '#show' do
+  context '#index' do
     before :each do
       session[:user_id] = 1234
       create_user(id: 1234)
@@ -27,6 +27,21 @@ describe ReposController do
     end
 
     context 'loading repos status' do
+
+      it 'sets are_repos_loading to false when not loading' do
+        get :index
+        expect(assigns(:are_repos_loading)).to eq(false)
+      end
+
+      it 'sets are_repos_loading to true when loading' do
+        User.find(1234).tap do |user|
+          user[:loading_repos] = true
+          user.save
+        end
+
+        get :index
+        expect(assigns(:are_repos_loading)).to eq(true)
+      end
 
       it 'refresh_button_caption should be \'Refresh Repos\' when not loading' do
         get :index

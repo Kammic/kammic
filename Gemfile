@@ -9,6 +9,8 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
 
+gem "font-awesome-rails"
+
 gem "lana", git:'git@github.com:Kammic/lana.git'
 gem "queue_classic", "~> 2.2"
 gem "octokit", '~> 2.0'

@@ -1,22 +1,22 @@
-<%= render 'load_repos_button' %>
+<%= load_repos_button @are_repos_loading, @refresh_button_caption %>
 <table class="table table-striped table-hover table-responsive table-condensed repo-list">
   <tr>
     <th>Repo Name</th>
     <th>Description</th>
     <th>Branch</th>
-    <th>Private</th>
-    <th></th>
+    <th>Visibility</th>
+    <th>Follow</th>
   </tr>
   <% @repos.each do |repo| %>
     <tr>
       <td class="no-wrap">
-        <%= repo.name %>
+        <%= link_to repo.name, repo.html_url %>
       </td>
       <td><%= repo.description %></td>
-      <td><%= repo.master_branch %></td>
-      <td><%= repo.private %></td>
+      <td class="centered"><%= repo.master_branch %></td>
+      <td class="centered"><%= repo_type repo.private %></td>
       <td>
-        <%= render 'follow_button', repo: repo, user: user, repo_book_ids: @repo_book_ids %>
+        <%= follow_button repo, user %>
       </td>
     </tr>
   <% end %>

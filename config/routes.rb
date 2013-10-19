@@ -9,7 +9,7 @@ Kammic::Application.routes.draw do
 
   scope 'repos' do
     get '/', to: 'repos#index', as: :repos
-    get '/:id/editor', to: 'editor#index',  as: :repo_editor
+    get '/:id/edit', to: 'editor#index',  as: :repo_editor
     get '/:id/build',  to: 'repos#build',   as: :repo_build
     get '/refresh',    to: 'repos#refresh', as: :refresh_repos
     get '/:id/follow', to: 'repos#follow', as: :follow

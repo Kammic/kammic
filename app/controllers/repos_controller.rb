@@ -3,7 +3,8 @@ class ReposController < ApplicationController
   before_filter :check_login
 
   def index
-    @refresh_button_caption = user[:loading_repos] ? 'Refreshing' : 'Refresh Repos'
+    @are_repos_loading      = user[:loading_repos]
+    @refresh_button_caption = @are_repos_loading ? 'Refreshing' : 'Refresh Repos'
     @repo_book_ids = repo_book_ids(user[:id])
     @repos = Repo.where(user_id: user[:id]).order("pushed_at desc")
   end
