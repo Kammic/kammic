@@ -44,6 +44,16 @@ describe User do
     end
   end
 
+  context '#queue_update_repos_from_github' do
+    it 'calls Github::RepoQueue.queue_update' do
+      stub_const("Github::RepoQueue", double("Github::RepoQueue"))
+      Github::RepoQueue.should_receive(:queue_update).with(42)
+
+      create_user(id: 42)
+      User.find_by_id(42).queue_update_repos_from_github
+    end
+  end
+
   context '#find_with_omniauth' do
     it 'finds the user with uid' do
       create_user(id: 123, uid: 'omniauth_user')

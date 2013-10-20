@@ -45,6 +45,6 @@ class User < ActiveRecord::Base
   end
 
   def queue_update_repos_from_github
-    QC.enqueue("Github::RepoQueue.update_from_github", self.id)
+    Github::RepoQueue.queue_update self.id
   end
 end

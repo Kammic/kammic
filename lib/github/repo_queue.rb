@@ -1,6 +1,11 @@
 module Github
   class RepoQueue
     class << self
+      
+      def queue_update(user_id)
+        QC.enqueue("Github::RepoQueue.update_from_github", user_id)
+      end
+
       def update_from_github(user_id)
         user = User.find_by_id(user_id)
         return false unless user && user.auth_token

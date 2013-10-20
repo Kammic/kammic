@@ -7,6 +7,15 @@ describe Github::RepoQueue do
     create_user(uid: 'user', auth_token: 'some_token', id: 42)
   end
 
+  context '#queue_update' do
+    it 'calls enqueue on QC' do
+      stub_const("QC", double("QC"))
+      QC.should_receive(:enqueue).with("Github::RepoQueue.update_from_github", 42)
+
+      subject.queue_update 42
+    end
+  end
+
   context 'user#loading_repos' do
     it 'sets the loading_repos param to false once done' do
       User.find(42).tap {|user| user[:loading_repos] = true}
