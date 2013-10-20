@@ -1,5 +1,13 @@
 module BooksHelper
 
+  def edit_book_button(book)
+    render 'edit_book_button', path: repo_editor_path(book.repo[:name])
+  end
+
+  def unfollow_button(book)
+    render 'unfollow_button', path: book_path(book)
+  end
+
   def book_pages(pages)
     render 'book_pages', pages: pages
   end
