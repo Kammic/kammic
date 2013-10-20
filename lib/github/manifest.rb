@@ -13,9 +13,10 @@ module Github
         book = Book.includes(:repo).find_by_id(book_id)
         return false unless book && book.repo
 
-        manifest    = retrieve_manifest(book.repo[:full_name], 'manifest.yml')
-        hash        = clean_hash(hash_from_content(manifest)) || {}
-        hash[:book] = book
+        manifest     = retrieve_manifest(book.repo[:full_name], 'manifest.yml')
+        hash         = clean_hash(hash_from_content(manifest))
+        hash[:book]  = book
+        hash[:pages] = hash[:pages].to_s if hash[:pages]
 
         ::Manifest.delete(::Manifest.find_by_book_id(book[:id]))
         ::Manifest.create(hash)
@@ -23,17 +24,7 @@ module Github
       end
 
       def clean_hash(hash)
-        hash         = hash.with_indifferent_access
-        clean_hash   = {}.with_indifferent_access
-        allowed_keys = ::Manifest.new.attributes.keys
-        allowed_keys.each do |key|
-          if key == 'pages'
-            clean_hash[key] = hash[key].to_s
-          else
-            clean_hash[key] = hash[key]
-          end
-        end
-        clean_hash
+        Kammic::HashCleaner.clean(hash, ::Manifest.new.attributes.keys) || {}
       end
 
       def hash_from_content(content)
