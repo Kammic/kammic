@@ -1,7 +1,7 @@
 module Github
   class RepoQueue
     class << self
-      
+
       def queue_update(user_id)
         QC.enqueue("Github::RepoQueue.update_from_github", user_id)
       end
@@ -14,8 +14,8 @@ module Github
         github_repos.each do |github_repo|
           create_from_hash github_repo, user_id
         end
-        user[:loading_repos] = false
-        user.save
+
+        user.is_loading_repos(false)
       end
 
       private

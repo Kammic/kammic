@@ -19,6 +19,7 @@ class Book < ActiveRecord::Base
   has_one :manifest
 
   def is_loading(value)
+    self.reload
     self.loading_manifest = value
     self.save
   end

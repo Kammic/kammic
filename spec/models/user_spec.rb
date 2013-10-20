@@ -18,6 +18,23 @@
 require 'spec_helper'
 
 describe User do
+
+  context '#is_loading_repos' do
+    it 'updates :loading_repos to the right value' do
+      create_user(id: 42)
+
+      user = User.find(42)
+      user.is_loading_repos(false)
+
+      user.reload
+      expect(user.loading_repos).to eq(false)
+
+      user.is_loading_repos(true)
+      user.reload
+      expect(user.loading_repos).to eq(true)
+    end
+  end
+
   context '#create_with_omniauth' do
     it 'creates a user with a given auth hash' do
       auth = {

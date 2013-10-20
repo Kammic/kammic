@@ -23,6 +23,12 @@ class User < ActiveRecord::Base
   validates_presence_of   :uid, :provider, :name, :auth_token
   validates_uniqueness_of :uid
 
+  def is_loading_repos(value)
+    self.reload
+    self.loading_repos = value
+    self.save
+  end
+
   def self.create_with_omniauth(auth = {})
     return nil unless auth
     user       = User.new

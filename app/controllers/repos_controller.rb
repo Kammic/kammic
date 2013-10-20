@@ -3,16 +3,17 @@ class ReposController < ApplicationController
   before_filter :check_login
 
   def index
+    user = current_user
     @are_repos_loading      = user[:loading_repos]
     @refresh_button_caption = @are_repos_loading ? 'Refreshing' : 'Refresh Repos'
     @repo_book_ids = repo_book_ids(user[:id])
-    @repos = Repo.where(user_id: user[:id]).order("pushed_at desc")
+    @repos = Repo.where(user: user).order("pushed_at desc")
   end
 
   def refresh
+    user = current_user
     user.queue_update_repos_from_github
-    user[:loading_repos] = true
-    user.save
+    user.is_loading_repos(true)
 
     redirect_to repos_path
   end
