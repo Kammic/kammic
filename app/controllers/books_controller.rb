@@ -2,8 +2,15 @@ class BooksController < ApplicationController
   before_filter :check_login
 
   def refresh
-    Github::Manifest.enqueue_update params[:book_id]
-    redirect_to book_path(params[:book_id])
+    book = Book.find_by_id(params[:book_id])
+    if book
+      Github::Manifest.enqueue_update book[:id]
+      book[:loading_manifest] = true
+      book.save
+      redirect_to book_path(book)
+    else
+      render nothing: true, status: 404
+    end
   end
 
   def index

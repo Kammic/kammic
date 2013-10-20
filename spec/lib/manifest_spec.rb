@@ -31,6 +31,19 @@ describe Github::Manifest do
       Book.create!(id: 1234, repo_id: 42, user_id: 1234)
     end
 
+    it 'sets book[:loading_manifest] to false when refreshed' do
+      book = Book.find_by_id(1234)
+      book[:loading_manifest] = true
+      book.save
+
+      contents = OpenStruct.new(content: Base64.encode64(read_fixture))
+      Octokit.stub(:contents).and_return contents
+
+      subject.update_from_github(1234)
+      book.reload
+      expect(book[:loading_manifest]).to eq(false)
+    end
+
     it 'returns false if the book doesn\'t exist' do
       expect(subject.update_from_github(12345)).to eq(false)
     end

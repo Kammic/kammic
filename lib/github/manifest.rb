@@ -19,6 +19,8 @@ module Github
 
         ::Manifest.delete(::Manifest.find_by_book_id(book[:id]))
         ::Manifest.create(hash)
+        book[:loading_manifest] = false
+        book.save
       end
 
       def clean_hash(hash)

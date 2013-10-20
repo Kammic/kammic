@@ -30,15 +30,19 @@ describe BooksController do
     end
 
     it 'calls Github::Manifest.enqueue_update' do
-      Github::Manifest.should_receive(:enqueue_update).with('55')
+      Github::Manifest.should_receive(:enqueue_update).with(55)
       get :refresh, book_id: 55
     end
 
-    xit 'sets User#loading_repos to true' do
-      get :refresh
-      expect(User.find(1234)[:loading_repos]).to eq(true)
+    it 'sets the loading_manifest to true' do
+      get :refresh, book_id: 55
+      expect(Book.find_by_id(55)[:loading_manifest]).to eq(true)
     end
 
+    it 'gives 404 if book is not found' do
+      get :refresh, book_id: 199
+      assert_response :missing
+    end
   end
 
   describe '#show' do

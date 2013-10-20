@@ -2,7 +2,7 @@
   <div class="col-sm-9">
     <div class="row">
       <div class="col-sm-5">
-        <%= image_tag 'http://placehold.it/250x350', class:'thumbnail' %>
+        <%= book_image(@book) %>
       </div>
       <div class="col-sm-7">
         <div class="page-header">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-    <%= link_to 'Refresh from Github', book_refresh_path(@book), class: "btn btn-primary btn-sm pull-right refresh-button btn-primary" %>
+    <%= refresh_manifest_button(@book) %>
   </div>
 
 </div>
