@@ -2,9 +2,9 @@ class CreateManifests < ActiveRecord::Migration
   def up
     enable_extension "hstore"
     create_table :manifests do |t|
-      t.string :title
-      t.string :cover_image
-      t.hstore :pages, array: true
+      t.string  :title
+      t.string  :cover_image
+      t.hstore  :pages
       t.integer :book_id
       t.timestamps
     end

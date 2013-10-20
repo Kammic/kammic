@@ -16,6 +16,31 @@ describe BooksController do
     end
   end
 
+  describe '#refresh' do
+    before do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+
+      create_repo("user" => User.find(1234))
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+    end
+
+    it 'redirects you back to the book path' do
+      expect(get :refresh, book_id: 55).to redirect_to book_path(55)
+    end
+
+    it 'calls Github::Manifest.enqueue_update' do
+      Github::Manifest.should_receive(:enqueue_update).with('55')
+      get :refresh, book_id: 55
+    end
+
+    xit 'sets User#loading_repos to true' do
+      get :refresh
+      expect(User.find(1234)[:loading_repos]).to eq(true)
+    end
+
+  end
+
   describe '#show' do
     before do
       session[:user_id] = 1234
@@ -23,6 +48,7 @@ describe BooksController do
 
       create_repo("user" => User.find(1234))
       Book.create!(id: 55, user_id: 1234, repo_id: 42)
+      Manifest.create!(book_id: 55, title: 'something')
     end
 
     it '404s when book is not present' do
@@ -39,8 +65,8 @@ describe BooksController do
       get :show, id: 55
 
       book = assigns(:book)
-      expect(book.repo).to_not be_nil
-      # expect(book.manifest).to_not be_nil
+      expect(assigns(:book).manifest).to_not be_nil
+      expect(assigns(:book).repo).to_not be_nil
     end
   end
  

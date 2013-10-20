@@ -15,5 +15,8 @@ Kammic::Application.routes.draw do
     get '/:id/follow', to: 'repos#follow',  as: :follow
   end
 
-  resources :books, only: [:index, :destroy, :show]
+  resources :books, only: [:index, :destroy, :show] do
+    get '/refresh', to: 'books#refresh', as: :refresh
+  end
+
 end

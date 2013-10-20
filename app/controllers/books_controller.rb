@@ -1,8 +1,13 @@
 class BooksController < ApplicationController
   before_filter :check_login
 
+  def refresh
+    Github::Manifest.enqueue_update params[:book_id]
+    redirect_to book_path(params[:book_id])
+  end
+
   def index
-    @books = Book.includes(:repo).where(user: user)
+    @books = Book.includes(:repo, :manifest).where(user: user)
     @books = @books.keep_if {|book| book.repo && book.repo[:name]}
   end
 
@@ -12,7 +17,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.includes(:repo).find_by_id(params[:id])
+    @book  = Book.includes(:repo, :manifest).find_by_id(params[:id])
     render nothing: true, status: 404 unless @book
   end
 end

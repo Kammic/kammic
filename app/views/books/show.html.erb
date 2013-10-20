@@ -1,15 +1,22 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-      <ul class="nav nav-tabs nav-stacked">
-        <li class="active"><a href="#">Home</a></li>
-        <li class=""><a href="#">Home</a></li>
-        <li class=""><a href="#">Home</a></li>
-        <li class=""><a href="#">Home</a></li>
-      </ul>
-    </div>
-    <div class="span10">
-      <!--Body content-->
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col-sm-5">
+        <%= image_tag 'http://placehold.it/250x350', class:'thumbnail' %>
+      </div>
+      <div class="col-sm-7">
+        <div class="row"
+          <h1><%= @book.manifest.title %></h1>
+        </div>
+        <div class="row">
+        <%= @book.manifest.pages %>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+    <%= link_to 'Refresh from Github', book_refresh_path(@book), class: "btn btn-primary btn-sm pull-right refresh-button btn-primary" %>
+  </div>
+
 </div>

@@ -2,14 +2,14 @@ module ReposHelper
 
   def repo_type(is_private)
     caption = is_private ? 'Private' : 'Public'
-    button_type = is_private ? 'btn-warning' : 'btn-success'
-    render 'private_label', caption: caption, button_type: button_type
+    label_type = is_private ? 'label-warning' : 'label-success'
+    render 'private_label', caption: caption, label_type: label_type
   end
 
   def follow_button(repo, user)
     repo_book_ids = repo_book_ids(user[:id])
     css_class     = follow_button_class(repo_book_ids.include? repo[:id])
-    button_type   = repo_book_ids.include?(repo[:id]) ? 'btn-info' : 'btn-success'
+    button_type   = repo_book_ids.include?(repo[:id]) ? 'btn-info' : 'btn-primary'
     path          = follow_path(repo[:id])
     render 'follow_button', path: path, css_class: css_class, button_type: button_type
   end
