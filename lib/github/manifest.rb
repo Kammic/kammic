@@ -28,7 +28,11 @@ module Github
         clean_hash   = {}.with_indifferent_access
         allowed_keys = ::Manifest.new.attributes.keys
         allowed_keys.each do |key|
-          clean_hash[key] = hash[key] if hash[key]
+          if key == 'pages'
+            clean_hash[key] = hash[key].to_s
+          else
+            clean_hash[key] = hash[key]
+          end
         end
         clean_hash
       end

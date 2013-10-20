@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20131020020957) do
   create_table "manifests", force: true do |t|
     t.string   "title"
     t.string   "cover_image"
-    t.hstore   "pages"
+    t.text     "pages"
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -4,7 +4,7 @@ class CreateManifests < ActiveRecord::Migration
     create_table :manifests do |t|
       t.string  :title
       t.string  :cover_image
-      t.hstore  :pages
+      t.text    :pages
       t.integer :book_id
       t.timestamps
     end

@@ -14,5 +14,8 @@
 require 'spec_helper'
 
 describe Manifest do
-
+  it 'converts pages to a hash' do
+    manifest = Manifest.new(pages: "{something_true: '1234'}")
+    expect(manifest.pages["something_true"]).to eq('1234')
+  end
 end

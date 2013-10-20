@@ -10,7 +10,12 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #
+require 'json'
 
 class Manifest < ActiveRecord::Base
   belongs_to :book
+
+  def pages
+    (eval(self[:pages])).with_indifferent_access
+  end
 end

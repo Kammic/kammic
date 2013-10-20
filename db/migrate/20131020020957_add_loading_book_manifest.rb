@@ -1,6 +1,6 @@
 class AddLoadingBookManifest < ActiveRecord::Migration
   def up
-    add_column :books, :loading_manifest, :boolean, default:false
+    add_column :books, :loading_manifest, :boolean, default: false
   end
 
   def down

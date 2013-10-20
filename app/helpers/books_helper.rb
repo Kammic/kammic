@@ -1,5 +1,9 @@
 module BooksHelper
 
+  def book_pages(pages)
+    render 'book_pages', pages: pages
+  end
+
   def book_image(book)
     render 'book_image', image: book_image_url(book)
   end
@@ -12,6 +16,32 @@ module BooksHelper
   end
 
   private
+
+  def table_of_contents(page, value, indent = 0)
+    output = ""
+    if value.kind_of? Hash
+      value.each do |k, v|
+        output << render('book_page', title: page, path: '#', indent: indent)
+        output << table_of_contents(k, v, indent+1)
+      end
+    else
+      output << render('book_page', title: page, path: value, indent: indent)
+    end
+    # if pages.kind_of? Array
+    #   pages.each do |page, value|
+    #     if value.kind_of? Hash
+    #       # output << '-' + render('book_page', title: page, path: value, indent: 1)
+    #       table_of_contents value
+    #     else
+    #       output << render('book_page', title: page, path: value, indent: 1)
+    #     end
+    #   end
+    # else
+    #   # output << debug(pages)
+    #   output << render('book_page', title: pages.first, path: pages.last, indent: 1)
+    # end
+    output.html_safe
+  end
 
   def book_image_url(book)
     if book.manifest.cover_image

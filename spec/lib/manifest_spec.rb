@@ -16,7 +16,7 @@ describe Github::Manifest do
 
   context '#clean_hash' do
     it 'returns only allowed attributes in Repo' do
-      dirty_hash = {id:1235, title: 'xyz', something_else: false}
+      dirty_hash = {id: 1235, title: 'xyz', something_else: false}
       clean_hash = subject.clean_hash(dirty_hash)
       expect(clean_hash[:id]).to eq(1235)
       expect(clean_hash[:title]).to eq('xyz')
