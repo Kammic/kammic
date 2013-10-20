@@ -2,11 +2,11 @@ require 'base64'
 require 'yaml'
 
 module Github
-  class Manifest
+  class ManifestQueue
     class << self
 
       def enqueue_update(book_id)
-        QC.enqueue("Github::Manifest.update_from_github", book_id)
+        QC.enqueue("Github::ManifestQueue.update_from_github", book_id)
       end
 
       def update_from_github(book_id)
@@ -18,13 +18,13 @@ module Github
         hash[:book]  = book
         hash[:pages] = hash[:pages].to_s if hash[:pages]
 
-        ::Manifest.delete(::Manifest.find_by_book_id(book[:id]))
-        ::Manifest.create(hash)
+        Manifest.delete(Manifest.find_by_book_id(book[:id]))
+        Manifest.create(hash)
         book.is_loading(false)
       end
 
       def clean_hash(hash)
-        Kammic::HashCleaner.clean(hash, ::Manifest.new.attributes.keys) || {}
+        Kammic::HashCleaner.clean(hash, Manifest.new.attributes.keys) || {}
       end
 
       def hash_from_content(content)

@@ -29,8 +29,8 @@ describe BooksController do
       expect(get :refresh, book_id: 55).to redirect_to book_path(55)
     end
 
-    it 'calls Github::Manifest.enqueue_update' do
-      Github::Manifest.should_receive(:enqueue_update).with(55)
+    it 'calls Github::ManifestQueue.enqueue_update' do
+      Github::ManifestQueue.should_receive(:enqueue_update).with(55)
       get :refresh, book_id: 55
     end
 

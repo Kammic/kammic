@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Github::Manifest do
-  let(:subject) { Github::Manifest }
+describe Github::ManifestQueue do
+  let(:subject) { Github::ManifestQueue }
 
   def read_fixture(path = 'manifest.yml')
     File.read("spec/fixtures/yaml/#{path}")
@@ -9,7 +9,7 @@ describe Github::Manifest do
 
   context '#enqueue_update' do
     it 'calls enqueue with the correct args' do
-      QC.should_receive(:enqueue).with("Github::Manifest.update_from_github", 21)
+      QC.should_receive(:enqueue).with("Github::ManifestQueue.update_from_github", 21)
       subject.enqueue_update 21
     end
   end

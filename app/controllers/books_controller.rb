@@ -29,7 +29,7 @@ class BooksController < ApplicationController
 
   private
   def queue_update(book)
-    Github::Manifest.enqueue_update book[:id]
+    Github::ManifestQueue.enqueue_update book[:id]
     book.is_loading(true)
     redirect_to book_path(book)
   end
