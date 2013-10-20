@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   helper_attr :user
 
   private
+  def render_nothing(status)
+    render nothing: true, status: 404
+  end
+  
   def user
     @user ||= current_user
   end

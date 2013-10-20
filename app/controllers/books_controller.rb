@@ -3,14 +3,7 @@ class BooksController < ApplicationController
 
   def refresh
     book = Book.find_by_id(params[:book_id])
-    if book
-      Github::Manifest.enqueue_update book[:id]
-      book[:loading_manifest] = true
-      book.save
-      redirect_to book_path(book)
-    else
-      render nothing: true, status: 404
-    end
+    book ? queue_update(book) : render_nothing(404)
   end
 
   def index
@@ -24,7 +17,20 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book  = Book.includes(:repo, :manifest).find_by_id(params[:id])
-    render nothing: true, status: 404 unless @book
+    @book  = Book.find_by_id(params[:id])
+    if @book && @book.manifest
+      render :show
+    elsif @book
+      render :refreshing
+    else
+      render_nothing 404
+    end
+  end
+
+  private
+  def queue_update(book)
+    Github::Manifest.enqueue_update book[:id]
+    book.is_loading(true)
+    redirect_to book_path(book)
   end
 end

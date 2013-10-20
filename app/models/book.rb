@@ -17,4 +17,9 @@ class Book < ActiveRecord::Base
   belongs_to :user
 
   has_one :manifest
+
+  def is_loading(value)
+    self.loading_manifest = value
+    self.save
+  end
 end

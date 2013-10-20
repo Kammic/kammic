@@ -27,19 +27,6 @@ module BooksHelper
     else
       output << render('book_page', title: page, path: value, indent: indent)
     end
-    # if pages.kind_of? Array
-    #   pages.each do |page, value|
-    #     if value.kind_of? Hash
-    #       # output << '-' + render('book_page', title: page, path: value, indent: 1)
-    #       table_of_contents value
-    #     else
-    #       output << render('book_page', title: page, path: value, indent: 1)
-    #     end
-    #   end
-    # else
-    #   # output << debug(pages)
-    #   output << render('book_page', title: pages.first, path: pages.last, indent: 1)
-    # end
     output.html_safe
   end
 
