@@ -36,7 +36,8 @@ describe Github::Manifest do
     end
 
     it 'updates the info of a manifest record from github' do
-      Octokit.stub(:contents).and_return OpenStruct.new(content: Base64.encode64(read_fixture))
+      contents = OpenStruct.new(content: Base64.encode64(read_fixture))
+      Octokit.stub(:contents).and_return contents
 
       subject.update_from_github(1234)
       expect(::Manifest.count).to eq(1)
@@ -47,7 +48,8 @@ describe Github::Manifest do
       Manifest.create!(book_id: 1234, id: 99)
       expect(::Manifest.count).to eq(1)
 
-      Octokit.stub(:contents).and_return OpenStruct.new(content: Base64.encode64(read_fixture))
+      contents = OpenStruct.new(content: Base64.encode64(read_fixture))
+      Octokit.stub(:contents).and_return contents
 
       subject.update_from_github(1234)
       expect(::Manifest.count).to eq(1)
@@ -64,7 +66,8 @@ describe Github::Manifest do
 
   context '#retrieve_manifest' do
     it 'it decodes the base64 to normal content' do
-      Octokit.stub(:contents).and_return OpenStruct.new(content: Base64.encode64('test'))
+      contents = OpenStruct.new(content: Base64.encode64('test'))
+      Octokit.stub(:contents).and_return contents
 
       content = subject.retrieve_manifest("ortuna/progit-bana", 'manifest.yml')
       expect(content).to eq('test')

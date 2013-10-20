@@ -13,21 +13,18 @@ module Github
         book = Book.includes(:repo).find_by_id(book_id)
         return false unless book && book.repo
 
-        manifest = retrieve_manifest(book.repo[:full_name], 'manifest.yml')
-
-        yaml = hash_from_content(manifest)
-        yaml = {} unless yaml
-        hash        = clean_hash(yaml)
+        manifest    = retrieve_manifest(book.repo[:full_name], 'manifest.yml')
+        hash        = clean_hash(hash_from_content(manifest)) || {}
         hash[:book] = book
 
-        manifest_const.delete(manifest_const.find_by_book_id(book[:id]))
-        manifest_const.create(hash)
+        ::Manifest.delete(::Manifest.find_by_book_id(book[:id]))
+        ::Manifest.create(hash)
       end
 
       def clean_hash(hash)
         hash         = hash.with_indifferent_access
         clean_hash   = {}.with_indifferent_access
-        allowed_keys = manifest_const.new.attributes.keys
+        allowed_keys = ::Manifest.new.attributes.keys
         allowed_keys.each do |key|
           clean_hash[key] = hash[key] if hash[key]
         end
@@ -43,9 +40,6 @@ module Github
       end
 
       private
-      def manifest_const
-        ::Manifest
-      end
 
       def decode(encoded)
         Base64.decode64(encoded)
