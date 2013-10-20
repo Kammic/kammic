@@ -17,6 +17,7 @@ gem "octokit", '~> 2.0'
 gem "pg"
 
 group :development, :test do
+  gem 'annotate'
   gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'

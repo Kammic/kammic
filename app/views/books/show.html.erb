@@ -5,11 +5,11 @@
         <%= image_tag 'http://placehold.it/250x350', class:'thumbnail' %>
       </div>
       <div class="col-sm-7">
-        <div class="row"
+        <div class="page-header">
           <h1><%= @book.manifest.title %></h1>
         </div>
         <div class="row">
-        <%= @book.manifest.pages %>
+          <%= @book.manifest.pages %>
         </div>
       </div>
     </div>
