@@ -19,4 +19,6 @@ Kammic::Application.routes.draw do
     get '/refresh', to: 'books#refresh', as: :refresh
   end
 
+  resources :builds, only: [:index, :show]
+
 end

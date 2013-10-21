@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BooksController do
-  describe 'filters' do
+  context 'filters' do
     it 'should forbid without login' do
       get :index 
       assert_response :forbidden
@@ -16,7 +16,7 @@ describe BooksController do
     end
   end
 
-  describe '#refresh' do
+  context '#refresh' do
     before do
       session[:user_id] = 1234
       create_user(id: 1234)
@@ -45,7 +45,7 @@ describe BooksController do
     end
   end
 
-  describe '#show' do
+  context '#show' do
     before do
       session[:user_id] = 1234
       create_user(id: 1234)
@@ -74,7 +74,7 @@ describe BooksController do
     end
   end
  
-  describe '#index' do
+  context '#index' do
     before do
       session[:user_id] = 1234
       create_user(id: 1234)

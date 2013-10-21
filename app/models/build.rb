@@ -17,4 +17,6 @@
 #
 
 class Build < ActiveRecord::Base
+  belongs_to :book
+  has_one :user, through: :book
 end

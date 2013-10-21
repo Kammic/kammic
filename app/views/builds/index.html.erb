@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover table-responsive table-condensed">
+  <tr>
+    <th>#</th>
+    <th>Book</th>
+    <th>Branch</th>
+    <th>Revision</th>
+    <th>Commit Message</th>
+    <th>Author</th>
+    <th>Started</th>
+    <th>Ended</th>
+    <th>Status</th>
+  </tr>
+  <% @builds.each do |build| %>
+  <tr>
+    <td> <%= build.id %> </td>
+    <td> <%= build.book.repo.name %> </td>
+    <td> <%= build.book.repo.master_branch %> </td>
+    <td> <%= build.revision && build.revision[1..10] %> </td>
+    <td> <%= build.commit_message %> </td>
+    <td> <%= build.author %> </td>
+    <td> <%= build.started_at %> </td>
+    <td> <%= build.ended_at %> </td>
+    <td> <%= build_status(build.status) %> </td>
+  </tr>
+  <% end %>
+</table>
