@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string(255)
 #  cover_image :string(255)
-#  pages       :hstore
+#  pages       :text
 #  book_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime

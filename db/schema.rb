@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020020957) do
+ActiveRecord::Schema.define(version: 20131021003431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20131020020957) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "loading_manifest", default: false
+  end
+
+  create_table "builds", force: true do |t|
+    t.string   "status"
+    t.string   "branch"
+    t.string   "commit_message"
+    t.string   "author"
+    t.string   "revision"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.hstore   "assets"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "manifests", force: true do |t|
