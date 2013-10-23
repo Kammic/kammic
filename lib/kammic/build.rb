@@ -9,9 +9,7 @@ module Kammic
       end
 
       def update(build_id)
-        build = ::Build.find_by_id(build_id)
-        build.update_attributes(last_commit_info(build[:book_id]))
-        build.save
+        update_with_commit_info(build_id)
         QC.enqueue("Kammic::Build.execute", build_id)
       end
 
@@ -27,8 +25,14 @@ module Kammic
       end
 
       private
+      def update_with_commit_info(build_id)
+        build = ::Build.find_by_id(build_id)
+        build.update_attributes(last_commit_info(build[:book_id]))
+        build.save
+      end
+
       def build_book(book)
-        some_method
+        # some_method
       end
 
       def last_commit_info(book_id)
