@@ -14,6 +14,8 @@ gem "font-awesome-rails"
 gem "lana", git:'git@github.com:Kammic/lana.git'
 gem "queue_classic", "~> 2.2"
 gem "octokit", '~> 2.0'
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap', '~> 1.0'
 gem "pg"
 
 group :development, :test do
