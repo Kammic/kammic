@@ -1,5 +1,9 @@
 module BooksHelper
 
+  def build_button(book)
+    render 'build_button', path: book_queue_build_path(book)
+  end
+
   def edit_book_button(book)
     render 'edit_book_button', path: repo_editor_path(book.repo[:name])
   end

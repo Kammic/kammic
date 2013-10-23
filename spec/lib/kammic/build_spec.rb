@@ -57,7 +57,7 @@ describe Kammic::Build do
     it 'updates the builds commit info' do
       Kammic::Build.update(1234)
 
-      build = Build.find_by_book_id(1234)
+      build = ::Build.find_by_book_id(1234)
       expect(build[:revision]).to eq('1234')
       expect(build[:author]).to eq('User')
       expect(build[:commit_message]).to eq('the commit')
@@ -68,6 +68,15 @@ describe Kammic::Build do
 
     it 'returns false when the book is not found' do
       expect(Kammic::Build.execute(11111)).to eq(false)
+    end
+
+    it 'marks the build failed if build errors' do
+      ::Build.create!(book_id: 1234, status: 'created', started_at: Time.now)
+      Kammic::Build.stub(:build_book).and_raise(Exception)
+
+      Kammic::Build.execute(1234)
+      build = ::Build.find_by_book_id(1234)
+      expect(build[:status]).to eq('failed')
     end
 
     it 'marks a build completed at the end' do

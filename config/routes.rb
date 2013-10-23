@@ -17,8 +17,11 @@ Kammic::Application.routes.draw do
 
   resources :books, only: [:index, :destroy, :show] do
     get '/refresh', to: 'books#refresh', as: :refresh
+    get '/queue_build',   to: 'books#queue'
   end
 
   resources :builds, only: [:index, :show]
+
+
 
 end

@@ -2,9 +2,8 @@ class BuildsController < ApplicationController
   before_filter :check_login
   
   def index
-    @builds = user_builds(user[:id])
+    @builds = user_builds(user[:id]).order("started_at desc")
   end
-
 
   private
   def user_builds(user_id)

@@ -6,8 +6,8 @@ class CreateBuilds < ActiveRecord::Migration
       t.string   :commit_message
       t.string   :author
       t.string   :revision
-      t.datetime :started_at
-      t.datetime :ended_at
+      t.timestamp :started_at
+      t.timestamp :ended_at
       t.hstore   :assets
       t.integer  :book_id
       t.timestamps

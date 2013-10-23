@@ -19,11 +19,18 @@ module Kammic
         book = find_book(book_id)
         return false unless book
 
-        build = ::Build.where(status: :created, book_id: book[:id]).first
+        build = ::Build.where(status: :created, book_id: book_id).first
+        build_book(book_id)
         complete_build(build)
+      rescue Exception => e
+        fail_build(build)
       end
 
       private
+      def build_book(book_id)
+        # some_method
+      end
+
       def last_commit_info(book_id)
         book = find_book(book_id)
         last_commit = Octokit.commits(book.repo.full_name).last
@@ -31,6 +38,13 @@ module Kammic
          revision:       last_commit.sha,
          commit_message: last_commit.commit.message,
          branch:         'master'}
+      end
+
+      def fail_build(build)
+        build.reload
+        build.status   = :failed
+        build.ended_at = Time.now
+        build.save
       end
 
       def complete_build(build)

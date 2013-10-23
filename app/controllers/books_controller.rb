@@ -26,8 +26,23 @@ class BooksController < ApplicationController
       render_nothing 404
     end
   end
+  
+  def queue
+    book = Book.find_by_id(params[:book_id])
+    if book
+      queue_build(params[:book_id])
+      redirect_to book_path(params[:book_id])
+    else
+      render nothing: true, status: 404
+    end
+  end
 
   private
+
+  def queue_build(book_id)
+    Kammic::Build.queue(book_id)
+  end
+
   def queue_update(book)
     Github::ManifestQueue.enqueue_update book[:id]
     book.is_loading(true)

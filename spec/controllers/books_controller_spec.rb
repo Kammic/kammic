@@ -16,6 +16,32 @@ describe BooksController do
     end
   end
 
+  context '#queue' do
+    before do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+
+      create_repo("user" => User.find(1234))
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+      stub_const "Kammic::Build", double("Kammic::Build").as_null_object
+    end
+
+    it 'returns missing when book is not found' do
+      get :queue, book_id: 123544
+      assert_response :missing
+    end
+
+    it 'calls queue on Kammic::Build with the books id' do
+      Kammic::Build.should_receive(:queue).with('55')
+      get :queue, book_id: 55
+    end
+
+    it 'should redirect after queueing the build' do
+      get :queue, book_id: 55
+      assert_response :redirect
+    end
+  end
+
   context '#refresh' do
     before do
       session[:user_id] = 1234
