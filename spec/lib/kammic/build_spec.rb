@@ -66,14 +66,21 @@ describe Kammic::Build do
   end
 
   context '#execute' do
+    def default_hash
+      {id: 98, book_id: 1234, status: 'created', started_at: Time.now}
+    end
 
     it 'returns false when the book is not found' do
-      ::Build.create!(id: 98, book_id: 11111, status: 'created', started_at: Time.now)
+      ::Build.create!({id:         98, 
+                       book_id:    1,
+                       status:     'created',
+                       started_at: Time.now})
+
       expect(Kammic::Build.execute(98)).to eq(false)
     end
 
     it 'marks the build failed if build errors' do
-      ::Build.create!(id: 98, book_id: 1234, status: 'created', started_at: Time.now)
+      ::Build.create! default_hash
       Kammic::Build.stub(:build_book).and_raise(Exception)
 
       Kammic::Build.execute(98)
@@ -82,8 +89,7 @@ describe Kammic::Build do
     end
 
     it 'marks a build completed at the end' do
-      ::Build.create!(id: 98, book_id: 1234, status: 'created', started_at: Time.now)
-
+      ::Build.create! default_hash
       Kammic::Build.execute(98)
 
       build = ::Build.find_by_book_id(1234)
