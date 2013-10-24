@@ -17,7 +17,9 @@
           </a>
         </li>
       <% else %>
-        <li><a href="#">Login via Github</a></li>
+        <li>
+          <%= link_to raw("#{fa_icon('github')} Github Auth"), '#' %>
+        </li>
       <% end %>
     </ul>
   </div>

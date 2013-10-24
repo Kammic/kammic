@@ -8,7 +8,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
-
+gem 'turbolinks'
 gem "font-awesome-rails", '~> 4.0'
 
 gem "lana", git:'git@github.com:Kammic/lana.git'
