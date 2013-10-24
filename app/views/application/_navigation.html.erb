@@ -2,18 +2,18 @@
     <ul class="nav navbar-nav navbar-right">
       <% if user %>
         <li>
-          <%= link_to 'Books', books_path %>
+          <%= link_to raw("#{fa_icon('book')} Books"), books_path %>
         </li>
         <li>
-          <%= link_to 'Repos', repos_path %>
+          <%= link_to raw("#{fa_icon('code-fork')} Repos"), repos_path %>
         </li>
         <li>
-          <%= link_to 'Builds', builds_path %>
+          <%= link_to raw("#{fa_icon('cogs')} Builds"), builds_path %>
         </li>
         <li>
           <a href="#">
-            <%= user.login %>
             <%= image_tag user.image_url, class: 'avatar' %>
+            <%= user.login %>
           </a>
         </li>
       <% else %>
