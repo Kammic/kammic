@@ -17,7 +17,7 @@
         <%= book.repo.description %>
       </td>
       <td class="centered">
-        <%= link_to 'Editor', repo_editor_path(book.repo[:name]), class: 'btn btn-primary btn-xs' %>
+        <%= link_to 'Editor', repo_editor_path(book.repo[:name]), class: 'btn btn-primary btn-xs', 'data-no-turbolink' => true %>
         <%= link_to 'Unfollow', book_path(book), method: :delete , class: 'btn btn-danger btn-xs'  %>
       </td>
     </tr>

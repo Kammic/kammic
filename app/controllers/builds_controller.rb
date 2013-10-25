@@ -3,7 +3,6 @@ class BuildsController < ApplicationController
   
   def index
     @builds = user_builds(user[:id])
-                  .order("started_at desc")
                   .paginate(:page => params[:page], :per_page => 25)
   end
 

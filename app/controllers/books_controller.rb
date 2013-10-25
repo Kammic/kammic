@@ -17,8 +17,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book  = Book.find_by_id(params[:id])
+    @book   = Book.find_by_id(params[:id])
     if @book && @book.manifest
+      @builds = Build.where(book: @book)
+                     .paginate(:page => params[:page], :per_page => 5)
       render :show
     elsif @book
       render :refreshing

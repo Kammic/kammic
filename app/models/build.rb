@@ -19,6 +19,7 @@
 class Build < ActiveRecord::Base
   belongs_to :book
   has_one :user, through: :book
-
   validates_presence_of   :book_id
+
+  default_scope { order("started_at desc") }
 end

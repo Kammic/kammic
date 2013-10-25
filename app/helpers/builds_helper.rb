@@ -12,6 +12,6 @@ module BuildsHelper
                 else
                   'label-danger'
                 end
-    render 'build_status_label', status: build_status, label_type: label_type
+    render 'shared/builds/build_status_label', status: build_status, label_type: label_type
   end
 end

@@ -1,30 +1,29 @@
 module BooksHelper
-
   def build_button(book)
-    render 'build_button', path: book_queue_build_path(book)
+    render 'shared/books/build_button', path: book_queue_build_path(book)
   end
 
   def edit_book_button(book)
-    render 'edit_book_button', path: repo_editor_path(book.repo[:name])
+    render 'shared/books/edit_book_button', path: repo_editor_path(book.repo[:name])
   end
 
   def unfollow_button(book)
-    render 'unfollow_button', path: book_path(book)
+    render 'shared/books/unfollow_button', path: book_path(book)
   end
 
   def book_pages(pages)
-    render 'book_pages', pages: pages
+    render 'shared/books/book_pages', pages: pages
   end
 
   def book_image(book)
-    render 'book_image', image: book_image_url(book)
+    render 'shared/books/book_image', image: book_image_url(book)
   end
 
   def refresh_manifest_button(book)
     caption   = is_loading(book) ? '<i class="icon-spinner icon-spin"></i> Loading' : 'Refresh from Github'
     css_class = is_loading(book) ? 'btn-warning' : 'btn-primary'
     path      = book_refresh_path(book)
-    render 'refresh_manifest_button', caption: caption.html_safe, css_class: css_class, path:path
+    render 'shared/books/refresh_manifest_button', caption: caption.html_safe, css_class: css_class, path:path
   end
 
   private
@@ -33,11 +32,11 @@ module BooksHelper
     output = ""
     if value.kind_of? Hash
       value.each do |k, v|
-        output << render('book_page', title: page, path: '#', indent: indent)
+        output << render('shared/books/book_page', title: page, path: '#', indent: indent)
         output << table_of_contents(k, v, indent+1)
       end
     else
-      output << render('book_page', title: page, path: value, indent: indent)
+      output << render('shared/books/book_page', title: page, path: value, indent: indent)
     end
     output.html_safe
   end
