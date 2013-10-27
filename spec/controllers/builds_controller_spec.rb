@@ -39,5 +39,19 @@ describe BuildsController do
       get :index
       expect(assigns(:builds).count).to eq(2)
     end
+
+    context '.json' do
+      it 'filters down to only a few ids w/ param only' do
+        Book.create!(id: 55, user_id: 1234, repo_id: 42)
+        10.times { |i| Build.create(id: i, book_id: 55) }
+        get :index, only: [1,2]
+
+        builds = assigns(:builds)
+        expect(builds.count).to eq(2)
+        builds.each do |build|
+          expect([1,2]).to include(build[:id])
+        end
+      end
+    end
   end
 end

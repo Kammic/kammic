@@ -22,4 +22,12 @@ class Build < ActiveRecord::Base
   validates_presence_of   :book_id
 
   default_scope { order("started_at desc") }
+
+  def self.user_builds(user_id, only = [])
+    builds = Build.joins(:book).where(books: { user_id: user_id})
+    builds = builds.where(id: only) if only && only.any?
+    builds
+  rescue ActiveRecord::RecordNotFound
+    Build.none
+  end
 end

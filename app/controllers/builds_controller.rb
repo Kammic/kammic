@@ -1,13 +1,14 @@
 class BuildsController < ApplicationController
   before_filter :check_login
-  
+
   def index
-    @builds = user_builds(user[:id])
-                  .paginate(:page => params[:page], :per_page => 25)
+    @builds = Build.user_builds(user[:id], params[:only])
+                .paginate(:page => params[:page], :per_page => 25)
+
+    respond_to do |format|
+        format.html
+        format.json { render json: @builds }
+    end
   end
 
-  private
-  def user_builds(user_id)
-    Build.joins(:book).where(books: { user_id: user_id})
-  end
 end

@@ -30,4 +30,37 @@ describe Build do
       expect(builds).to eq([build1, build3, build2])
     end
   end
+
+  context 'user_builds scope' do
+    before do
+      create_user(id: 1234)
+      create_repo(user_id: 1234)
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+    end
+
+    it 'gets all of the users builds' do
+      Build.create!(book_id: 55)
+      Build.create!(book_id: 55)
+      expect(Build.user_builds(1234).count).to eq(2)
+    end
+
+    it 'filters down to only a few ids w/ param only' do
+      Build.create!(id: 1, book_id: 55)
+      Build.create!(id: 2, book_id: 55)
+      Build.create!(id: 3, book_id: 55)
+      Build.create!(id: 4, book_id: 55)
+
+      builds = Build.user_builds(1234, [2,4])
+      expect(builds.count).to eq(2)
+
+      builds.each do |build|
+        expect([2,4].include?(build[:id])).to eq(true)
+      end
+    end
+
+    it 'it returns only those records that are requested' do
+      Build.create!(id: 1, book_id: 55)
+      expect(Build.user_builds(1234, [1,2]).count).to eq(1)
+    end
+  end
 end
