@@ -17,7 +17,7 @@
     <td> <%= build.revision && build.revision[1..10] %> </td>
     <td> <%= build.commit_message %> </td>
     <td> <%= build.author %> </td>
-    <td><time datetime="<%= build.started_at %>"></time></td>
+    <td> <%= time_ago_in_words(build.started_at) %> ago</td>
     <td> <%= build_status(build.status) %> </td>
   </tr>
   <% end %>
