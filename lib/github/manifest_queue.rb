@@ -1,5 +1,5 @@
 require 'base64'
-require 'yaml'
+require 'json'
 
 module Github
   class ManifestQueue
@@ -13,7 +13,7 @@ module Github
         book = Book.includes(:repo).find_by_id(book_id)
         return false unless book && book.repo
 
-        manifest     = retrieve_manifest(book.repo[:full_name], 'manifest.yml')
+        manifest     = retrieve_manifest(book.repo[:full_name], 'manifest.json')
         hash         = clean_hash(hash_from_content(manifest))
         hash[:book]  = book
         hash[:pages] = hash[:pages].to_s if hash[:pages]
@@ -28,7 +28,7 @@ module Github
       end
 
       def hash_from_content(content)
-        YAML.load(content)
+        JSON.parse(content)
       end
 
       def retrieve_manifest(repo, path)

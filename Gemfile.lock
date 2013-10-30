@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:Kammic/lana.git
-  revision: 152be0e26b9c67cc5b4361f8adc6f8ff7f826802
+  revision: 846e9a720c25a2dd05633b2884316566e17ba8b1
   specs:
     lana (1.0.0)
       grit
