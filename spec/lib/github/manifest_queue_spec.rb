@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Github::ManifestQueue do
   let(:subject) { Github::ManifestQueue }
 
-  def read_fixture(path = 'manifest.yml')
-    File.read("spec/fixtures/yaml/#{path}")
+  def read_fixture(path = 'manifest.json')
+    File.read("spec/fixtures/json/#{path}")
   end
 
   context '#enqueue_update' do
