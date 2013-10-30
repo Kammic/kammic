@@ -37,7 +37,8 @@ module Kammic
 
       def last_commit_info(book_id)
         book = Book.find_by_id(book_id)
-        last_commit = Octokit.commits(book.repo.full_name).last
+        last_ref    = Octokit.refs(book.repo.full_name).last.object.sha
+        last_commit = Octokit.commit(book.repo.full_name, last_ref)
         {author:         last_commit.commit.author.name,
          revision:       last_commit.sha,
          commit_message: last_commit.commit.message,
