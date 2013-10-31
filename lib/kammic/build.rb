@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module Kammic
   class Build
     class << self
@@ -33,6 +35,8 @@ module Kammic
 
       def build_book(book)
         # some_method
+        # local_path = "/tmp/#{SecureRandom.uuid}"
+        # Lana::BookGenerator local: 
       end
 
       def last_commit_info(book_id)
