@@ -27,7 +27,7 @@ class BooksController < ApplicationController
       render_nothing 404
     end
   end
-  
+
   def queue
     book = Book.find_by_id(params[:book_id])
     if book

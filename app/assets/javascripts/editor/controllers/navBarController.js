@@ -27,10 +27,6 @@ NavBarController = function($scope, $rootScope, github) {
     $scope.setLoading(false);
   });
 
-  $rootScope.$on('windowResized', function(e, width, height){
-    $scope.$element.width(width);
-  });
-
   $rootScope.$on('githubLoaded', function(){ $scope.updateUser(); });
   $scope.$emit('navBarLoaded');
 }
