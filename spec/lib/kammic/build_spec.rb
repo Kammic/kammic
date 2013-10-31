@@ -65,6 +65,18 @@ describe Kammic::Build do
     end
   end
 
+  context '#build_book' do
+    it 'calls generate on the generator' do
+      double = double()
+      Kammic::Build.stub(:generator).and_return(double)
+      double.should_receive(:generate)
+
+      ::Build.create!({id: 98, book_id: 1,
+                       status:'created', started_at: Time.now})
+      Kammic::Build.send(:build_book, Book.find(1234))
+    end
+  end
+
   context '#execute' do
     def default_hash
       {id: 98, book_id: 1234, status: 'created', started_at: Time.now}
@@ -90,6 +102,8 @@ describe Kammic::Build do
 
     it 'marks a build completed at the end' do
       ::Build.create! default_hash
+      Kammic::Build.stub(:build_book)
+      Kammic::Build.stub(:update_with_commit_info)
       Kammic::Build.execute(98)
 
       build = ::Build.find_by_book_id(1234)

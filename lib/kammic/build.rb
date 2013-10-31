@@ -34,9 +34,24 @@ module Kammic
       end
 
       def build_book(book)
-        # some_method
-        # local_path = "/tmp/#{SecureRandom.uuid}"
-        # Lana::BookGenerator local: 
+        local_path = tmp_path
+        generate local:  local_path,
+                 remote: book.repo.clone_url,
+                 output: '/Users/ortuna/Desktop/output.pdf'
+      ensure
+        FileUtils.rm_rf local_path
+      end
+
+      def tmp_path
+        "/tmp/#{SecureRandom.uuid}"
+      end
+
+      def generate(*args)
+        generator(*args).generate
+      end
+      
+      def generator(*args)
+        Lana::BookGenerator.new *args
       end
 
       def last_commit_info(book_id)
