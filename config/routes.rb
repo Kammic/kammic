@@ -1,6 +1,5 @@
 Kammic::Application.routes.draw do
   
-  # get '/editor', to: 'editor#index'
   root to: 'application#index'
   get '/user/login',  to: 'user#login'
   get '/user/logout', to: 'user#logout'
@@ -16,8 +15,9 @@ Kammic::Application.routes.draw do
   end
 
   resources :books, only: [:index, :destroy, :show] do
-    get '/refresh', to: 'books#refresh', as: :refresh
+    get '/refresh',       to: 'books#refresh', as: :refresh
     get '/queue_build',   to: 'books#queue'
+    get '/status',        to: 'books#status'
   end
 
   resources :builds, only: [:index, :show]
