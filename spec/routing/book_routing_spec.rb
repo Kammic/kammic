@@ -15,7 +15,7 @@ describe 'books controller' do
 
   it 'can route to the queue_build path' do
     expect(get '/books/1/status').to route_to(controller: "books",
-                                              action: "status",
+                                              action: "book_status",
                                               "book_id" =>  "1")
   end
 end

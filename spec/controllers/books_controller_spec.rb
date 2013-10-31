@@ -109,7 +109,25 @@ describe BooksController do
       expect(builds.count).to eq(3)
     end
   end
- 
+
+  context '#book_status' do
+    before do 
+      session[:user_id] = 1234
+      create_user(id: 1234)
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+    end
+
+    it 'returns 404 when a book is not found' do
+      get :book_status, book_id: 42 
+      assert_response :missing
+    end
+
+    it 'gets the status of a book' do
+      get :book_status, book_id: 55
+      assert_response :success
+    end
+  end
+
   context '#index' do
     before do
       session[:user_id] = 1234

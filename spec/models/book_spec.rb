@@ -14,6 +14,17 @@
 require 'spec_helper'
 
 describe Book do
+
+  context '#is_loading?' do
+    it 'returns the books loading status' do 
+      book = Book.create!(id: 55, user_id: 1234, repo_id: 42)
+      expect(book.is_loading?).to eq(false)
+
+      book.loading_manifest  = true
+      expect(book.is_loading?).to eq(true)
+    end
+  end
+
   context '#is_loading' do
     it 'sets the loading_manifest field to passed in value' do
       create_user(id: 1234)

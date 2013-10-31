@@ -25,4 +25,8 @@ class Book < ActiveRecord::Base
     self.loading_manifest = value
     self.save
   end
+
+  def is_loading?
+    self.loading_manifest || false
+  end
 end
