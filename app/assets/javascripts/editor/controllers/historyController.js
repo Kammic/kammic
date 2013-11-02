@@ -1,4 +1,4 @@
-HistoryController = function($scope, $rootScope, github) {
+HistoryController = ["$scope", "$rootScope", "github", function($scope, $rootScope, github) {
   var context         = this;
   $scope.$element     = $('#history');
   $scope.commits      = [];
@@ -11,4 +11,4 @@ HistoryController = function($scope, $rootScope, github) {
 
   $rootScope.$on('updateHistory', function(){ $scope.updateHistory(); });
   $rootScope.$on('githubLoaded', function(){ $scope.updateHistory(); });
-};
+}];

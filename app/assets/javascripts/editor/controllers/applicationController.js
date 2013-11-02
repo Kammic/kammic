@@ -1,4 +1,4 @@
-ApplicationController = function($scope, $rootScope, github) {
+ApplicationController = ["$scope", "$rootScope", "github", function($scope, $rootScope, github) {
   var context = this;
 
   $scope.$on('previewLoaded', function(e) {
@@ -25,4 +25,4 @@ ApplicationController = function($scope, $rootScope, github) {
   key('esc', function(){
     $scope.$emit('toggleMenu');
   });
-};
+}];

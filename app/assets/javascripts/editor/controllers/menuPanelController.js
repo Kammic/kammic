@@ -1,4 +1,4 @@
-MenuPanelController = function($scope, $rootScope) {
+MenuPanelController = ["$scope", "$rootScope", function($scope, $rootScope) {
   $scope.$element = $('#menu-panel');
   $scope.$element.hide();
   $scope.visible  = false;
@@ -38,4 +38,4 @@ MenuPanelController = function($scope, $rootScope) {
   }
 
   $scope.$emit('menuPanelLoaded');
-}
+}];

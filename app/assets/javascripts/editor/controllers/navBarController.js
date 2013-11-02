@@ -1,4 +1,4 @@
-NavBarController = function($scope, $rootScope, github) {
+NavBarController = ["$scope", "$rootScope", "github", function($scope, $rootScope, github) {
   $scope.$element = $('#nav');
   $scope.loading  = false;
 
@@ -29,4 +29,4 @@ NavBarController = function($scope, $rootScope, github) {
 
   $rootScope.$on('githubLoaded', function(){ $scope.updateUser(); });
   $scope.$emit('navBarLoaded');
-}
+}];

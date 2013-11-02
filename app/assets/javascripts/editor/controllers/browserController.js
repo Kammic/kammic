@@ -1,4 +1,4 @@
-BrowserController = function($scope, $rootScope, github, editor) {
+BrowserController = ["$scope", "$rootScope", "github", "editor", function($scope, $rootScope, github, editor) {
   $scope.loading  = false;
   $scope.currentPath = [];
 
@@ -81,4 +81,4 @@ BrowserController = function($scope, $rootScope, github, editor) {
   });
 
   $scope.$emit('browserLoaded');
-}
+}]

@@ -1,4 +1,4 @@
-PendingController = function($scope, $rootScope, github, editor) {
+PendingController = ["$scope", "$rootScope", "github", "editor", function($scope, $rootScope, github, editor) {
 
   var context     = this;
   $scope.$element = $('#pending');
@@ -29,4 +29,4 @@ PendingController = function($scope, $rootScope, github, editor) {
     if(editor.currentPath() == path)
       $scope.$emit('fileSelected', {path: path});
   });
-};
+}];

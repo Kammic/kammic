@@ -1,4 +1,4 @@
-PreviewController = function($scope, $rootScope) {
+PreviewController = ["$scope", "$rootScope", function($scope, $rootScope) {
   $scope.$element = $('#preview');
   var mdConverter = new Showdown.converter();
 
@@ -25,4 +25,4 @@ PreviewController = function($scope, $rootScope) {
   });
 
   $scope.$emit('previewLoaded');
-}
+}];
