@@ -1,9 +1,0 @@
-name makeindex.x86_64-linux
-category Package
-revision 26535
-shortdesc x86_64-linux files of makeindex
-containersize 44016
-containermd5 933aae3e1c077066112efb5ef0efcba9
-binfiles arch=x86_64-linux size=35
- bin/x86_64-linux/makeindex
- bin/x86_64-linux/mkindex

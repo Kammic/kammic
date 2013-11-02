@@ -1,9 +1,0 @@
-name tex.x86_64-linux
-category TLCore
-revision 26915
-shortdesc x86_64-linux files of tex
-containersize 160804
-containermd5 7b57b585850a30f4fc2ea2e1bf72f9c5
-binfiles arch=x86_64-linux size=87
- bin/x86_64-linux/initex
- bin/x86_64-linux/tex

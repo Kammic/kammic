@@ -1,8 +1,0 @@
-name gsftopk.x86_64-linux
-category TLCore
-revision 26535
-shortdesc x86_64-linux files of gsftopk
-containersize 37204
-containermd5 0bb20d25c64b0c4601d161b59f5f1cb0
-binfiles arch=x86_64-linux size=21
- bin/x86_64-linux/gsftopk

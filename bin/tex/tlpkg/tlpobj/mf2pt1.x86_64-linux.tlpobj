@@ -1,8 +1,0 @@
-name mf2pt1.x86_64-linux
-category Package
-revision 23406
-shortdesc x86_64-linux files of mf2pt1
-containersize 340
-containermd5 c5e8d9b4d7b8af8eade016b172cbb119
-binfiles arch=x86_64-linux size=1
- bin/x86_64-linux/mf2pt1

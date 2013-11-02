@@ -1,9 +1,0 @@
-name epstopdf.x86_64-linux
-category Package
-revision 18365
-shortdesc x86_64-linux files of epstopdf
-containersize 372
-containermd5 84683d0c40c2203146e5a07040e4bae2
-binfiles arch=x86_64-linux size=2
- bin/x86_64-linux/epstopdf
- bin/x86_64-linux/repstopdf
