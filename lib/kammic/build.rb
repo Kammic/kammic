@@ -20,7 +20,8 @@ module Kammic
         book  = Book.find_by_id(build[:book_id])
         return false unless book
 
-        build_book(book)
+        paths = build_book(book, build)
+        upload_book(paths)
         complete_build(build)
       rescue Exception => e
         fail_build(build)
@@ -33,13 +34,33 @@ module Kammic
         build.save
       end
 
-      def build_book(book)
+      def build_book(book, build)
         local_path = tmp_path
         generate local:  local_path,
                  remote: book.repo.clone_url,
-                 output: '/Users/ortuna/Desktop/output.pdf'
+                 output: "/tmp/#{build.revision}.pdf"
+        { "#{build.revision}.pdf" => "/tmp/#{build.revision}.pdf" }
       ensure
         FileUtils.rm_rf local_path
+      end
+
+      def upload_book(paths)
+        bucket = s3_bucket
+        paths.each do |upload_path, local_path|
+          object = bucket.objects.build(upload_path)
+          object.content = open_file(local_path)
+          object.save
+        end 
+      end
+
+      def open_file(*args)
+        open *args
+      end
+
+      def s3_bucket
+        service = S3::Service.new(:access_key_id     => Rails.application.config.s3_access_key,
+                                  :secret_access_key => Rails.application.config.s3_secret)
+        service.buckets.find(Rails.application.config.s3_bucket)
       end
 
       def tmp_path

@@ -7,23 +7,25 @@ describe Kammic::Build do
     Book.create!(id: 1234, repo_id: 42, user_id: 1234)
   end
 
+  let(:subject) { Kammic::Build }
+
   context '#queue' do
     it 'queues a build w/ #queue' do
       stub_const "QC", double("QC")
       QC.should_receive(:enqueue).with("Kammic::Build.update", anything)
 
-      Kammic::Build.queue(1234)
+      subject.queue(1234)
     end
 
     it 'doesnt call QC.enqueue when the book is not found' do
       stub_const "QC", double("QC")
       QC.should_not_receive(:enqueue)
 
-      Kammic::Build.queue(11111)
+      subject.queue(11111)
     end
 
     it 'creates a Build stub' do
-      Kammic::Build.queue(1234)
+      subject.queue(1234)
       build = Build.find_by_book_id(1234)
 
       expect(build).to_not be_nil
@@ -44,7 +46,7 @@ describe Kammic::Build do
         commit_message: 'the commit',
         branch:         'master'
       }
-      Kammic::Build.stub(:last_commit_info).and_return commit_hash
+      subject.stub(:last_commit_info).and_return commit_hash
       ::Build.create!(id: 99, book_id: 1234)
     end
 
@@ -52,11 +54,11 @@ describe Kammic::Build do
       stub_const "QC", double("QC")
       QC.should_receive(:enqueue).with("Kammic::Build.execute", 99)
 
-      Kammic::Build.update(99)
+      subject.update(99)
     end
 
     it 'updates the builds commit info' do
-      Kammic::Build.update(99)
+      subject.update(99)
 
       build = ::Build.find_by_book_id(1234)
       expect(build[:revision]).to eq('1234')
@@ -66,15 +68,67 @@ describe Kammic::Build do
   end
 
   context '#build_book' do
+    before do
+      ::Build.create!({id: 98, 
+                       book_id: 1,
+                       status:'created', 
+                       revision: 'xyz',
+                       started_at: Time.now})
+    end
+
     it 'calls generate on the generator' do
       double = double()
-      Kammic::Build.stub(:generator).and_return(double)
+      subject.stub(:generator).and_return(double)
       double.should_receive(:generate)
 
-      ::Build.create!({id: 98, book_id: 1,
-                       status:'created', started_at: Time.now})
-      Kammic::Build.send(:build_book, Book.find(1234))
+      subject.send(:build_book, Book.find(1234), Build.find(98))
     end
+
+    it 'returns a hash of generated files and revision' do
+      subject.stub(:generate)
+      hash = subject.send(:build_book, Book.find(1234), Build.find(98))
+
+      expect(hash.count).to eq(1)
+      expect(hash["xyz.pdf"]).to eq("/tmp/xyz.pdf")
+    end
+
+  end
+
+  context '#upload_book' do
+    before do
+      stub_const "S3::Service", double("S3::Service").as_null_object
+
+      @double  = double().as_null_object
+      subject.stub(:s3_bucket).and_return(@double)
+      subject.stub(:open_file).and_return(@double)
+      @paths = {'1234.pdf' => '/tmp/1234.pdf',
+        '0000.Mobi' => '/tmp/0000.Mobi',
+        '0000.epub' => '/tmp/0000.epub'}
+      end
+
+      it 'calls build on each bucket.object' do
+        @double.stub(:objects).and_return(@double)
+        @double.should_receive(:build).with("1234.pdf")
+        @double.should_receive(:build).with("0000.Mobi")
+        @double.should_receive(:build).with("0000.epub")
+
+        subject.send(:upload_book, @paths)
+      end
+
+      it 'sets the content of each object' do
+        @double.stub(:build).and_return(@double)
+        subject.should_receive(:open_file).exactly(3).times
+        @double.should_receive(:content=).exactly(3).times
+
+        subject.send(:upload_book, @paths)
+      end
+
+      it 'calls save on each object' do
+        @double.stub(:build).and_return(@double)
+        @double.should_receive(:save).exactly(3).times
+
+        subject.send(:upload_book, @paths)
+      end
   end
 
   context '#execute' do
@@ -82,33 +136,41 @@ describe Kammic::Build do
       {id: 98, book_id: 1234, status: 'created', started_at: Time.now}
     end
 
-    it 'returns false when the book is not found' do
-      ::Build.create!({id:         98, 
-                       book_id:    1,
-                       status:     'created',
-                       started_at: Time.now})
+    before do
+      ::Build.create! default_hash
+    end
 
-      expect(Kammic::Build.execute(98)).to eq(false)
+    it 'returns false when the book is not found' do
+      build = ::Build.find(98)
+      build.book_id = 0
+      build.save!
+      expect(subject.execute(98)).to eq(false)
     end
 
     it 'marks the build failed if build errors' do
-      ::Build.create! default_hash
-      Kammic::Build.stub(:build_book).and_raise(Exception)
-
-      Kammic::Build.execute(98)
+      subject.stub(:build_book).and_raise(Exception)
+      subject.execute(98)
       build = ::Build.find_by_book_id(1234)
       expect(build[:status]).to eq('failed')
     end
 
     it 'marks a build completed at the end' do
-      ::Build.create! default_hash
-      Kammic::Build.stub(:build_book)
-      Kammic::Build.stub(:update_with_commit_info)
-      Kammic::Build.execute(98)
+      subject.stub(:update_with_commit_info)
+      subject.stub(:upload_book)
+      subject.should_receive(:build_book).with(anything, anything)
+      subject.execute(98)
 
       build = ::Build.find_by_book_id(1234)
       expect(build[:status]).to eq('completed')
       expect(build[:ended_at]).to_not be_nil
     end
+
+    it 'calls upload_book' do
+      subject.stub(:build_book)
+      subject.stub(:update_with_commit_info)
+
+      subject.should_receive(:upload_book)
+      subject.execute(98)
+    end  
   end
 end
