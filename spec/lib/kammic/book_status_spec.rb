@@ -38,18 +38,18 @@ describe Kammic::BookStatus do
 
   context '#build_status' do
     it 'returns a hash of statuses for each build' do
-      Build.create!(id: 2, book_id: 55, status: "failed")
-      Build.create!(id: 3, book_id: 55, status: "complete")
+      create_build(book_id: 55, status: "failed")
+      create_build(book_id: 55, status: "complete")
       expected =  [
         {id: anything, status: "complete"},
-        {id: 2, status: "failed"},
-        {id: 3, status: "complete"},
+        {id: anything, status: "failed"},
+        {id: anything, status: "complete"},
       ] 
       expect(@status.build_status).to eq(expected)
     end
 
     it 'limits the statuses to only return 5' do 
-      20.times { Build.create(book_id: 55, status: "failed") }
+      6.times { create_build(book_id: 55, status: "failed") }
       expect(@status.build_status.count).to eq(5)
     end
 
