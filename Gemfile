@@ -21,6 +21,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap', '~> 1.0'
 gem "pg"
 gem "s3"
+gem "unicorn"
 
 gem "rails_12factor"
 
