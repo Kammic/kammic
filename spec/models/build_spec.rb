@@ -22,9 +22,9 @@ describe Build do
   context '#default_scope' do
     it 'orders by the build date' do
       time   = Time.now
-      build1 = Build.create!(id: 1, started_at: time+5, book_id: 1)
-      build2 = Build.create!(id: 2, started_at: time+1, book_id: 1)
-      build3 = Build.create!(id: 3, started_at: time+3, book_id: 1)
+      build1 = create_build(id: 1, started_at: time+5, book_id: 1)
+      build2 = create_build(id: 2, started_at: time+1, book_id: 1)
+      build3 = create_build(id: 3, started_at: time+3, book_id: 1)
 
       builds = Build.all
       expect(builds).to eq([build1, build3, build2])
@@ -39,16 +39,16 @@ describe Build do
     end
 
     it 'gets all of the users builds' do
-      Build.create!(book_id: 55)
-      Build.create!(book_id: 55)
+      create_build(book_id: 55)
+      create_build(book_id: 55)
       expect(Build.user_builds(1234).count).to eq(2)
     end
 
     it 'filters down to only a few ids w/ param only' do
-      Build.create!(id: 1, book_id: 55)
-      Build.create!(id: 2, book_id: 55)
-      Build.create!(id: 3, book_id: 55)
-      Build.create!(id: 4, book_id: 55)
+      create_build(id: 1, book_id: 55)
+      create_build(id: 2, book_id: 55)
+      create_build(id: 3, book_id: 55)
+      create_build(id: 4, book_id: 55)
 
       builds = Build.user_builds(1234, [2,4])
       expect(builds.count).to eq(2)
@@ -59,7 +59,7 @@ describe Build do
     end
 
     it 'it returns only those records that are requested' do
-      Build.create!(id: 1, book_id: 55)
+      create_build(id: 1, book_id: 55)
       expect(Build.user_builds(1234, [1,2]).count).to eq(1)
     end
   end

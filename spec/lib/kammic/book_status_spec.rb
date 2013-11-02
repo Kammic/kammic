@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Kammic::BookStatus do
-  before :each do
+  before do
     create_user(id: 1234)
     create_repo(user_id: 1234)
-    Book.create!(id: 55, user_id: 1234, repo_id: 42)
-    Build.create!(id: 1, book_id: 55)
-    @book = Book.find(55)
+    create_book(id: 55, user_id: 1234, repo_id: 42)
+    create_build(book_id: 55)
+
+    @book   = Book.find(55)
     @status = Kammic::BookStatus.new(@book)
   end
 
@@ -21,7 +22,7 @@ describe Kammic::BookStatus do
     end
   end
   context '#status' do
-    before :each do
+    before do
       @hash = @status.status
     end
 
@@ -40,7 +41,7 @@ describe Kammic::BookStatus do
       Build.create!(id: 2, book_id: 55, status: "failed")
       Build.create!(id: 3, book_id: 55, status: "complete")
       expected =  [
-        {id: 1, status: "complete"},
+        {id: anything, status: "complete"},
         {id: 2, status: "failed"},
         {id: 3, status: "complete"},
       ] 

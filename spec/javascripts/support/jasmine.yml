@@ -24,9 +24,11 @@ src_files:
   - app/assets/javascripts/lib/github/underscore.js
   - app/assets/javascripts/lib/github/octokit.js
   - app/assets/javascripts/lib/misc/keymaster.min.js
+  - app/assets/javascripts/editor.js
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js
   - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js
+
 
 # stylesheets
 #
