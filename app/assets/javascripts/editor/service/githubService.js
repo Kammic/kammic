@@ -1,4 +1,4 @@
-Application.service('github', function() {
+Application.service('github', [function() {
   var github = {}
 
   github.api = null;
@@ -64,4 +64,4 @@ Application.service('github', function() {
   }
 
   return github;
-});
+}]);

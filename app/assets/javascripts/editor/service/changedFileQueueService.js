@@ -1,4 +1,4 @@
-Application.service('changedFileQueue', function() {
+Application.service('changedFileQueue', [function() {
   var service   = {}
   var namespace = '';
 
@@ -30,4 +30,4 @@ Application.service('changedFileQueue', function() {
   }
 
   return service;
-});
+}]);

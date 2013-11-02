@@ -1,4 +1,4 @@
-Application.service('editor', function(github, changedFileQueue) {
+Application.service('editor', ["github", "changedFileQueue", function(github, changedFileQueue) {
   var editor = {}
   var currentFile = null;
   var storage     = localStorage;
@@ -142,4 +142,4 @@ Application.service('editor', function(github, changedFileQueue) {
   }
 
   return editor;
-});
+}]);
