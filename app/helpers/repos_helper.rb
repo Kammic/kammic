@@ -20,7 +20,7 @@ module ReposHelper
 
   def load_repos_button(are_repos_loading, caption)
     css_class = are_repos_loading ? 'btn-warning' : 'btn-primary'
-    caption   = are_repos_loading ? '<i class="icon-spinner icon-spin"></i> ' + caption : caption
+    caption   = are_repos_loading ? "#{fa_icon('spinner spin')}" + caption : caption
     render 'load_repos_button', caption: caption.html_safe, css_class: css_class
   end
 

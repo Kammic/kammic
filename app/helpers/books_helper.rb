@@ -20,7 +20,7 @@ module BooksHelper
   end
 
   def refresh_manifest_button(book)
-    caption   = is_loading(book) ? '<i class="icon-spinner icon-spin"></i> Loading' : 'Refresh from Github'
+    caption   = is_loading(book) ? "#{fa_icon('spinner spin')} Loading" : 'Refresh from Github'
     css_class = is_loading(book) ? 'btn-warning' : 'btn-primary'
     path      = book_refresh_path(book)
     render 'shared/books/refresh_manifest_button', caption: caption.html_safe, css_class: css_class, path:path
