@@ -1,0 +1,21 @@
+{
+    "title": "Some Title",
+    "cover_image": "assets/cover.jpg",
+    "pages": 
+        {
+            "Preface": "01-introduction/01-chapter1.markdown",
+            "Introduction": "02-introduction/01-chapter1.markdown",
+            "Other":
+               {
+                "Some More": "03-introduction/01-chapter99.markdown",
+                "Some More2": "04-introduction/01-chapter42.markdown"
+                },
+            "Git Basics": "05-git-basics/01-chapter2.markdown",
+            "Git Branching": "06-git-branching/01-chapter3.markdown",
+            "Git Server": "07-git-server/01-chapter4.markdown",
+            "Git Tools": "08-git-tools/01-chapter6.markdown",
+            "Customize Git": "09-customizing-git/01-chapter7.markdown",
+            "Git And Other SCMS": "10-git-and-other-scms/01-chapter8.markdown",
+            "Git Internals": "11-git-internals/01-chapter9.markdown"
+        }
+}
