@@ -1,1 +1,3 @@
-var Application = angular.module('Application', []);
+var Application = angular.module('Application',  ['$rootScope', function($rootScope) {
+
+}]);
