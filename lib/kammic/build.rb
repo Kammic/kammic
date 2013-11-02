@@ -23,8 +23,8 @@ module Kammic
         paths = build_book(book, build)
         upload_book(paths)
         complete_build(build)
-      # rescue Exception => e
-        # fail_build(build)
+      rescue Exception => e
+        fail_build(build)
       end
 
       private
