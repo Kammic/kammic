@@ -13,6 +13,7 @@ gem 'omniauth-github'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem "font-awesome-rails", '~> 4.0'
+gem "ace-editor"
 
 gem "lana"
 gem "queue_classic", "~> 2.2"
@@ -22,6 +23,7 @@ gem 'will_paginate-bootstrap', '~> 1.0'
 gem "pg"
 gem "s3"
 gem "unicorn"
+
 
 gem "rails_12factor"
 

@@ -10,5 +10,5 @@ test:
 
 production:
   adapter: postgresql
-  database: writing
+  database: writing_dev
   host: localhost
