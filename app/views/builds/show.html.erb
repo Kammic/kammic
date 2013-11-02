@@ -1,0 +1,4 @@
+<% if @build.revision %>
+  Download: 
+  <%= link_to @build.revision, "https://s3.amazonaws.com/kammic/#{@build.revision}.pdf" %>
+<% end %>

@@ -11,4 +11,13 @@ class BuildsController < ApplicationController
     end
   end
 
+  def show
+    @build = Build.find_by_id(params[:id])
+    if @build
+      render :show
+    else
+      render nothing: true, status: 404
+    end
+  end
+
 end

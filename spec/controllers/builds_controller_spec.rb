@@ -18,6 +18,24 @@ describe BuildsController do
     end
   end
 
+  context '#show' do
+    before do
+      session[:user_id] = 1234
+    end
+
+    it 'sets @build' do
+      Book.create!(id: 99, user_id: 1234, repo_id: 42)
+      Build.create(id: 42, book_id: 55)
+      get :show, id: 42
+      expect(assigns(:build)).to_not be_nil
+    end 
+
+    it 'returns 404 when a build is not found' do
+      get :show, id: 5000
+      assert_response :missing
+    end
+  end 
+
   context '#index' do
     before do
       session[:user_id] = 1234
