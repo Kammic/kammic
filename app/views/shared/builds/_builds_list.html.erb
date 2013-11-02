@@ -11,7 +11,7 @@
   </tr>
   <% @builds.each do |build| %>
   <tr>
-    <td> <%= build.id %> </td>
+    <td> <%= link_to build.id, build_path(build) %> </td>
     <td> <%= build.book.repo.name %> </td>
     <td> <%= build.book.repo.master_branch %> </td>
     <td> <%= build.revision && build.revision[1..10] %> </td>
