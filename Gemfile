@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+source 'https://7PTTUMssfRTdFds3xAKz@gem.fury.io/app16982024_heroku_com/'
+
+ruby "2.0.0"
 
 gem 'unicorn'
 gem 'rails', '4.0.0'
@@ -11,13 +14,15 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem "font-awesome-rails", '~> 4.0'
 
-gem "lana", git:'git@github.com:Kammic/lana.git'
+gem "lana"
 gem "queue_classic", "~> 2.2"
 gem "octokit", '~> 2.0'
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap', '~> 1.0'
 gem "pg"
 gem "s3"
+
+gem "rails_12factor"
 
 group :development, :test do
   gem 'annotate'

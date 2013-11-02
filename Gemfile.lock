@@ -1,13 +1,6 @@
-GIT
-  remote: git@github.com:Kammic/lana.git
-  revision: 846e9a720c25a2dd05633b2884316566e17ba8b1
-  specs:
-    lana (1.0.0)
-      grit
-      pandoc-ruby (~> 0.7)
-
 GEM
   remote: https://rubygems.org/
+  remote: https://7PTTUMssfRTdFds3xAKz@gem.fury.io/app16982024_heroku_com/
   specs:
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
@@ -82,6 +75,9 @@ GEM
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.1)
+    lana (1.0.0)
+      grit
+      pandoc-ruby (~> 0.7)
     libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -130,6 +126,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.0)
       sprockets-rails (~> 2.0.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.3)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
@@ -213,7 +214,7 @@ DEPENDENCIES
   jasmine
   jasmine-rails
   jquery-rails
-  lana!
+  lana
   octokit (~> 2.0)
   omniauth
   omniauth-github
@@ -221,6 +222,7 @@ DEPENDENCIES
   pry
   queue_classic (~> 2.2)
   rails (= 4.0.0)
+  rails_12factor
   rspec
   rspec-rails
   s3
