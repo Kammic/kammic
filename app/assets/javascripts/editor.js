@@ -1,3 +1,4 @@
+//= require ./lib/ace-builds/src-noconflict/ace
 //= require_tree ./lib/bootstrap
 //= require ./lib/angular/angular.min
 //= require ./lib/showdown/compressed/showdown
