@@ -1,3 +1,6 @@
-/*= require ./bootstrap/bootstrap */
-/*= require_tree ./editor */
+/*
+*= require_self
+*= require ./bootstrap/bootstrap
+*= require_tree ./editor
+*/
 
