@@ -1,0 +1,33 @@
+name etex
+category Package
+revision 22198
+shortdesc An extended version of TeX, from the NTS project.
+longdesc An extended version of TeX (which is capable of running as if
+longdesc it were TeX unmodified). E-TeX has been specified by the LaTeX
+longdesc team as the engine for the development of LaTeX, in the
+longdesc immediate future; as a result, LaTeX programmers may (in all
+longdesc current TeX distributions) assume e-TeX functionality.
+containersize 10448
+containermd5 6426642b9080d083400431de6d391899
+doccontainersize 189752
+doccontainermd5 0a00755ff727f604259220968b214795
+docfiles size=129
+ texmf-dist/doc/etex/base/NTS-FAQ
+ texmf-dist/doc/etex/base/etex_gen.tex
+ texmf-dist/doc/etex/base/etex_man.pdf
+ texmf-dist/doc/etex/base/etex_man.sty
+ texmf-dist/doc/etex/base/etex_man.tex
+ texmf-dist/doc/etex/base/etex_ref.html
+ texmf-dist/doc/etex/base/etex_src.html
+ texmf-dist/doc/etex/base/legal.html
+ texmf-dist/doc/etex/base/nts-group.html
+ texmf-dist/doc/etex/base/webmerge.tex
+ texmf/doc/man/man1/etex.1
+ texmf/doc/man/man1/etex.man1.pdf
+runfiles size=9
+ texmf-dist/tex/plain/etex/etex.src
+ texmf-dist/tex/plain/etex/etexdefs.lib
+catalogue-ctan /systems/e-tex
+catalogue-date 2010-02-06 00:03:35 +0100
+catalogue-license knuth
+catalogue-version 2.1

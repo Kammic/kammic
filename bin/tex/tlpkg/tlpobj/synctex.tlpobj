@@ -1,0 +1,13 @@
+name synctex
+category TLCore
+revision 26689
+depend synctex.ARCH
+containersize 244
+containermd5 225acd4aaf08ff5100b263996770fbb4
+doccontainersize 10040
+doccontainermd5 7a97bbfa28ba88266aeea074a3a5049f
+docfiles size=8
+ texmf/doc/man/man1/synctex.1
+ texmf/doc/man/man1/synctex.man1.pdf
+ texmf/doc/man/man5/synctex.5
+ texmf/doc/man/man5/synctex.man5.pdf

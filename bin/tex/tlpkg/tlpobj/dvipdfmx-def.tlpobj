@@ -1,0 +1,8 @@
+name dvipdfmx-def
+category Package
+revision 15878
+relocated 1
+containersize 2432
+containermd5 ccb8eba5caf26e4da385ae521137152d
+runfiles size=2
+ texmf-dist/tex/latex/dvipdfmx-def/dvipdfmx.def

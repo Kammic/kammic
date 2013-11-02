@@ -1,0 +1,52 @@
+name luaotfload
+category Package
+revision 26718
+shortdesc OpenType layout system for Plain TeX and LaTeX.
+longdesc The package adopts the TrueType/OpenType Font loader code
+longdesc provided in ConTeXt, and adapts it to use in Plain TeX and
+longdesc LaTeX.
+depend luaotfload.ARCH
+containersize 74348
+containermd5 91185aa28776cbf86c7f4ad5c4b7fe98
+doccontainersize 105216
+doccontainermd5 79a4397110e16900015a5c52a720db38
+docfiles size=30
+ texmf-dist/doc/luatex/luaotfload/NEWS
+ texmf-dist/doc/luatex/luaotfload/README details="Readme"
+ texmf-dist/doc/luatex/luaotfload/luaotfload.pdf details="Package documentation"
+srccontainersize 15848
+srccontainermd5 b3c594a9d9fa32324f25cd0e9fe2cc62
+srcfiles size=12
+ texmf-dist/source/luatex/luaotfload/Makefile
+ texmf-dist/source/luatex/luaotfload/luaotfload.dtx
+runfiles size=121
+ texmf-dist/scripts/luaotfload/mkluatexfontdb.lua
+ texmf-dist/tex/luatex/luaotfload/luaotfload.lua
+ texmf-dist/tex/luatex/luaotfload/luaotfload.sty
+ texmf-dist/tex/luatex/luaotfload/otfl-blacklist.cnf
+ texmf-dist/tex/luatex/luaotfload/otfl-data-con.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-cid.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-clr.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-def.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-dum.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-ini.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-map.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-nms.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-ota.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-otb.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-otc.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-otd.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-otf.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-oti.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-otn.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-ott.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-tfm.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-font-xtx.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-luat-dum.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-luat-ovr.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-node-dum.lua
+ texmf-dist/tex/luatex/luaotfload/otfl-node-inj.lua
+catalogue-ctan /macros/luatex/generic/luaotfload
+catalogue-date 2012-04-27 17:19:37 +0200
+catalogue-license gpl2
+catalogue-version 1.26

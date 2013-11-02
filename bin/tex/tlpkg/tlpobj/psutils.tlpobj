@@ -1,0 +1,71 @@
+name psutils
+category TLCore
+revision 26689
+shortdesc PostScript utilities.
+longdesc A bundle of utilities for manipulating PostScript documents,
+longdesc including page selection and rearrangement, resizing the page,
+longdesc arrangement into signatures for booklet printing, and page
+longdesc merging for n-up printing. Utilities include psbook, psselect,
+longdesc pstops, psnup, psresize, epsffit.
+depend psutils.ARCH
+containersize 6060
+containermd5 21a12a6f22f0475b080325db72a9f3a1
+doccontainersize 40828
+doccontainermd5 93105b2f68f9d02730c84aa070abb64a
+docfiles size=48
+ texmf/doc/man/man1/epsffit.1
+ texmf/doc/man/man1/epsffit.man1.pdf
+ texmf/doc/man/man1/extractres.1
+ texmf/doc/man/man1/extractres.man1.pdf
+ texmf/doc/man/man1/fixdlsrps.1
+ texmf/doc/man/man1/fixdlsrps.man1.pdf
+ texmf/doc/man/man1/fixfmps.1
+ texmf/doc/man/man1/fixfmps.man1.pdf
+ texmf/doc/man/man1/fixpsditps.1
+ texmf/doc/man/man1/fixpsditps.man1.pdf
+ texmf/doc/man/man1/fixpspps.1
+ texmf/doc/man/man1/fixpspps.man1.pdf
+ texmf/doc/man/man1/fixscribeps.1
+ texmf/doc/man/man1/fixscribeps.man1.pdf
+ texmf/doc/man/man1/fixtpps.1
+ texmf/doc/man/man1/fixtpps.man1.pdf
+ texmf/doc/man/man1/fixwfwps.1
+ texmf/doc/man/man1/fixwfwps.man1.pdf
+ texmf/doc/man/man1/fixwpps.1
+ texmf/doc/man/man1/fixwpps.man1.pdf
+ texmf/doc/man/man1/fixwwps.1
+ texmf/doc/man/man1/fixwwps.man1.pdf
+ texmf/doc/man/man1/getafm.1
+ texmf/doc/man/man1/getafm.man1.pdf
+ texmf/doc/man/man1/includeres.1
+ texmf/doc/man/man1/includeres.man1.pdf
+ texmf/doc/man/man1/psbook.1
+ texmf/doc/man/man1/psbook.man1.pdf
+ texmf/doc/man/man1/psmerge.1
+ texmf/doc/man/man1/psmerge.man1.pdf
+ texmf/doc/man/man1/psnup.1
+ texmf/doc/man/man1/psnup.man1.pdf
+ texmf/doc/man/man1/psresize.1
+ texmf/doc/man/man1/psresize.man1.pdf
+ texmf/doc/man/man1/psselect.1
+ texmf/doc/man/man1/psselect.man1.pdf
+ texmf/doc/man/man1/pstops.1
+ texmf/doc/man/man1/pstops.man1.pdf
+runfiles size=14
+ texmf/dvips/getafm/getafm.ps
+ texmf/scripts/psutils/extractres.pl
+ texmf/scripts/psutils/fixdlsrps.pl
+ texmf/scripts/psutils/fixfmps.pl
+ texmf/scripts/psutils/fixpsditps.pl
+ texmf/scripts/psutils/fixpspps.pl
+ texmf/scripts/psutils/fixscribeps.pl
+ texmf/scripts/psutils/fixtpps.pl
+ texmf/scripts/psutils/fixwfwps.pl
+ texmf/scripts/psutils/fixwpps.pl
+ texmf/scripts/psutils/fixwwps.pl
+ texmf/scripts/psutils/includeres.pl
+ texmf/scripts/psutils/psmerge.pl
+catalogue-ctan /support/psutils
+catalogue-date 2009-11-10 00:30:52 +0100
+catalogue-license other-free
+catalogue-version p17

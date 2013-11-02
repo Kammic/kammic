@@ -1,0 +1,102 @@
+name tetex
+category TLCore
+revision 28593
+shortdesc scripts and files originally written for or included in teTeX
+longdesc teTeX was a comprehensive distribution of TeX, LaTeX and
+longdesc family, designed for ease of compilation, installation and
+longdesc customisation. In 2006, Thomas Esser announced he would no
+longdesc longer be able to support, or to produce new versions of,
+longdesc teTeX. With the appearance of TeX live 2007 (whose Unix-system
+longdesc TeX support originally derived from teTeX), no-one should be
+longdesc using teTeX at all, in new applications. One of the "schemes"
+longdesc available when installing TeX live provides a configuration
+longdesc very close to that of the old teTeX, but using modern versions
+longdesc of programs and packages.
+depend tetex.ARCH
+execute addMap mathpple.map
+containersize 47584
+containermd5 aa4ae1c2c7f92a9ad9d7594f1475a9e0
+doccontainersize 340420
+doccontainermd5 8f5e803bfaa2608c2e4b812cd2f6acf9
+docfiles size=142
+ texmf/doc/man/man1/allcm.1
+ texmf/doc/man/man1/allcm.man1.pdf
+ texmf/doc/man/man1/allec.1
+ texmf/doc/man/man1/allec.man1.pdf
+ texmf/doc/man/man1/allneeded.1
+ texmf/doc/man/man1/allneeded.man1.pdf
+ texmf/doc/man/man1/dvi2fax.1
+ texmf/doc/man/man1/dvi2fax.man1.pdf
+ texmf/doc/man/man1/dvired.1
+ texmf/doc/man/man1/dvired.man1.pdf
+ texmf/doc/man/man1/fmtutil-sys.1
+ texmf/doc/man/man1/fmtutil-sys.man1.pdf
+ texmf/doc/man/man1/fmtutil.1
+ texmf/doc/man/man1/fmtutil.man1.pdf
+ texmf/doc/man/man1/kpsepath.1
+ texmf/doc/man/man1/kpsepath.man1.pdf
+ texmf/doc/man/man1/kpsetool.1
+ texmf/doc/man/man1/kpsetool.man1.pdf
+ texmf/doc/man/man1/kpsewhere.1
+ texmf/doc/man/man1/kpsewhere.man1.pdf
+ texmf/doc/man/man1/kpsexpand.1
+ texmf/doc/man/man1/kpsexpand.man1.pdf
+ texmf/doc/man/man1/texlinks.1
+ texmf/doc/man/man1/texlinks.man1.pdf
+ texmf/doc/man/man1/updmap-sys.1
+ texmf/doc/man/man1/updmap-sys.man1.pdf
+ texmf/doc/man/man1/updmap.1
+ texmf/doc/man/man1/updmap.man1.pdf
+ texmf/doc/man/man5/fmtutil.cnf.5
+ texmf/doc/man/man5/fmtutil.cnf.man5.pdf
+ texmf/doc/man/man5/updmap.cfg.5
+ texmf/doc/man/man5/updmap.cfg.man5.pdf
+ texmf/doc/tetex/TETEXDOC.pdf
+ texmf/doc/tetex/teTeX-FAQ
+runfiles size=89
+ texmf-dist/scripts/tetex/allcm.sh
+ texmf-dist/scripts/tetex/allneeded.sh
+ texmf-dist/scripts/tetex/dvi2fax.sh
+ texmf-dist/scripts/tetex/dvired.sh
+ texmf-dist/scripts/tetex/kpsetool.sh
+ texmf-dist/scripts/tetex/kpsewhere.sh
+ texmf-dist/scripts/tetex/updmap-sys.sh
+ texmf-dist/scripts/tetex/updmap.pl
+ texmf-dist/web2c/updmap.cfg
+ texmf/dvips/tetex/config.builtin35
+ texmf/dvips/tetex/config.dfaxhigh
+ texmf/dvips/tetex/config.dfaxlo
+ texmf/dvips/tetex/config.download35
+ texmf/dvips/tetex/config.gsftopk
+ texmf/dvips/tetex/config.outline
+ texmf/dvips/tetex/config.pdf
+ texmf/dvips/tetex/config.pk
+ texmf/dvips/tetex/config.www
+ texmf/fonts/enc/dvips/tetex/09fbbfac.enc
+ texmf/fonts/enc/dvips/tetex/0ef0afca.enc
+ texmf/fonts/enc/dvips/tetex/10037936.enc
+ texmf/fonts/enc/dvips/tetex/1b6d048e.enc
+ texmf/fonts/enc/dvips/tetex/71414f53.enc
+ texmf/fonts/enc/dvips/tetex/74afc74c.enc
+ texmf/fonts/enc/dvips/tetex/aae443f0.enc
+ texmf/fonts/enc/dvips/tetex/b6a4d7c7.enc
+ texmf/fonts/enc/dvips/tetex/bbad153f.enc
+ texmf/fonts/enc/dvips/tetex/d9b29452.enc
+ texmf/fonts/enc/dvips/tetex/f7b6d320.enc
+ texmf/fonts/enc/dvips/tetex/mtex.enc
+ texmf/fonts/map/dvips/tetex/README
+ texmf/fonts/map/dvips/tetex/dvipdfm35.map
+ texmf/fonts/map/dvips/tetex/dvips35.map
+ texmf/fonts/map/dvips/tetex/mathpple.map
+ texmf/fonts/map/dvips/tetex/pdftex35.map
+ texmf/fonts/map/dvips/tetex/ps2pk35.map
+ texmf/scripts/tetex/fmtutil-sys.sh
+ texmf/scripts/tetex/fmtutil.sh
+ texmf/scripts/tetex/texconfig-dialog.sh
+ texmf/scripts/tetex/texconfig-sys.sh
+ texmf/scripts/tetex/texlinks.sh
+ texmf/web2c/updmap.cfg
+catalogue-ctan /obsolete/systems/unix/teTeX
+catalogue-date 2012-09-11 08:43:58 +0200
+catalogue-license other-free
+catalogue-version 3.0

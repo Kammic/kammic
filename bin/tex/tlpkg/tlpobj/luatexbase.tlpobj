@@ -1,0 +1,82 @@
+name luatexbase
+category Package
+revision 22560
+shortdesc Basic resource management for LuaTeX code.
+relocated 1
+longdesc The bundle provides basic facilities for LuaTeX macro
+longdesc programmers, mostly resource allocation and convenience
+longdesc packages. Provided are: - luatexbase-attr: attribute
+longdesc allocation; - luatexbase-cctb: catcode table allocation; -
+longdesc luatexbase-compat: compatibility helpers; - luatexbase-loader:
+longdesc Lua module loading; - luatexbase-modutils: Lua module
+longdesc declaration; - luatexbase-mcb: callbacks extension; and -
+longdesc luatexbase-regs: allocation of registers and the like. In
+longdesc addition, the (unadorned) luatexbase package loads all the
+longdesc above in one fell swoop.
+containersize 7756
+containermd5 1acd3f3b88009af4f23b3663ce92b076
+doccontainersize 2367592
+doccontainermd5 efee0cd91c1f491282404274b081951c
+docfiles size=777
+ texmf-dist/doc/luatex/luatexbase/Changes
+ texmf-dist/doc/luatex/luatexbase/README details="Readme"
+ texmf-dist/doc/luatex/luatexbase/TODO
+ texmf-dist/doc/luatex/luatexbase/luatexbase-attr.pdf details="luatexbase-attr documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-cctb.pdf details="luatexbase-cctb documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-compat.pdf details="luatexbase-compat documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-loader.pdf details="luatexbase-loader documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-mcb.pdf details="luatexbase-mcb documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-modutils.pdf details="luatexbase-modutils documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase-regs.pdf details="luatexbase-regs documentation"
+ texmf-dist/doc/luatex/luatexbase/luatexbase.pdf details="Package documentation"
+ texmf-dist/doc/luatex/luatexbase/test-attr-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-attr-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-base-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-base-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-cctb-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-cctb-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-compat-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-compat-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-loader-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-loader-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-loader.lua
+ texmf-dist/doc/luatex/luatexbase/test-loader.sub.lua
+ texmf-dist/doc/luatex/luatexbase/test-mcb-aux.tex
+ texmf-dist/doc/luatex/luatexbase/test-mcb-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-mcb-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-mcb.lua
+ texmf-dist/doc/luatex/luatexbase/test-modutils-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-modutils-plain.tex
+ texmf-dist/doc/luatex/luatexbase/test-modutils.lua
+ texmf-dist/doc/luatex/luatexbase/test-regs-latex.tex
+ texmf-dist/doc/luatex/luatexbase/test-regs-plain.tex
+srccontainersize 26248
+srccontainermd5 6737efe87385f37e8a0ede978fc6d3f8
+srcfiles size=38
+ texmf-dist/source/luatex/luatexbase/Makefile
+ texmf-dist/source/luatex/luatexbase/luatexbase-attr.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-cctb.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-compat.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-loader.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-mcb.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-modutils.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase-regs.dtx
+ texmf-dist/source/luatex/luatexbase/luatexbase.dtx
+runfiles size=17
+ texmf-dist/tex/luatex/luatexbase/attr.lua
+ texmf-dist/tex/luatex/luatexbase/cctb.lua
+ texmf-dist/tex/luatex/luatexbase/luatexbase-attr.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-cctb.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-compat.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-loader.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-mcb.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-modutils.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase-regs.sty
+ texmf-dist/tex/luatex/luatexbase/luatexbase.loader.lua
+ texmf-dist/tex/luatex/luatexbase/luatexbase.sty
+ texmf-dist/tex/luatex/luatexbase/mcb.lua
+ texmf-dist/tex/luatex/luatexbase/modutils.lua
+catalogue-ctan /macros/luatex/generic/luatexbase
+catalogue-date 2011-05-21 16:06:38 +0200
+catalogue-license pd
+catalogue-version 0.31

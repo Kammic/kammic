@@ -1,0 +1,45 @@
+name lualibs
+category Package
+revision 21149
+shortdesc Additional Lua functions for LuaTeX macro programmers.
+relocated 1
+longdesc Lualibs is a collection of Lua modules useful for general
+longdesc programming. The bundle is based on lua modules shipped with
+longdesc ConTeXt, and are made available in this bundle for use
+longdesc independent of ConTeXt.
+containersize 24812
+containermd5 12211f682a36d346150b6c1fa6ad9c02
+doccontainersize 129220
+doccontainermd5 21305d76f04bdb12645a97cacf6afdb0
+docfiles size=34
+ texmf-dist/doc/luatex/lualibs/NEWS
+ texmf-dist/doc/luatex/lualibs/README details="Readme"
+ texmf-dist/doc/luatex/lualibs/lualibs.pdf details="Package documentation"
+srccontainersize 3460
+srccontainermd5 b0fe3bd289736310cc413dd9c53b807c
+srcfiles size=3
+ texmf-dist/source/luatex/lualibs/Makefile
+ texmf-dist/source/luatex/lualibs/lualibs.dtx
+runfiles size=40
+ texmf-dist/tex/luatex/lualibs/lualibs-aux.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-boolean.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-dimen.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-dir.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-file.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-io.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-lpeg.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-math.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-md5.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-number.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-os.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-set.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-string.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-table.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-unicode.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-url.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-utils.lua
+ texmf-dist/tex/luatex/lualibs/lualibs.lua
+catalogue-ctan /macros/luatex/generic/lualibs
+catalogue-date 2010-09-08 12:09:58 +0200
+catalogue-license pd
+catalogue-version 0.95

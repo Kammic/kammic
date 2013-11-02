@@ -1,0 +1,45 @@
+name pstools
+category TLCore
+revision 27328
+catalogue ps2eps
+shortdesc Produce Encapsulated PostScript from PostScript.
+longdesc Produce Encapsulated PostScript Files (EPS/EPSF) from a one-
+longdesc page PostScript document, or any PostScript document. A correct
+longdesc Bounding Box is calculated for the EPS files and some
+longdesc PostScript command sequences that can produce errorneous
+longdesc results on printers are filtered. The input is cropped to
+longdesc include just the image contained in the PostScript file. The
+longdesc EPS files can then be included into TeX documents. Other
+longdesc programs like ps2epsi (a script distributed with ghostscript)
+longdesc don't always calculate the correct bounding box (because the
+longdesc values are put on the PostScript stack which may get corrupted
+longdesc by bad PostScript code) or they round it off, resulting in
+longdesc clipping the image. Therefore ps2eps uses a resolution of 144
+longdesc dpi to get the correct bounding box. The bundle includes
+longdesc binaries for Linux, Solaris, Digital Unix or Windows
+longdesc 2000/9x/NT; for other platforms, the user needs perl,
+longdesc ghostscript and an ANSI-C compiler. Included in the
+longdesc distribution is the bbox program, an application to produce
+longdesc Bounding Box values for rawppm or rawpbm format files.
+depend pstools.ARCH
+containersize 11516
+containermd5 7191bf1e3d44b6ed9c64b14176d45915
+doccontainersize 33608
+doccontainermd5 290d89345b7e40bb57553aaf5b744674
+docfiles size=20
+ texmf/doc/man/man1/bbox.1
+ texmf/doc/man/man1/bbox.man1.pdf
+ texmf/doc/man/man1/ps2eps.1
+ texmf/doc/man/man1/ps2eps.man1.pdf
+ texmf/doc/man/man1/ps2frag.1
+ texmf/doc/man/man1/ps2frag.man1.pdf
+ texmf/doc/man/man1/pslatex.1
+ texmf/doc/man/man1/pslatex.man1.pdf
+runfiles size=11
+ texmf-dist/scripts/tetex/ps2frag.sh
+ texmf-dist/scripts/tetex/pslatex.sh
+ texmf/scripts/ps2eps/ps2eps.pl
+catalogue-ctan /support/ps2eps
+catalogue-date 2012-07-20 20:39:39 +0200
+catalogue-license gpl
+catalogue-version 1.68

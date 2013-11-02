@@ -1,0 +1,15 @@
+name hyphen-finnish
+category TLCore
+revision 25990
+catalogue fihyph
+shortdesc Finnish hyphenation patterns.
+relocated 1
+longdesc Hyphenation patterns for Finnish in T1/EC and UTF-8 encodings.
+depend hyphen-base
+depend hyph-utf8
+execute AddHyphen 	name=finnish 	lefthyphenmin=2 	righthyphenmin=2 	file=loadhyph-fi.tex 	file_patterns=hyph-fi.pat.txt 	file_exceptions=
+containersize 468
+containermd5 c0b1620fe2258b374b7d3bc21d99473b
+catalogue-ctan /language/hyphenation/fihyph
+catalogue-date 2009-09-27 10:36:15 +0200
+catalogue-license pd

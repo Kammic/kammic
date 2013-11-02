@@ -1,0 +1,9 @@
+name dvipdfm.x86_64-linux
+category TLCore
+revision 13777
+shortdesc x86_64-linux files of dvipdfm
+containersize 1564
+containermd5 6d8c12aa6b4cbc96b1c84c60eb765ed9
+binfiles arch=x86_64-linux size=2
+ bin/x86_64-linux/dvipdfm
+ bin/x86_64-linux/dvipdft

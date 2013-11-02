@@ -1,0 +1,42 @@
+name dosepsbin
+category Package
+revision 26313
+shortdesc Deal with DOS binary EPS files.
+longdesc A Encapsulated PostScript (EPS) file may given in a special
+longdesc binary format to support the inclusion of a thumbnail. This
+longdesc file format, commonly known as DOS EPS format starts with a
+longdesc binary header that contains the positions of the possible
+longdesc sections: - Postscript (PS); - Windows Metafile Format (WMF);
+longdesc and - Tag Image File Format (TIFF). The PS section must be
+longdesc present and either the WMF file or the TIFF file should be
+longdesc given. The package provides a Perl program that will extract
+longdesc any of the sections of such a file, in particular providing a
+longdesc 'text'-form EPS file for use with (La)TeX.
+depend dosepsbin.ARCH
+containersize 4120
+containermd5 2f50e181418508bb6d1a39d03655157f
+doccontainersize 57068
+doccontainermd5 f8d8a56345c226fdaad9a387ad20816b
+docfiles size=26
+ texmf-dist/doc/support/dosepsbin/Makefile.in
+ texmf-dist/doc/support/dosepsbin/README
+ texmf-dist/doc/support/dosepsbin/clean-case.pl
+ texmf-dist/doc/support/dosepsbin/dosepsbin.html
+ texmf-dist/doc/support/dosepsbin/dosepsbin.ltx
+ texmf-dist/doc/support/dosepsbin/dosepsbin.pdf details="Package documentation (PDF format)"
+ texmf-dist/doc/support/dosepsbin/dosepsbin.txt details="Package documentation (text format)"
+ texmf-dist/doc/support/dosepsbin/version.pl
+ texmf/doc/man/man1/dosepsbin.1
+ texmf/doc/man/man1/dosepsbin.man1.pdf
+srccontainersize 19036
+srccontainermd5 aff653a4ad04db5062864b9820d421a7
+srcfiles size=20
+ texmf-dist/source/support/dosepsbin/configure
+ texmf-dist/source/support/dosepsbin/configure.ac
+ texmf-dist/source/support/dosepsbin/install-sh
+runfiles size=3
+ texmf-dist/scripts/dosepsbin/dosepsbin.pl
+catalogue-ctan /support/dosepsbin
+catalogue-date 2012-03-22 21:51:23 +0100
+catalogue-license artistic
+catalogue-version 1.2

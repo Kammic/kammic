@@ -1,0 +1,8 @@
+name dosepsbin.x86_64-linux
+category Package
+revision 24759
+shortdesc x86_64-linux files of dosepsbin
+containersize 340
+containermd5 8d3ab862e0443a28b17ef3791a9a66a7
+binfiles arch=x86_64-linux size=1
+ bin/x86_64-linux/dosepsbin

@@ -1,0 +1,36 @@
+name collection-latex
+category Collection
+revision 25030
+shortdesc Basic LaTeX packages
+relocated 1
+longdesc These packages are mandated by the core LaTeX team, or at least
+longdesc very strongly recommended.
+depend collection-basic
+depend ae
+depend amscls
+depend amsmath
+depend babel
+depend babelbib
+depend carlisle
+depend colortbl
+depend fancyhdr
+depend fix2col
+depend geometry
+depend graphics
+depend hyperref
+depend latex
+depend latex-bin
+depend latex-fonts
+depend latexconfig
+depend ltxmisc
+depend mfnfss
+depend mptopdf
+depend natbib
+depend oberdiek
+depend pdftex-def
+depend pslatex
+depend psnfss
+depend pspicture
+depend tools
+containersize 496
+containermd5 535e16c4f68b58ee31ca233e88695261

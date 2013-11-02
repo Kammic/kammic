@@ -1,0 +1,8 @@
+name bibtex.x86_64-linux
+category Package
+revision 26915
+shortdesc x86_64-linux files of bibtex
+containersize 66580
+containermd5 a910cab259a097fd81dbe8d620541a23
+binfiles arch=x86_64-linux size=38
+ bin/x86_64-linux/bibtex

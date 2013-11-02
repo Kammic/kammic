@@ -1,0 +1,69 @@
+name amsmath
+category Package
+revision 26389
+shortdesc AMS mathematical facilities for LaTeX.
+relocated 1
+longdesc This package is the principal package in the AMS-LaTeX
+longdesc distribution. It adapts for use in LaTeX most of the
+longdesc mathematical features found in AMS-TeX; it is a near-
+longdesc indispensable adjunct to serious mathematical typesetting in
+longdesc LaTeX. When amsmath is loaded, AMS-LaTeX packages amsbsy (for
+longdesc bold symbols), amsopn (for operator names) and amstext (for
+longdesc text embdedded in mathematics) are also loaded. Amsmath is part
+longdesc of the LaTeX required distribution; however, several
+longdesc contributed packages add still further to its appeal; examples
+longdesc are empheq, which provides functions for decorating and
+longdesc highlighting mathematics, and ntheorem, for specifying theorem
+longdesc (and similar) definitions.
+containersize 29952
+containermd5 255cd372ea3dd8dacbdcace364899062
+doccontainersize 1790696
+doccontainermd5 ce48e02db2511910718380a9f0715187
+docfiles size=490
+ texmf-dist/doc/latex/amsmath/00LICENSE.txt
+ texmf-dist/doc/latex/amsmath/amsbsy.pdf
+ texmf-dist/doc/latex/amsmath/amscd.pdf
+ texmf-dist/doc/latex/amsmath/amsgen.pdf
+ texmf-dist/doc/latex/amsmath/amsldoc.pdf details="User guide (English)" language="en"
+ texmf-dist/doc/latex/amsmath/amsmath.pdf
+ texmf-dist/doc/latex/amsmath/amsopn.pdf
+ texmf-dist/doc/latex/amsmath/amstext.pdf
+ texmf-dist/doc/latex/amsmath/amsxtra.pdf
+ texmf-dist/doc/latex/amsmath/diffs-m.txt details="Differences from previous versions" language="en"
+ texmf-dist/doc/latex/amsmath/subeqn.pdf details="Sub-equation usage" language="en"
+ texmf-dist/doc/latex/amsmath/technote.pdf details="Technical details" language="en"
+ texmf-dist/doc/latex/amsmath/testmath.pdf details="Examples paper" language="en"
+srccontainersize 116156
+srccontainermd5 e02913ae86c89cf65d93b460425d4a2d
+srcfiles size=133
+ texmf-dist/source/latex/amsmath/00LICENSE.txt
+ texmf-dist/source/latex/amsmath/00readme.txt
+ texmf-dist/source/latex/amsmath/ams-m1.ins
+ texmf-dist/source/latex/amsmath/amsbsy.dtx
+ texmf-dist/source/latex/amsmath/amscd.dtx
+ texmf-dist/source/latex/amsmath/amsdtx.cls
+ texmf-dist/source/latex/amsmath/amsgen.dtx
+ texmf-dist/source/latex/amsmath/amsldoc.cls
+ texmf-dist/source/latex/amsmath/amsldoc.tex
+ texmf-dist/source/latex/amsmath/amsmath.dtx
+ texmf-dist/source/latex/amsmath/amsopn.dtx
+ texmf-dist/source/latex/amsmath/amstext.dtx
+ texmf-dist/source/latex/amsmath/amsxtra.dtx
+ texmf-dist/source/latex/amsmath/install.txt
+ texmf-dist/source/latex/amsmath/manifest.txt
+ texmf-dist/source/latex/amsmath/subeqn.tex
+ texmf-dist/source/latex/amsmath/technote.tex
+ texmf-dist/source/latex/amsmath/testmath.tex
+runfiles size=47
+ texmf-dist/tex/latex/amsmath/amsbsy.sty
+ texmf-dist/tex/latex/amsmath/amscd.sty
+ texmf-dist/tex/latex/amsmath/amsgen.sty
+ texmf-dist/tex/latex/amsmath/amsmath.sty
+ texmf-dist/tex/latex/amsmath/amsopn.sty
+ texmf-dist/tex/latex/amsmath/amstex.sty
+ texmf-dist/tex/latex/amsmath/amstext.sty
+ texmf-dist/tex/latex/amsmath/amsxtra.sty
+catalogue-ctan /macros/latex/required/amslatex/math
+catalogue-date 2010-12-31 18:17:46 +0100
+catalogue-license lppl
+catalogue-version 2.13

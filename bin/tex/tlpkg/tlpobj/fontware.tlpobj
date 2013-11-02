@@ -1,0 +1,17 @@
+name fontware
+category TLCore
+revision 26689
+depend fontware.ARCH
+containersize 244
+containermd5 daa1e4da98a67b91f2b5285e192d38bf
+doccontainersize 13876
+doccontainermd5 952c7c5ffb6b04e01a937969759b6949
+docfiles size=12
+ texmf/doc/man/man1/pltotf.1
+ texmf/doc/man/man1/pltotf.man1.pdf
+ texmf/doc/man/man1/tftopl.1
+ texmf/doc/man/man1/tftopl.man1.pdf
+ texmf/doc/man/man1/vftovp.1
+ texmf/doc/man/man1/vftovp.man1.pdf
+ texmf/doc/man/man1/vptovf.1
+ texmf/doc/man/man1/vptovf.man1.pdf

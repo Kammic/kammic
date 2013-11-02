@@ -1,0 +1,27 @@
+name psutils.x86_64-linux
+category TLCore
+revision 24528
+shortdesc x86_64-linux files of psutils
+containersize 22968
+containermd5 cb4f490690231276918c8b7d7543cc36
+binfiles arch=x86_64-linux size=44
+ bin/x86_64-linux/epsffit
+ bin/x86_64-linux/extractres
+ bin/x86_64-linux/fixdlsrps
+ bin/x86_64-linux/fixfmps
+ bin/x86_64-linux/fixpsditps
+ bin/x86_64-linux/fixpspps
+ bin/x86_64-linux/fixscribeps
+ bin/x86_64-linux/fixtpps
+ bin/x86_64-linux/fixwfwps
+ bin/x86_64-linux/fixwpps
+ bin/x86_64-linux/fixwwps
+ bin/x86_64-linux/getafm
+ bin/x86_64-linux/includeres
+ bin/x86_64-linux/psbook
+ bin/x86_64-linux/psmerge
+ bin/x86_64-linux/psnup
+ bin/x86_64-linux/psresize
+ bin/x86_64-linux/psselect
+ bin/x86_64-linux/pstops
+ bin/x86_64-linux/showchar
