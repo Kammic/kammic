@@ -1,7 +1,7 @@
 <div id="history" data-ng-controller='HistoryController' ng-show="selected == 'History'">
   <div ng-class-odd="'odd'" ng-class-even="'even'" class="media" ng-repeat="commit in commits" class="commit">
     <a class="pull-left" href="#">
-      <img class="media-object" height="36" src="{{commit.author.avatar_url}}">
+      <img class="media-object" height="36" ng-src="{{commit.author.avatar_url}}">
     </a>
     <div class="media-body">
       <p class='message'>{{commit.commit.message}}</p>
