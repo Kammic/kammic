@@ -1,3 +1,7 @@
+//= require ./lib/github/underscore
+//= require ./lib/github/base64
+//= require ./lib/github/octokit
+
 //= require ace/ace
 //= require ace/theme-tomorrow_night_bright
 //= require ace/mode-markdown
@@ -10,7 +14,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree ./lib/bootstrap
-//= require_tree ./lib/github
 //= require_tree ./lib/showdown
 //= require_tree ./lib/misc
 
