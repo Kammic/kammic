@@ -1,18 +1,18 @@
-//= require ace
-//= require ace/theme/tomorrow_night_bright
-//= require ace/mode/markdown
-//= require ace/mode/textile
-//= require ace/mode/latex
-//= require ace/mode/ruby
-//= require ace/mode/javascript
-//= require ace/mode/json
+//= require ace/ace
+//= require ace/theme-tomorrow_night_bright
+//= require ace/mode-markdown
+//= require ace/mode-textile
+//= require ace/mode-latex
+//= require ace/mode-ruby
+//= require ace/mode-javascript
+//= require ace/mode-json
 
+//= require jquery
+//= require jquery_ujs
 //= require_tree ./lib/bootstrap
-//= require ./lib/angular/angular.min
-//= require ./lib/showdown/compressed/showdown
-//= require ./lib/github/base64
-//= require ./lib/github/underscore
-//= require ./lib/github/octokit
-//= require ./lib/misc/keymaster.min
+//= require_tree ./lib/github
+//= require_tree ./lib/showdown
+//= require_tree ./lib/misc
 
+//= require ./lib/angular/angular.min
 //= require_tree ./editor
