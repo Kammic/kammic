@@ -76,7 +76,7 @@ GEM
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.1)
-    lana (1.0.1)
+    lana (1.0.2)
       grit
       pandoc-ruby (~> 0.7)
     libv8 (3.16.14.3)

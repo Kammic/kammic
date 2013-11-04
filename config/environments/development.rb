@@ -13,5 +13,5 @@ Kammic::Application.configure do
 
   config.s3_access_key = 'AKIAICK4VG37DHFYCW3A'
   config.s3_secret     = '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'
-  config.s3_bucket     = 'kammic-dev'
+  config.s3_bucket     = 'kammic'
 end

@@ -24,6 +24,7 @@ module Kammic
         upload_book(paths)
         complete_build(build)
       rescue Exception => e
+        Rails.logger.info "Book build error: #{e.inspect}"
         fail_build(build)
       end
 

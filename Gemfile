@@ -15,6 +15,7 @@ gem 'turbolinks'
 gem "font-awesome-rails", '~> 4.0'
 gem 'ace-rails-ap'
 
+# gem "lana", path: '../lana'
 gem "lana"
 gem "queue_classic", "~> 2.2"
 gem "octokit", '~> 2.0'
