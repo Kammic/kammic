@@ -22,6 +22,4 @@ Kammic::Application.routes.draw do
 
   resources :builds, only: [:index, :show]
 
-
-
 end
