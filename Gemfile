@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'https://7PTTUMssfRTdFds3xAKz@gem.fury.io/app16982024_heroku_com/'
+source 'https://rY4exdszxsxuMvA3Ca5M@gem.fury.io/ortuna/'
 
 ruby "2.0.0"
 
