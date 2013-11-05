@@ -12,6 +12,7 @@ module Kammic
 
       def update(build_id)
         update_with_commit_info(build_id)
+        building_build(build_id)
         QC.enqueue("Kammic::Build.execute", build_id)
       end
 
@@ -84,6 +85,12 @@ module Kammic
          revision:       last_commit.sha,
          commit_message: last_commit.commit.message,
          branch:         'master'}
+      end
+
+      def building_build(build_id)
+        book = ::Build.find_by_id(build_id)
+        book[:status] = :building
+        book.save
       end
 
       def fail_build(build)

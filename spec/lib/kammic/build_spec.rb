@@ -65,6 +65,12 @@ describe Kammic::Build do
       expect(build[:author]).to eq('User')
       expect(build[:commit_message]).to eq('the commit')
     end
+
+    it 'updates the build status to building' do
+      subject.update(99)
+      build = ::Build.find_by_book_id(1234)
+      expect(build[:status]).to eq('building')
+    end
   end
 
   context '#build_book' do
