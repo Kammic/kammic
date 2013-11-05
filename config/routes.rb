@@ -16,8 +16,8 @@ Kammic::Application.routes.draw do
 
   resources :books, only: [:index, :destroy, :show] do
     get '/refresh',       to: 'books#refresh', as: :refresh
+    get '/builds',        to: 'books#builds', as: :builds
     get '/queue_build',   to: 'books#queue'
-    get '/status',        to: 'books#book_status'
   end
 
   resources :builds, only: [:index, :show]

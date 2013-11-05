@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 source 'https://rY4exdszxsxuMvA3Ca5M@gem.fury.io/ortuna/'
 
 ruby "2.0.0"
-#asldkfjas
+
 gem 'unicorn'
 gem 'rails', '4.0.0'
 gem 'sass-rails', '~> 4.0.0'
@@ -11,7 +11,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem "font-awesome-rails", '~> 4.0'
 gem 'ace-rails-ap'
 

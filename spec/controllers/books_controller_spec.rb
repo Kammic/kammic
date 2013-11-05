@@ -110,7 +110,7 @@ describe BooksController do
     end
   end
 
-  context '#book_status' do
+  context '#builds' do
     before do 
       session[:user_id] = 1234
       create_user(id: 1234)
@@ -118,12 +118,12 @@ describe BooksController do
     end
 
     it 'returns 404 when a book is not found' do
-      get :book_status, book_id: 42 
+      get :builds, book_id: 42 
       assert_response :missing
     end
 
     it 'gets the status of a book' do
-      get :book_status, book_id: 55
+      get :builds, book_id: 55
       assert_response :success
     end
   end

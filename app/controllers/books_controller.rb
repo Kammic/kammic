@@ -38,10 +38,10 @@ class BooksController < ApplicationController
     end
   end
 
-  def book_status
-    book = Book.find_by_id(params[:book_id])
-    if book
-      render json: Kammic::BookStatus.new(book).to_json
+  def builds
+    @book = Book.find_by_id(params[:book_id])
+    if @book
+      render json: ::Build.where(book_id: @book[:id]).limit(5)
     else
       render nothing: true, status: 404
     end

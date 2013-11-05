@@ -17,6 +17,7 @@ src_files:
   - app/assets/javascripts/lib/bootstrap/bootstrap.min.js
   - app/assets/javascripts/lib/bootstrap/jquery.bootstrap-growl.min.js
   - app/assets/javascripts/lib/angular/angular.min.js
+  - app/assets/javascripts/lib/angular/angular-sanitize.js
   - app/assets/javascripts/lib/angular/angular-mocks.js
   - app/assets/javascripts/lib/angular/jquery.mockjax.js
   - app/assets/javascripts/lib/mock-github/mock-github.js
@@ -29,6 +30,7 @@ src_files:
   - app/assets/javascripts/editor/**/*.js
   - app/assets/javascripts/lib/showdown/**/*.js
   - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js
+  - app/assets/javascripts/application/kammic.js
 
 
 # stylesheets

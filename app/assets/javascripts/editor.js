@@ -18,4 +18,5 @@
 //= require_tree ./lib/misc
 
 //= require ./lib/angular/angular.min
+//= require ./lib/angular/angular-sanitize
 //= require_tree ./editor

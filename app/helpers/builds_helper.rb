@@ -2,16 +2,23 @@ module BuildsHelper
   def build_status(build_status)
     label_type = case build_status
                 when /created/
-                  'label-warning'
+                  build_status = append_spinner(build_status)
+                  'label-warning status-created'
                 when /building/
-                  'label-info'
+                  build_status = append_spinner(build_status)
+                  'label-info status-building'
                 when /failed/
-                  'label-danger'
+                  'label-danger status-failed'
                 when /completed/
-                  'label-success'
+                  'label-success status-completed'
                 else
-                  'label-danger'
+                  'label-danger status-other'
                 end
-    render 'shared/builds/build_status_label', status: build_status, label_type: label_type
+    render 'shared/builds/build_status_label',
+            status: raw(build_status), label_type: label_type
+  end
+
+  def append_spinner(status)
+    "#{fa_icon('spinner spin')} #{status}"
   end
 end
