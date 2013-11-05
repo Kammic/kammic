@@ -33,8 +33,10 @@ BuildsController = ["$scope", "$http", function($scope, $http) {
     return output;
   }
 
-  $scope.updateBuilds = function(){
-    $http({method: 'GET', url: '/books/1/builds'}).
+  $scope.updateBuilds = function() {
+    if(typeof $scope.id === 'undefined')
+      return
+    $http({method: 'GET', url: '/books/' + $scope.id +'/builds'}).
       success(function(data, status, headers, config) {
         $scope.builds = data;
       }).

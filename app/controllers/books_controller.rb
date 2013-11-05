@@ -19,7 +19,6 @@ class BooksController < ApplicationController
   def show
     @book   = Book.find_by_id(params[:id])
     if @book && @book.manifest
-      @builds = Build.where(book: @book).limit(5)
       render :show
     elsif @book
       render :refreshing
