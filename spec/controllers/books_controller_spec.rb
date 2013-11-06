@@ -98,16 +98,6 @@ describe BooksController do
       expect(assigns(:book).manifest).to_not be_nil
       expect(assigns(:book).repo).to_not be_nil
     end
-
-    it 'sets the builds to the books builds' do
-      3.times { Build.create!(book_id: 55) }
-      get :show, id: 55
-
-      builds = assigns(:builds)
-      expect(builds).to_not be_nil
-      expect(builds).to_not be_empty
-      expect(builds.count).to eq(3)
-    end
   end
 
   context '#builds' do
