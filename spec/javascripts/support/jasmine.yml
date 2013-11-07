@@ -1,96 +1,20 @@
-# src_files
-#
-# Return an array of filepaths relative to src_dir to include before jasmine specs.
-# Default: []
-#
-# EXAMPLE:
-#
-# src_files:
-#   - lib/source1.js
-#   - lib/source2.js
-#   - dist/**/*.js
-#
+# path to parent directory of src_files
+# relative path from Rails.root
+# defaults to app/assets/javascripts
+src_dir: "app/assets/javascripts"
+ # list of file expressions to include as source files
+# relative path from scr_dir
 src_files:
-  - app/assets/javascripts/editor/lib/env.js
-  - app/assets/javascripts/lib/jquery/jquery-1.10.2.min.js
-  - app/assets/javascripts/lib/jquery/jquery.simulate.js
-  - app/assets/javascripts/lib/bootstrap/bootstrap.min.js
-  - app/assets/javascripts/lib/bootstrap/jquery.bootstrap-growl.min.js
-  - app/assets/javascripts/lib/angular/angular.min.js
-  - app/assets/javascripts/lib/angular/angular-sanitize.js
-  - app/assets/javascripts/lib/angular/angular-mocks.js
-  - app/assets/javascripts/lib/angular/jquery.mockjax.js
-  - app/assets/javascripts/lib/mock-github/mock-github.js
-  - app/assets/javascripts/lib/github/base64.js
-  - app/assets/javascripts/lib/github/underscore.js
-  - app/assets/javascripts/lib/github/octokit.js
-  - app/assets/javascripts/lib/misc/keymaster.min.js
-  - app/assets/javascripts/lib/ace/ace.js
-  - app/assets/javascripts/editor.js
-  - app/assets/javascripts/editor/**/*.js
-  - app/assets/javascripts/lib/showdown/**/*.js
-  - app/assets/javascripts/lib/ace-builds/src-noconflict/ace.js
-  - app/assets/javascripts/application/kammic.js
-
-
-# stylesheets
-#
-# Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.
-# Default: []
-#
-# EXAMPLE:
-#
-# stylesheets:
-#   - css/style.css
-#   - stylesheets/*.css
-#
-stylesheets:
-  - stylesheets/**/*.css
-
-# helpers
-#
-# Return an array of filepaths relative to spec_dir to include before jasmine specs.
-# Default: ["helpers/**/*.js"]
-#
-# EXAMPLE:
-#
-# helpers:
-#   - helpers/**/*.js
-#
-helpers:
-  - helpers/**/*.js
-
-# spec_files
-#
-# Return an array of filepaths relative to spec_dir to include.
-# Default: ["**/*[sS]pec.js"]
-#
-# EXAMPLE:
-#
-# spec_files:
-#   - **/*[sS]pec.js
-#
-spec_files:
-  - '**/*[sS]pec.js'
-
-# src_dir
-#
-# Source directory path. Your src_files must be returned relative to this path. Will use root if left blank.
-# Default: project root
-#
-# EXAMPLE:
-#
-# src_dir: public
-#
-src_dir:
-
-# spec_dir
-#
-# Spec directory path. Your spec_files must be returned relative to this path.
-# Default: spec/javascripts
-#
-# EXAMPLE:
-#
-# spec_dir: spec/javascripts
-#
+ - "application.{js,coffee}"
+ # path to parent directory of spec_files
+# relative path from Rails.root
+# defaults to spec/javascripts
 spec_dir: spec/javascripts
+ # list of file expressions to include as helpers into spec runner
+# relative path from spec_dir
+helpers:
+  - "helpers/**/*.{js,coffee}"
+ # list of file expressions to include as specs into spec runner
+# relative path from spec_dir
+spec_files:
+  - "**/*[Ss]pec.{js,coffee}"

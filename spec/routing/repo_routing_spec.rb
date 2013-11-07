@@ -11,11 +11,6 @@ describe 'repos controller' do
                                       action:   "index")
   end
 
-  it 'can route to the editor' do 
-    expect(get '/repos/1/edit').to route_to(controller: "editor",
-                                            action:   "index",
-                                            id: '1')
-  end
 
   it 'can route to the build path' do
     expect(get '/repos/1/build').to route_to(controller: "repos",

@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rY4exdszxsxuMvA3Ca5M@gem.fury.io/ortuna/'
 
 ruby "2.0.0"
 
@@ -14,7 +13,6 @@ gem 'jquery-rails'
 gem "font-awesome-rails", '~> 4.0'
 gem 'ace-rails-ap'
 
-gem "lana"
 gem "queue_classic", "~> 2.2"
 gem "octokit", '~> 2.0'
 gem 'will_paginate', '~> 3.0'
@@ -23,6 +21,8 @@ gem "pg"
 gem "s3"
 gem "unicorn"
 
+gem "editor", git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git'
+gem "lana", git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git'
 
 group :production do
   gem "rails_12factor"
