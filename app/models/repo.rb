@@ -20,4 +20,10 @@ class Repo < ActiveRecord::Base
   validates_presence_of :user_id
   belongs_to :user
   has_one :book
+
+  def short_description
+    return unless description
+    return description if description.length < 75 
+    "#{description[0..75]}..."
+  end
 end

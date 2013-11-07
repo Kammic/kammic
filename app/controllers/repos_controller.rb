@@ -6,10 +6,14 @@ class ReposController < ApplicationController
     user = current_user
     @are_repos_loading      = user[:loading_repos]
     @refresh_button_caption = @are_repos_loading ? 'Refreshing' : 'Refresh Repos'
-    @repo_book_ids = repo_book_ids(user[:id])
     @repos = Repo.where(user: user)
                   .order("pushed_at desc")
                   .paginate(:page => params[:page], :per_page => 25)
+    @repo_book_ids = repo_book_ids(user[:id])
+
+    @repo_count   = @repos.count
+    @follow_count = @repo_book_ids.count
+    @username     = user.login
   end
 
   def refresh

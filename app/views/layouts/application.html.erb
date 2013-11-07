@@ -7,21 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="global">
-
   <div class="container">
-    <nav class="navbar navbar-default fixed-top" role="navigation">
-      <div class="navbar-header brand">
-        <%= link_to 'Writing.is', root_path, class: 'navbar-brand' %>
-      </div>
-      <%= render 'navigation' %>
-    </nav>
-
-    <div class="row content">
+    <div class="row row-offcanvas row-offcanvas-right">
       <%= yield %>
     </div>
   </div>
 
-<script type="text/javascript" src="//use.typekit.net/kco6ydm.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript" src="//use.typekit.net/kco6ydm.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
 </html>

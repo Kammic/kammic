@@ -1,6 +1,42 @@
 require 'spec_helper'
 
 describe BooksController do
+  context 'JSON' do
+
+    def assert_json_response(action, *args)
+      get action, *args
+      expect(response.content_type).to eq('application/json')
+    end
+
+    before do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+    end
+
+    context '#show' do
+      it 'should return JSON data' do
+        Book.create!(id: 55, user_id: 1234, repo_id: 42)
+        assert_json_response :show, id: 55
+      end
+    end
+
+    context '#builds' do
+      it 'should return JSON data' do
+        create_book(id: 42)
+        create_build(id: 52, book_id: 42)
+
+        assert_json_response :builds, book_id: 42
+      end
+    end
+
+
+    context '#index' do
+      it 'should return JSON data' do
+        assert_json_response :index
+      end
+    end
+  end
+
   context 'filters' do
     it 'should forbid without login' do
       get :index 

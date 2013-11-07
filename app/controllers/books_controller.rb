@@ -9,6 +9,8 @@ class BooksController < ApplicationController
   def index
     @books = Book.includes(:repo, :manifest).where(user: user)
     @books = @books.keep_if {|book| book.repo && book.repo[:name]}
+
+    render json: @books
   end
 
   def destroy
@@ -18,13 +20,7 @@ class BooksController < ApplicationController
 
   def show
     @book   = Book.find_by_id(params[:id])
-    if @book && @book.manifest
-      render :show
-    elsif @book
-      render :refreshing
-    else
-      render_nothing 404
-    end
+    @book ? render(json: @book) : render_nothing(404)
   end
 
   def queue
