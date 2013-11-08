@@ -16,7 +16,7 @@ Kammic::Application.routes.draw do
 
   mount Editor::Engine, at: "/editor/:id", as: :repo_editor
 
-  resources :books, only: [:index, :destroy, :show] do
+  resources :books, only: [:index, :destroy, :show], defaults: {format: :json} do
     get '/refresh',       to: 'books#refresh', as: :refresh
     get '/builds',        to: 'books#builds', as: :builds
     get '/queue_build',   to: 'books#queue'

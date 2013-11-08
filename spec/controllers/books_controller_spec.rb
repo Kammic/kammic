@@ -76,6 +76,12 @@ describe BooksController do
       get :queue, book_id: 55
       assert_response :redirect
     end
+
+    it 'gives 403 when a book is not owned by the user' do
+      Book.create(id: 56, user_id: 1111)
+      get :queue, book_id: 56
+      assert_response :forbidden
+    end
   end
 
   context '#refresh' do
@@ -105,6 +111,49 @@ describe BooksController do
       get :refresh, book_id: 199
       assert_response :missing
     end
+
+    it 'gives 403 when a book is not owned by the user' do
+      book = Book.find(55)
+      book.user_id = 99
+      book.save
+
+      get :refresh, book_id: 55
+      assert_response :forbidden
+    end
+  end
+
+  context '#destroy' do
+    before do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+
+      create_repo("user" => User.find(1234))
+      Book.create!(id: 55, user_id: 1234, repo_id: 42)
+    end
+
+    it 'gives 404 when a book is not found' do
+      get :destroy, id: 99
+      assert_response :missing
+    end
+
+    it 'deletes the book' do
+      get :destroy, id: 55
+      expect(Book.find_by_id(55)).to be_nil
+    end
+
+    it 'redirects the user after delete' do
+      get :destroy, id: 55
+      assert_response :redirect
+    end
+
+    it 'gives 403 when a book is not owned by the user' do
+      book = Book.find(55)
+      book[:user_id] = 99
+      book.save
+
+      get :destroy, id: 55
+      assert_response :forbidden
+    end
   end
 
   context '#show' do
@@ -129,10 +178,17 @@ describe BooksController do
 
     it 'gets the manifest and repo relationship' do
       get :show, id: 55
-
-      book = assigns(:book)
       expect(assigns(:book).manifest).to_not be_nil
       expect(assigns(:book).repo).to_not be_nil
+    end
+
+    it 'only shows books that belong to the current user' do
+      book = Book.find(55)
+      book[:user_id] = 99
+      book.save!
+
+      get :show, id: 55
+      assert_response :forbidden
     end
   end
 
@@ -151,6 +207,15 @@ describe BooksController do
     it 'gets the status of a book' do
       get :builds, book_id: 55
       assert_response :success
+    end
+
+    it 'returns 403 if the user is not allowed' do
+      book = Book.find(55)
+      book[:user_id] = 99
+      book.save
+
+      get :builds, book_id: 55
+      assert_response :forbidden
     end
   end
 

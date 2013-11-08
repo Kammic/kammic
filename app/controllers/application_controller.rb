@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   helper_attr :user
 
   private
+  def json_format
+    request.format = "json"
+  end
+
   def render_nothing(status)
     render nothing: true, status: 404
   end
