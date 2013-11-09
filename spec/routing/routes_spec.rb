@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe 'Routes' do
+  it 'routes to the user information path' do
+    expect(get '/user').to route_to(controller: "user",
+                                    action:     "show")
+  end
+
   it 'routes to the user login path' do 
     expect(get '/user/login').to route_to(controller: "user",
                                           action:     "login")

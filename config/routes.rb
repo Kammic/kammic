@@ -1,6 +1,8 @@
 Kammic::Application.routes.draw do
-  
+
+
   root to: 'application#index'
+  get '/user',        to: 'user#show'
   get '/user/login',  to: 'user#login'
   get '/user/logout', to: 'user#logout'
   get '/user/login/callback',  to: 'omniauth_github#callback'
@@ -14,7 +16,8 @@ Kammic::Application.routes.draw do
     #get '/:id/edit',   to: 'Editor::editor#index',  as: :repo_editor
   end
 
-  mount Editor::Engine, at: "/editor/:id", as: :repo_editor
+  mount Editor::Engine,  at: "/editor/:id", as: :repo_editor
+  mount Browser::Engine, at: "/browser", as: :browser
 
   resources :books, only: [:index, :destroy, :show], defaults: {format: :json} do
     get '/refresh',       to: 'books#refresh', as: :refresh

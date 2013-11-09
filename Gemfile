@@ -22,9 +22,15 @@ gem 's3'
 gem 'unicorn'
 gem 'authority', '~> 2.0'
 gem 'jbuilder'
+gem 'haml'
 
-gem 'editor', git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git'
-gem 'lana',   git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git'
+#gem 'editor', git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git'
+#gem 'browser', git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git'
+#gem 'lana',   git: 'https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git'
+
+gem 'editor', path: '../editor'
+gem 'browser', path: '../browser'
+gem 'lana', path: '../lana'
 
 group :production do
   gem 'rails_12factor'
