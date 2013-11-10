@@ -10,8 +10,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
-gem 'font-awesome-rails', '~> 4.0'
-gem 'ace-rails-ap'
 
 gem 'queue_classic', '~> 2.2'
 gem 'octokit', '~> 2.0'
@@ -41,6 +39,4 @@ group :development, :test do
   gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'jasmine'
-  gem 'jasmine-rails'
 end
