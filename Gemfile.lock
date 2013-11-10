@@ -222,6 +222,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ace-rails-ap
   annotate
   authority (~> 2.0)
   browser!

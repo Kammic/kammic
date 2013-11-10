@@ -10,6 +10,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'jquery-rails'
+gem 'ace-rails-ap'
 
 gem 'queue_classic', '~> 2.2'
 gem 'octokit', '~> 2.0'
