@@ -227,6 +227,7 @@ DEPENDENCIES
   authority (~> 2.0)
   browser!
   editor!
+  font-awesome-rails
   haml
   jbuilder
   jquery-rails
