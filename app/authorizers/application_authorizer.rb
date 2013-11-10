@@ -13,4 +13,9 @@ class ApplicationAuthorizer < Authority::Authorizer
     false
   end
 
+  private
+  def owner?(user)
+    resource[:user_id] == user[:id]
+  end
+
 end

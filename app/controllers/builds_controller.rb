@@ -1,5 +1,6 @@
 class BuildsController < ApplicationController
-  before_filter :check_login
+  before_filter :check_login, :json_format
+  respond_to :json
 
   def index
     @builds = Build.user_builds(user[:id], params[:only])
@@ -14,9 +15,10 @@ class BuildsController < ApplicationController
   def show
     @build = Build.find_by_id(params[:id])
     if @build
-      render :show
+      authorize_action_for(@build)
+      respond_with(@build)
     else
-      render nothing: true, status: 404
+      render_nothing(404)
     end
   end
 

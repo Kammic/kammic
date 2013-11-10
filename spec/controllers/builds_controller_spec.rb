@@ -34,7 +34,14 @@ describe BuildsController do
       get :show, id: 5000
       assert_response :missing
     end
-  end 
+
+    it 'returns a 403 when a build does not belong to hte user' do
+      Book.create!(id: 99, user_id: 999, repo_id: 42)
+      Build.create(id: 42, book_id: 99)
+      get :show, id:42
+      assert_response :forbidden
+    end
+  end
 
   context '#index' do
     before do

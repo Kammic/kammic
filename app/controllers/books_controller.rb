@@ -34,8 +34,7 @@ class BooksController < ApplicationController
   def show
     @book   = Book.find_by_id(params[:id])
     authorize_action_for(@book) if @book
-
-    @book ? render(json: @book) : render_nothing(404)
+    @book ? respond_with(@book) : render_nothing(404)
   end
 
   def queue

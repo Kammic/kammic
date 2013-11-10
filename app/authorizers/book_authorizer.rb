@@ -7,8 +7,4 @@ class BookAuthorizer < ApplicationAuthorizer
     owner?(user)
   end
 
-  private
-  def owner?(user)
-    resource[:user_id] == user[:id]
-  end
 end

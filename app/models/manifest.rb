@@ -31,4 +31,5 @@ class Manifest < ActiveRecord::Base
   def pages
     (eval(self[:pages])).with_indifferent_access
   end
+
 end

@@ -17,6 +17,8 @@
 #
 
 class Build < ActiveRecord::Base
+  include Authority::Abilities
+
   belongs_to :book
   has_one :user, through: :book
   validates_presence_of   :book_id
