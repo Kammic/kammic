@@ -66,6 +66,11 @@ describe BuildsController do
     end
 
     context '.json' do
+      it 'returns json by default' do
+        get :index
+        expect(response.content_type).to eq('application/json')
+      end
+
       it 'filters down to only a few ids w/ param only' do
         Book.create!(id: 55, user_id: 1234, repo_id: 42)
         10.times { |i| Build.create(id: i, book_id: 55) }

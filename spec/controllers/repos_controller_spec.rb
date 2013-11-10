@@ -26,6 +26,11 @@ describe ReposController do
       assert_not_nil assigns(:repos)
     end
 
+    it 'returns json format' do
+      get :index
+      expect(response.content_type).to eq('application/json')
+    end
+
     context 'loading repos status' do
 
       it 'sets are_repos_loading to false when not loading' do
@@ -43,20 +48,6 @@ describe ReposController do
         expect(assigns(:are_repos_loading)).to eq(true)
       end
 
-      it 'refresh_button_caption should be \'Refresh Repos\' when not loading' do
-        get :index
-        expect(assigns(:refresh_button_caption)).to eq('Refresh Repos')
-      end
-
-      it 'refresh_button_caption should be \'Refreshing\' when loading' do
-        User.find(1234).tap do |user|
-          user[:loading_repos] = true
-          user.save
-        end
-
-        get :index
-        expect(assigns(:refresh_button_caption)).to eq('Refreshing')
-      end
     end
   end
 
@@ -100,6 +91,15 @@ describe ReposController do
     it 'returns 404 on non-existing repos' do
       get :follow, {id: 40}
       assert_response :missing
+    end
+
+    it 'gives 403 for repos not owned by the user' do
+      repo = Repo.find(42)
+      repo.user_id = 999
+      repo.save
+
+      get :follow, {id: 42}
+      assert_response :forbidden
     end
 
     it 'redirects to repos_path once successful' do

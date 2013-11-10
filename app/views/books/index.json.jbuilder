@@ -1,6 +1,6 @@
 json.array! @books do |book|
   json.id   book.id
-  json.name book.manifest.title || book.repo.name
+  json.name (book.manifest && book.manifest.title) || book.repo.name
   json.description book.repo.description
 
   json.url          book_url(book)

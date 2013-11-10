@@ -1,19 +1,15 @@
 class ReposController < ApplicationController
   include ReposHelper
-  before_filter :check_login
+  before_filter :check_login, :json_format
+  respond_to :json
 
+  authority_actions follow: :read
   def index
-    user = current_user
     @are_repos_loading      = user[:loading_repos]
-    @refresh_button_caption = @are_repos_loading ? 'Refreshing' : 'Refresh Repos'
-    @repos = Repo.where(user: user)
-                  .order("pushed_at desc")
-                  .paginate(:page => params[:page], :per_page => 25)
+    @repos = Repo.where(user: user).order("pushed_at desc")
     @repo_book_ids = repo_book_ids(user[:id])
 
-    @repo_count   = @repos.count
-    @follow_count = @repo_book_ids.count
-    @username     = user.login
+    respond_with @repos
   end
 
   def refresh
@@ -25,8 +21,9 @@ class ReposController < ApplicationController
   end
 
   def follow
-    repo   = Repo.find_by_id(params[:id])
+    repo = Repo.find_by_id(params[:id])
     if repo
+      authorize_action_for(repo)
       Book.create(repo: repo, user: user)
       redirect_to repos_path
     else

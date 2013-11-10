@@ -17,6 +17,8 @@
 #
 
 class Repo < ActiveRecord::Base
+  include Authority::Abilities
+
   validates_presence_of :user_id
   belongs_to :user
   has_one :book
