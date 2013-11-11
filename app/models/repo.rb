@@ -23,9 +23,11 @@ class Repo < ActiveRecord::Base
   belongs_to :user
   has_one :book
 
+  default_scope { order("pushed_at desc") }
+
   def short_description
     return unless description
     return description if description.length < 75 
-    "#{description[0..75]}..."
+    "#{description[0..125]}..."
   end
 end

@@ -1,6 +1,5 @@
-GIT
-  remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: fcdb6d70d4d55db5107f432716fd5a5a4d0289a7
+PATH
+  remote: ../browser
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -10,9 +9,8 @@ GIT
       sass-rails (~> 4.0.0)
       uglifier (>= 1.3.0)
 
-GIT
-  remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git
-  revision: 92a05fd1384a9f54d75d66677ec1b0c44e8d0047
+PATH
+  remote: ../editor
   specs:
     editor (1.0.0)
       ace-rails-ap
@@ -21,9 +19,8 @@ GIT
       sass-rails (~> 4.0.0)
       uglifier (>= 1.3.0)
 
-GIT
-  remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git
-  revision: 62218ebe8e4f709cca8ead6dee0f610d23aaa51b
+PATH
+  remote: ../lana
   specs:
     lana (1.0.3)
       grit

@@ -14,7 +14,6 @@
 class Book < ActiveRecord::Base
   include Authority::Abilities
 
-  validates :repo_id, uniqueness: true
   belongs_to :repo
   belongs_to :user
 

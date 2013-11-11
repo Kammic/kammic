@@ -21,13 +21,15 @@ module Github
       private
       def create_from_hash(hash, user_id)
         repo = Repo.new(hash)
-        repo.user_id = user_id
-        delete_if_exists repo[:id]
+        repo.id        = nil
+        repo.user_id   = user_id
+        repo.github_id = hash["id"]
+        delete_if_exists hash["id"]
         repo.save
-      end
+     end
 
-      def delete_if_exists(repo_id)
-        old_repo = Repo.find_by_id(repo_id)
+      def delete_if_exists(github_id)
+        old_repo = Repo.find_by_github_id(github_id)
         old_repo && old_repo.delete
       end
     end

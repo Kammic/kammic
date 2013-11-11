@@ -19,7 +19,7 @@ describe Github::RepoQueue do
   context 'user#loading_repos' do
     it 'sets the loading_repos param to false once done' do
       User.find(42).tap {|user| user[:loading_repos] = true}
-      
+
       Github::RepoFinder.stub(:find_repos).and_return([])
       subject.update_from_github(42)
 
@@ -44,7 +44,7 @@ describe Github::RepoQueue do
       }
 
       subject.send(:create_from_hash, hash, 42)
-      repo = Repo.find(42)
+      repo = Repo.find_by_github_id(42)
       expect(repo[:name]).to eq('repo_name')
       expect(repo[:user_id]).to eq(42)
       expect(repo[:html_url]).to eq("http://github.com/clone_me")
@@ -53,10 +53,10 @@ describe Github::RepoQueue do
 
   context '#delete_if_exists' do
     it 'it deletes a repo if it exists in the DB' do
-      create_repo("user_id" => 42)
+      create_repo("user_id" => 42, "github_id" => 123)
       expect {
-        subject.send(:delete_if_exists, 42)
-      }.to change{Repo.count}.from(1).to(0)      
+        subject.send(:delete_if_exists, 123)
+      }.to change{Repo.count}.from(1).to(0)
     end
   end
 
@@ -80,6 +80,7 @@ describe Github::RepoQueue do
     it 'creates repos from Github::RepoFinder' do
       expected_hash = [
       {
+          "id" => 1,
           "name" => "repo_one",
           "full_name" => "user/repo_one",
           "description" => "xyz",
@@ -89,6 +90,7 @@ describe Github::RepoQueue do
           "pushed_at" => Time.now,
       },
       {
+          "id" => 2,
           "name" => "repo_two",
           "full_name" => "user/repo_two",
           "description" => "xyz2",
@@ -97,6 +99,7 @@ describe Github::RepoQueue do
           "master_branch" => "dev",
           "pushed_at" => Time.now,
       }]
+
       Github::RepoFinder.stub(:find_repos).and_return(expected_hash)
       subject.update_from_github(42)
 
@@ -109,33 +112,9 @@ describe Github::RepoQueue do
     end
 
     it 'deletes any existing repo with the same id' do
-      expected_hash = [
-      {
-        "id" => 42,
-        "name" => "repo_new",
-        "full_name" => "user/repo_one",
-        "description" => "xyz",
-        "private" => false,
-        "clone_url" => "http://github.com/clone_me",
-        "master_branch" => "master",
-        "pushed_at" => Time.now,
-        "user_id" => 42
-      },
-      {
-        "id" => 40,
-        "name" => "repo_two",
-        "full_name" => "user/repo_two",
-        "description" => "xyz2",
-        "private" => false,
-        "clone_url" => "http://github.com/clone_me",
-        "master_branch" => "dev",
-        "pushed_at" => Time.now,
-        "user_id" => 42
-      }]
-
       Repo.create({
-        "id" => 42,
         "name" => "repo_old",
+        "github_id" => 1,
         "full_name" => "user/repo_one",
         "description" => "xyz",
         "private" => false,
@@ -144,10 +123,33 @@ describe Github::RepoQueue do
         "pushed_at" => Time.now,
         "user_id" => 42
       })
+
+      expected_hash = [
+      {
+        "id" => 1,
+        "name" => "repo_new",
+        "full_name" => "user/repo_one",
+        "description" => "xyz",
+        "private" => false,
+        "clone_url" => "http://github.com/clone_me",
+        "master_branch" => "master",
+        "pushed_at" => Time.now,
+      },
+      {
+        "id" => 2,
+        "name" => "repo_two",
+        "full_name" => "user/repo_two",
+        "description" => "xyz2",
+        "private" => false,
+        "clone_url" => "http://github.com/clone_me",
+        "master_branch" => "dev",
+        "pushed_at" => Time.now,
+      }]
+
       Github::RepoFinder.stub(:find_repos).and_return(expected_hash)
       subject.update_from_github(42)
       expect(Repo.count).to eq(2)
-      expect(Repo.find(42).name).to eq('repo_new')
+      expect(Repo.find_by_github_id(1).name).to eq('repo_new')
     end
   end
 end
