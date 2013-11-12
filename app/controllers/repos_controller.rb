@@ -5,9 +5,9 @@ class ReposController < ApplicationController
 
   authority_actions follow: :read
   def index
-    @are_repos_loading      = user[:loading_repos]
-    @repos = Repo.where(user: user).order("pushed_at desc")
-    @repo_book_ids = repo_book_ids(user[:id])
+    @are_repos_loading = user[:loading_repos]
+    @repos             = Repo.includes(:book).where(user: user).order("pushed_at desc")
+    @repo_book_ids     = repo_book_ids(user[:id])
 
     respond_with @repos
   end
@@ -25,7 +25,7 @@ class ReposController < ApplicationController
     if repo
       authorize_action_for(repo)
       Book.create(repo: repo, user: user)
-      redirect_to repos_path
+      render nothing: true, status: 200
     else
       render nothing: true, status: 404
     end

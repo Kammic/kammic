@@ -18,8 +18,9 @@ class Book < ActiveRecord::Base
   belongs_to :user
 
   has_one :manifest
-
   has_many :builds
+
+  validates :repo_id, :uniqueness => { :scope => :user_id }
 
   def is_loading(value)
     self.reload

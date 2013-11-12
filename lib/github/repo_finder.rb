@@ -3,7 +3,7 @@ module Github
     def self.find_repos(auth_token)
       client = Octokit::Client.new(access_token: auth_token)
       keys   = Repo.new.attributes.keys
-      client.repos.map do |repo|
+      client.repos(client.user.login, per_page: 1000).map do |repo|
         Kammic::HashCleaner.clean(repo.attrs, keys).tap do |hash|
           hash[:clone_url] = repo.rels[:git].href
           hash[:html_url]  = repo.rels[:html].href

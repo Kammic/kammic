@@ -85,7 +85,7 @@ describe ReposController do
     it 'adds a book model from a repo' do
       get :follow, {id: 42}
       expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
-      assert_response :redirect
+      assert_response :success
     end
 
     it 'returns 404 on non-existing repos' do
@@ -102,16 +102,11 @@ describe ReposController do
       assert_response :forbidden
     end
 
-    it 'redirects to repos_path once successful' do
-      expect(get(:follow, {id: 42})).to redirect_to repos_path
-
-    end
-
     it 'works if a book is already added' do
       get :follow, {id: 42}
       get :follow, {id: 42}
       expect(Book.where(repo_id: 42, user_id: 1234).count).to eq(1)
-      assert_response :redirect
+      assert_response :success
     end
   end
 end

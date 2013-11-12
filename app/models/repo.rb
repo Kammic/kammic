@@ -23,6 +23,8 @@ class Repo < ActiveRecord::Base
   belongs_to :user
   has_one :book
 
+  validates :github_id, :uniqueness => {:scope => :user_id}
+
   default_scope { order("pushed_at desc") }
 
   def short_description
