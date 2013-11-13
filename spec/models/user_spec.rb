@@ -78,4 +78,27 @@ describe User do
       expect(user[:id]).to eq(123)
     end
   end
+
+  context '#update_from_omniauth' do
+    it 'updates the auth_token if its different' do
+      create_user(id: 42, auth_token: 'bad')
+      user = User.find(42)
+      expect(user[:auth_token]).to eq('bad')
+
+      user.update_from_omniauth({'credentials' => { 'token' => 'good'}})
+
+      user = User.find(42)
+      expect(user[:auth_token]).to eq('good')
+    end
+
+    it 'doesnt break on empty token' do
+      create_user(id: 42, auth_token: 'good')
+      user = User.find(42)
+      user.update_from_omniauth({})
+
+      user = User.find(42)
+      expect(user[:auth_token]).to eq('good')
+    end
+  end
+
 end
