@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: 8cff3eb578c31d76a0d83d65c3625443f51b4af6
+  revision: 943a9df7608798df542fe7ea391e690d894f8c87
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git
-  revision: 92a05fd1384a9f54d75d66677ec1b0c44e8d0047
+  revision: ac2373fe61cd1ae07cba8181b20a6ee4ada9d9a2
   specs:
     editor (1.0.0)
       ace-rails-ap
@@ -66,7 +66,7 @@ GEM
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
     builder (3.1.4)
-    coderay (1.0.9)
+    coderay (1.1.0)
     commonjs (0.2.7)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -79,7 +79,7 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    haml (4.0.3)
+    haml (4.0.4)
       tilt
     hashie (2.0.5)
     hike (1.2.3)
@@ -131,8 +131,8 @@ GEM
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     proxies (0.2.1)
-    pry (0.9.12.2)
-      coderay (~> 1.0.5)
+    pry (0.9.12.3)
+      coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
     queue_classic (2.2.3)
@@ -207,7 +207,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.7.0)
