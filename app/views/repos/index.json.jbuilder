@@ -7,4 +7,5 @@ json.array! @repos do |repo|
   json.private     repo.private
   json.follow_url  follow_url(repo)
   json.following   repo.book ? true : false
+  json.book        repo.book
 end
