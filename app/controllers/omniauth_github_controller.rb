@@ -6,6 +6,7 @@ class OmniauthGithubController < ApplicationController
     user = User.find_with_omniauth(auth) || User.create_with_omniauth(auth)
 
     if user
+      user.update_from_omniauth(auth)
       session[:user_id] = user[:id]
       redirect_to repos_path
     else

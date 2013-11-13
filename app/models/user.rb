@@ -30,9 +30,17 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def update_from_omniauth(auth = {})
+    token = auth['credentials'] && auth['credentials']['token']
+    return unless token
+    self[:auth_token] = token
+    save
+  end
+
   def self.create_with_omniauth(auth = {})
     return nil unless auth
     user       = User.new
+
     user.attributes = {
       provider:  auth['provider'],
       uid:       auth['uid'],
@@ -42,7 +50,6 @@ class User < ActiveRecord::Base
       auth_token:(auth['credentials'] && auth['credentials']['token']) || nil,
       role:      'author'
     }
-
     user.save ? user : nil
   end
 
