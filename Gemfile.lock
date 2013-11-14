@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: 943a9df7608798df542fe7ea391e690d894f8c87
+  revision: b2cc64642277dd5537dabf1bdd3b9c240f56d1f8
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)

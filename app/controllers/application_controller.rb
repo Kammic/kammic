@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
     request.format = "json"
   end
 
-  def render_nothing(status)
-    render nothing: true, status: 404
+  def render_nothing(status = 404)
+    render nothing: true, status: status
   end
 
   def user

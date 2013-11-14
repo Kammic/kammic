@@ -22,7 +22,7 @@ Kammic::Application.routes.draw do
   resources :books, only: [:index, :destroy, :show], defaults: {format: :json} do
     get '/refresh',       to: 'books#refresh', as: :refresh
     get '/builds',        to: 'books#builds', as: :builds
-    get '/queue_build',   to: 'books#queue'
+    get '/build',   to: 'books#queue'
   end
 
   resources :builds, only: [:index, :show]

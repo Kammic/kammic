@@ -72,9 +72,9 @@ describe BooksController do
       get :queue, book_id: 55
     end
 
-    it 'should redirect after queueing the build' do
+    it 'should return 200 after queueing the build' do
       get :queue, book_id: 55
-      assert_response :redirect
+      assert_response :success
     end
 
     it 'gives 403 when a book is not owned by the user' do

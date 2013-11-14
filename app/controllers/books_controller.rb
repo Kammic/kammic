@@ -42,7 +42,7 @@ class BooksController < ApplicationController
     if book
       authorize_action_for(book)
       queue_build(params[:book_id])
-      redirect_to book_path(params[:book_id])
+      render_nothing(200)
     else
       render_nothing(404)
     end
