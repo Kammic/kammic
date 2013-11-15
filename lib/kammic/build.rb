@@ -63,8 +63,8 @@ module Kammic
       end
 
       def s3_bucket
-        service = S3::Service.new(:access_key_id     => Rails.application.config.s3_access_key,
-                                  :secret_access_key => Rails.application.config.s3_secret)
+        service = S3::Service.new(access_key_id:     Rails.application.config.s3_access_key,
+                                  secret_access_key: Rails.application.config.s3_secret)
         service.buckets.find(Rails.application.config.s3_bucket)
       end
 
