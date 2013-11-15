@@ -87,6 +87,8 @@ module Kammic
         {author:         last_commit.commit.author.name,
          revision:       last_commit.sha,
          commit_message: last_commit.commit.message,
+         additions:      last_commit.stats.additions,
+         deletions:      last_commit.stats.deletions,
          branch:         'master'}
       end
 

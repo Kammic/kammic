@@ -44,7 +44,9 @@ describe Kammic::Build do
         author:         'User',
         revision:       '1234',
         commit_message: 'the commit',
-        branch:         'master'
+        branch:         'master',
+        deletions:      1,
+        additions:      2
       }
       subject.stub(:last_commit_info).and_return commit_hash
       ::Build.create!(id: 99, book_id: 1234)
@@ -64,6 +66,8 @@ describe Kammic::Build do
       expect(build[:revision]).to eq('1234')
       expect(build[:author]).to eq('User')
       expect(build[:commit_message]).to eq('the commit')
+      expect(build[:deletions]).to eq(1)
+      expect(build[:additions]).to eq(2)
     end
 
     it 'updates the build status to building' do
