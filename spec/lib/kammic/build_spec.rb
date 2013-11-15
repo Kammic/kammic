@@ -135,6 +135,31 @@ describe Kammic::Build do
 
         subject.send(:upload_book, @paths)
       end
+
+      it 'returns the urls of uploaded objects' do
+        @double.stub(:build).and_return(@double)
+        subject.stub(:open_file).and_return('')
+        @double.stub(:url).and_return('some_url')
+        urls = subject.send(:upload_book, @paths)
+        expect(urls['1234.pdf']).to eq('some_url')
+        expect(urls['0000.Mobi']).to eq('some_url')
+        expect(urls['0000.epub']).to eq('some_url')
+      end
+  end
+
+  context '#complete_build' do
+    it 'sets the build to complete status' do
+      build = create_build(id: 45, book_id: 1)
+      subject.send(:complete_build, build)
+      expect(build.status).to eq(:completed)
+    end
+
+    it 'sets the assets to the passed in URLs' do
+      build = create_build(id: 45, book_id: 1)
+      urls  = {'1.pdf' => 'something.com/1.pdf'}
+      subject.send(:complete_build, build, urls)
+      expect(build.assets).to eq(urls)
+    end
   end
 
   context '#execute' do
@@ -177,6 +202,6 @@ describe Kammic::Build do
 
       subject.should_receive(:upload_book)
       subject.execute(98)
-    end  
+    end
   end
 end

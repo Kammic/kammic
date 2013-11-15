@@ -190,7 +190,8 @@ describe BooksController do
       get :show, id: 55
       assert_response :forbidden
     end
-  end
+
+ end
 
   context '#builds' do
     before do 
@@ -235,6 +236,17 @@ describe BooksController do
 
       get :index
       expect(assigns(:books)).to eq([])
+    end
+
+    it 'includes any active builds with the book' do
+      create_repo(id: 1, user: User.find(1234))
+      create_build(book_id: 42,status: 'created')
+      Book.create!(id:42, user_id: 1234, repo_id: 1)
+
+      get :index
+
+      book = assigns(:books).first
+      expect(book.active_builds).to_not be_empty
     end
 
     it '@books returns defined repos' do

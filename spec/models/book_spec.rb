@@ -15,6 +15,16 @@ require 'spec_helper'
 
 describe Book do
 
+  context '#active_builds' do
+    it 'returns active builds with this book' do
+      book = Book.create!(id: 55, user_id: 1234, repo_id: 42)
+      create_build(book_id: 55, status: 'building')
+      create_build(book_id: 55, status: 'created')
+      create_build(book_id: 55, status: 'completed')
+      expect(book.active_builds.count).to eq(2)
+    end
+  end
+
   context '#is_loading?' do
     it 'returns the books loading status' do 
       book = Book.create!(id: 55, user_id: 1234, repo_id: 42)

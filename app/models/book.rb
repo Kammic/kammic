@@ -31,4 +31,8 @@ class Book < ActiveRecord::Base
   def is_loading?
     self.loading_manifest || false
   end
+
+  def active_builds
+    builds.where(status: ['building', 'created'])
+  end
 end

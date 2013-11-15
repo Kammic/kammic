@@ -22,8 +22,8 @@ module Kammic
         return false unless book
 
         paths = build_book(book, build)
-        upload_book(paths)
-        complete_build(build)
+        urls  = upload_book(paths)
+        complete_build(build, urls)
       rescue Exception => e
         Rails.logger.info "Book build error: #{e.inspect}"
         fail_build(build)
@@ -48,15 +48,18 @@ module Kammic
 
       def upload_book(paths)
         bucket = s3_bucket
-        paths.each do |upload_path, local_path|
+        urls   = {}
+        paths.map do |upload_path, local_path|
           object = bucket.objects.build(upload_path)
           object.content = open_file(local_path)
           object.save
-        end 
+          urls[upload_path] = object.url
+        end
+        urls
       end
 
       def open_file(*args)
-        open *args
+        open(*args)
       end
 
       def s3_bucket
@@ -72,9 +75,9 @@ module Kammic
       def generate(*args)
         generator(*args).generate
       end
-      
+
       def generator(*args)
-        Lana::BookGenerator.new *args
+        Lana::BookGenerator.new(*args)
       end
 
       def last_commit_info(book_id)
@@ -100,8 +103,9 @@ module Kammic
         build.save
       end
 
-      def complete_build(build)
+      def complete_build(build, urls = {})
         build.reload
+        build.assets = urls
         build.status = :completed
         build.ended_at = Time.now
         build.save
