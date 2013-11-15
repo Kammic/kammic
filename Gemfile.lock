@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: b2cc64642277dd5537dabf1bdd3b9c240f56d1f8
+  revision: 004e332513e38ac919cae0643e38868cfb6e780b
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -115,7 +115,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (2.5.1)
+    octokit (2.6.0)
       sawyer (~> 0.5.1)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
@@ -186,7 +186,7 @@ GEM
     sawyer (0.5.1)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
-    slop (3.4.6)
+    slop (3.4.7)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
