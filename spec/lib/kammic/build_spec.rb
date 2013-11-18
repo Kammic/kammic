@@ -89,7 +89,7 @@ describe Kammic::Build do
     it 'calls generate on the generator' do
       double = double()
       subject.stub(:generator).and_return(double)
-      double.should_receive(:generate)
+      double.should_receive(:generate).exactly(3).times
 
       subject.send(:build_book, Book.find(1234), Build.find(98))
     end
@@ -98,8 +98,10 @@ describe Kammic::Build do
       subject.stub(:generate)
       hash = subject.send(:build_book, Book.find(1234), Build.find(98))
 
-      expect(hash.count).to eq(1)
+      expect(hash.count).to eq(3)
       expect(hash["xyz.pdf"]).to eq("/tmp/xyz.pdf")
+      expect(hash["xyz.Mobi"]).to eq("/tmp/xyz.Mobi")
+      expect(hash["xyz.epub"]).to eq("/tmp/xyz.epub")
     end
 
   end

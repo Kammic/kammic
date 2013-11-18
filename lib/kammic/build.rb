@@ -37,13 +37,21 @@ module Kammic
       end
 
       def build_book(book, build)
-        local_path = tmp_path
-        generate local:  local_path,
-                 remote: book.repo.clone_url,
-                 output: "/tmp/#{build.revision}.pdf"
-        { "#{build.revision}.pdf" => "/tmp/#{build.revision}.pdf" }
+        {}.tap do |generated_files|
+          formats.each do |format|
+            file_name = "#{build.revision}.#{format}"
+            generate local:  tmp_path,
+              remote: book.repo.clone_url,
+              output: "/tmp/#{file_name}"
+            generated_files[file_name] = "/tmp/#{file_name}"
+          end
+        end
       ensure
-        FileUtils.rm_rf local_path
+        FileUtils.rm_rf tmp_path
+      end
+
+      def formats
+        ['pdf', 'Mobi', 'epub']
       end
 
       def upload_book(paths)
