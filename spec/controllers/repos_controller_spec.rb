@@ -35,7 +35,7 @@ describe ReposController do
 
       it 'sets are_repos_loading to false when not loading' do
         get :index
-        expect(assigns(:are_repos_loading)).to eq(false)
+        expect(assigns(:loading_repos)).to eq(false)
       end
 
       it 'sets are_repos_loading to true when loading' do
@@ -45,7 +45,7 @@ describe ReposController do
         end
 
         get :index
-        expect(assigns(:are_repos_loading)).to eq(true)
+        expect(assigns(:loading_repos)).to eq(true)
       end
 
     end
