@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: 2b976045f04a1c54de515600f11a08411251a3bd
+  revision: dca34d14d9b2e35650fdc4a621b156a75b325ad7
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git
-  revision: ac2373fe61cd1ae07cba8181b20a6ee4ada9d9a2
+  revision: cd536c94542c01274d3c87e66142f4540d08d41e
   specs:
     editor (1.0.0)
       ace-rails-ap
