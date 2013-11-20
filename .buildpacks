@@ -1,2 +1,3 @@
 git://github.com/heroku/heroku-buildpack-ruby.git
-https://github.com/Kammic/heroku-buildpack-tex.git
+#https://github.com/Kammic/heroku-buildpack-tex.git
+https://github.com/Ortuna/heroku-buildpack-tex.git
