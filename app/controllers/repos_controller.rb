@@ -5,7 +5,7 @@ class ReposController < ApplicationController
 
   authority_actions follow: :read
   def index
-    @are_repos_loading = user[:loading_repos]
+    @loading_repos = user[:loading_repos]
     @repos             = Repo.includes(:book).where(user: user).order("pushed_at desc")
     @repo_book_ids     = repo_book_ids(user[:id])
 
