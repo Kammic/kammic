@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git
-  revision: 3d879c3b3c17bbc3e10f34b423975e8a069601af
+  revision: 7c8044cc35b4078b16899e321b61a6e91e258606
   specs:
     lana (1.0.3)
       grit
