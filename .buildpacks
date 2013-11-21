@@ -1,5 +1,6 @@
 #https://github.com/perplexes/heroku-buildpack-clearcache.git
 #https://github.com/Kammic/heroku-buildpack-tex.git
+git://github.com/johnbeynon/heroku-buildpack-wget.git
 git://github.com/heroku/heroku-buildpack-ruby.git
 https://github.com/Kammic/heroku-buildpack-tex.git
 
