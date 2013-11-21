@@ -29,10 +29,10 @@ describe Github::RepoQueue do
     end
   end
 
-  context '#create_from_hash' do
+  context '#create_or_update_from_hash' do
     it 'creates a repo from a given hash and user_id' do
       hash = {
-          "id" => 42,
+          "id" => 55,
           "name" => "repo_name",
           "full_name" => "user/repo_one",
           "description" => "xyz",
@@ -43,19 +43,41 @@ describe Github::RepoQueue do
           "pushed_at" => Time.now,
       }
 
-      subject.send(:create_from_hash, hash, 42)
-      repo = Repo.find_by_github_id(42)
+      subject.send(:create_or_update_from_hash, hash, 42)
+      repo = Repo.find_by_github_id(55)
       expect(repo[:name]).to eq('repo_name')
       expect(repo[:user_id]).to eq(42)
       expect(repo[:html_url]).to eq("http://github.com/clone_me")
     end
+
+    it 'updates a repo if github_id already exists' do
+      create_repo(github_id: 99, name: 'old_name', user_id: 42)
+
+      hash = {
+        "id" => 1,
+        "name" => "new_name",
+        "full_name" => "user/repo_one",
+        "description" => "xyz",
+        "private" => false,
+        "clone_url" => "http://github.com/clone_me",
+        "html_url" => "http://github.com/clone_me",
+        "master_branch" => "master",
+        "pushed_at" => Time.now,
+      }
+
+      subject.send(:create_or_update_from_hash, hash, 42)
+      repos = Repo.where(github_id: 1)
+
+      expect(repos.count).to eq(1)
+      expect(repos.first[:name]).to eq('new_name')
+    end
   end
 
-  context '#delete_if_exists' do
+  context '#delete_user_repos' do
     it 'it deletes a repo if it exists in the DB' do
       create_repo("user_id" => 42, "github_id" => 123)
       expect {
-        subject.send(:delete_if_exists, 123)
+        subject.send(:delete_user_repos, 42)
       }.to change{Repo.count}.from(1).to(0)
     end
   end
@@ -78,6 +100,8 @@ describe Github::RepoQueue do
     end
 
     it 'creates repos from Github::RepoFinder' do
+      create_repo(github_id: 1, name: 'old_name', user_id: 42)
+
       expected_hash = [
       {
           "id" => 1,
@@ -109,9 +133,10 @@ describe Github::RepoQueue do
       repo_one = Repo.where(user_id: 42, name: 'repo_one').first
       expect(repo_one[:full_name]).to eq('user/repo_one')
       expect(repo_one[:private]).to eq(false)
+      expect(repo_one[:github_id]).to eq(1)
     end
 
-    it 'deletes any existing repo with the same id' do
+    it 'updates existing repos with the same github_id' do
       Repo.create({
         "name" => "repo_old",
         "github_id" => 1,

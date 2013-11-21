@@ -12,25 +12,28 @@ module Github
 
         github_repos = Github::RepoFinder.find_repos(user.auth_token)
         github_repos.each do |github_repo|
-          create_from_hash github_repo, user_id
+          create_or_update_from_hash github_repo, user_id
         end
 
         user.is_loading_repos(false)
       end
 
       private
-      def create_from_hash(hash, user_id)
-        repo = Repo.new(hash)
-        repo.user_id   = user_id
-        repo.github_id = hash["id"]
-        deleted_id     = delete_if_exists(hash["id"])
-        repo.id        = deleted_id
+      def create_or_update_from_hash(hash, user_id)
+        github_id = hash["id"]
+        hash.delete("id")
+
+        repo = Repo.find_by_github_id(github_id) || Repo.new(hash)
+        repo.update_attributes(hash)
+
+        repo.user_id = user_id
+        repo.github_id = github_id
         repo.save
       end
 
-      def delete_if_exists(github_id)
-        old_repo = Repo.find_by_github_id(github_id)
-        old_repo && old_repo.delete && old_repo.id
+      def delete_user_repos(user_id)
+        repos = Repo.where(user_id: user_id)
+        repos.each {|r| r.destroy }
       end
     end
   end
