@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git
-  revision: 7c8044cc35b4078b16899e321b61a6e91e258606
+  revision: dbd6cbb44013c735b70fee472ab7f0a1578ec3d1
   specs:
     lana (1.0.3)
       grit
@@ -115,7 +115,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    octokit (2.6.0)
+    octokit (2.6.1)
       sawyer (~> 0.5.1)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
