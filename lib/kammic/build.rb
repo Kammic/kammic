@@ -41,8 +41,8 @@ module Kammic
           formats.each do |format|
             file_name = "#{build.revision}.#{format}"
             generate local:  tmp_path,
-              remote: book.repo.clone_url,
-              output: "/tmp/#{file_name}"
+                     remote: book.repo.clone_url,
+                     output: "/tmp/#{file_name}"
             generated_files[file_name] = "/tmp/#{file_name}"
           end
         end
@@ -81,7 +81,7 @@ module Kammic
       end
 
       def generate(*args)
-        generator(*args).generate
+        generator(*args).generate(Lana::Generators::PDF)
       end
 
       def generator(*args)
