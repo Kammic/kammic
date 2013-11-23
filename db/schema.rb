@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115203104) do
+ActiveRecord::Schema.define(version: 20131123152239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131115203104) do
   end
 
   create_table "builds", force: true do |t|
-    t.string   "status",         default: "complete"
+    t.string   "status",            default: "complete"
     t.string   "branch"
     t.string   "commit_message"
     t.string   "author"
@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(version: 20131115203104) do
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "deletions",      default: 0
-    t.integer  "additions",      default: 0
+    t.integer  "deletions",         default: 0
+    t.integer  "additions",         default: 0
+    t.string   "github_commit_url"
   end
 
   create_table "manifests", force: true do |t|

@@ -38,9 +38,10 @@ module Kammic
 
       def build_book(book, build)
         {}.tap do |generated_files|
-          formats.each do |format|
+          formats.each do |format, const|
             file_name = "#{build.revision}.#{format}"
-            generate local:  tmp_path,
+            generate const, 
+                     local:  tmp_path,
                      remote: book.repo.clone_url,
                      output: "/tmp/#{file_name}"
             generated_files[file_name] = "/tmp/#{file_name}"
@@ -51,7 +52,11 @@ module Kammic
       end
 
       def formats
-        ['pdf', 'Mobi', 'epub']
+        {
+          'pdf'  => Lana::Generators::PDF,
+          'epub' => Lana::Generators::PDF,
+          'Mobi' => Lana::Generators::PDF,
+        }
       end
 
       def upload_book(paths)
@@ -80,8 +85,8 @@ module Kammic
         "/tmp/#{SecureRandom.uuid}"
       end
 
-      def generate(*args)
-        generator(*args).generate(Lana::Generators::PDF)
+      def generate(const, *args)
+        generator(*args).generate(const)
       end
 
       def generator(*args)
@@ -92,12 +97,13 @@ module Kammic
         book = Book.find_by_id(book_id)
         last_ref    = Octokit.refs(book.repo.full_name).last.object.sha
         last_commit = Octokit.commit(book.repo.full_name, last_ref)
-        {author:         last_commit.commit.author.name,
-         revision:       last_commit.sha,
-         commit_message: last_commit.commit.message,
-         additions:      last_commit.stats.additions,
-         deletions:      last_commit.stats.deletions,
-         branch:         'master'}
+        {author:            last_commit.commit.author.name,
+         revision:          last_commit.sha,
+         commit_message:    last_commit.commit.message,
+         additions:         last_commit.stats.additions,
+         deletions:         last_commit.stats.deletions,
+         github_commit_url: last_commit.rels[:html].href,
+         branch:            'master'}
       end
 
       def building_build(build_id)

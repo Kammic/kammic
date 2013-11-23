@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: dca34d14d9b2e35650fdc4a621b156a75b325ad7
+  revision: db0e6c64651f625aaaf76ebad24a017be529cb43
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/lana.git
-  revision: b61ca878ca076f8bfcd3aececf0533b3eae3baf1
+  revision: 47e2c74352f989eb71d4ddd209cb0a012c7e674d
   specs:
     lana (1.0.3)
       grit
@@ -187,7 +187,7 @@ GEM
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     slop (3.4.7)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)

@@ -12,3 +12,4 @@ json.created_at build.created_at
 json.updated_at build.updated_at
 json.additions build.additions
 json.deletions build.deletions
+json.github_commit_url build.github_commit_url

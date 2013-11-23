@@ -46,7 +46,8 @@ describe Kammic::Build do
         commit_message: 'the commit',
         branch:         'master',
         deletions:      1,
-        additions:      2
+        additions:      2,
+        github_commit_url: 'http://www.google.com'
       }
       subject.stub(:last_commit_info).and_return commit_hash
       ::Build.create!(id: 99, book_id: 1234)
@@ -68,6 +69,7 @@ describe Kammic::Build do
       expect(build[:commit_message]).to eq('the commit')
       expect(build[:deletions]).to eq(1)
       expect(build[:additions]).to eq(2)
+      expect(build[:github_commit_url]).to eq('http://www.google.com')
     end
 
     it 'updates the build status to building' do
