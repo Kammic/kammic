@@ -18,6 +18,28 @@ describe BuildsController do
     end
   end
 
+  context 'pagination' do
+    before :each do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+      create_book(id: 99, user_id: 1234)
+      25.times do |i|
+        create_build(id: nil, book_id: 99)
+      end
+    end
+
+    it 'limits items from per_page param' do
+      get :index, per_page: 5
+      expect(assigns(:builds).to_a.count).to eq(5)
+    end
+
+    it 'defaults to 10 items per page' do
+      get :index
+      expect(assigns(:builds).to_a.count).to eq(10)
+    end
+  end
+
+
   context '#show' do
     before do
       session[:user_id] = 1234

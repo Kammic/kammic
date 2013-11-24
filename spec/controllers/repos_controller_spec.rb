@@ -15,6 +15,26 @@ describe ReposController do
     end
   end
 
+  context 'pagination' do
+    before :each do
+      session[:user_id] = 1234
+      create_user(id: 1234)
+      25.times do |i|
+        create_repo(id: nil, user_id: 1234, github_id: i)
+      end
+    end
+
+    it 'limits items from per_page param' do
+      get :index, per_page: 5
+      expect(assigns(:repos).to_a.count).to eq(5)
+    end
+
+    it 'defaults to 10 items per page' do
+      get :index
+      expect(assigns(:repos).to_a.count).to eq(10)
+    end
+  end
+
   context '#index' do
     before :each do
       session[:user_id] = 1234

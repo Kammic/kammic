@@ -3,7 +3,9 @@ class BuildsController < ApplicationController
   respond_to :json
 
   def index
-    @builds = Build.user_builds(user[:id], params[:only])
+    @builds = Build
+               .user_builds(user[:id], params[:only])
+               .paginate(page: params[:page], per_page: params[:per_page] || 10)
     respond_with(@builds)
  end
 

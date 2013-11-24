@@ -1,5 +1,6 @@
 json.loading       @loading_repos
-json.repos do 
+json.total_pages   @repos.total_pages
+json.repos do
   json.array! @repos do |repo|
     json.id          repo.id
     json.name        repo.name

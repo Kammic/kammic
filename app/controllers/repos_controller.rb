@@ -6,8 +6,12 @@ class ReposController < ApplicationController
   authority_actions follow: :read
   def index
     @loading_repos = user[:loading_repos]
-    @repos             = Repo.includes(:book).where(user: user).order("pushed_at desc")
-    @repo_book_ids     = repo_book_ids(user[:id])
+    @repos  = Repo
+               .includes(:book)
+               .where(user: user)
+               .paginate(page: params[:page], per_page: params[:per_page] || 10)
+               .order("pushed_at desc")
+    @repo_book_ids = repo_book_ids(user[:id])
 
     respond_with @repos
   end
