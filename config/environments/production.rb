@@ -12,7 +12,7 @@ Kammic::Application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
-
+  config.force_ssl = true
 
 
   config.github_key    = ENV['GITHUB_KEY']
