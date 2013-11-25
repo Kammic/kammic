@@ -1,6 +1,6 @@
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/browser.git
-  revision: 7481deff79c691caab83acf628a10bf77a344f2c
+  revision: 884c72216a4de3e2722a3784c48fa8f7772ec78a
   specs:
     browser (1.0.0)
       font-awesome-rails (~> 4.0)
@@ -102,7 +102,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
-    mime-types (1.25)
+    mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
@@ -128,7 +128,7 @@ GEM
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     proxies (0.2.1)
-    pry (0.9.12.3)
+    pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
