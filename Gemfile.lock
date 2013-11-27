@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://e8ee1fc6cdebf526cee0ff21f452052e21e9a1c7:x-oauth-basic@github.com/Kammic/editor.git
-  revision: 7d6798ae07fa41c64319942dddb6f62f40ee2654
+  revision: a50503052ee1d9319b781d6c38d75e9d0d191640
   specs:
     editor (1.0.0)
       ace-rails-ap
